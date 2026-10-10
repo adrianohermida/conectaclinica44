@@ -1,0 +1,51 @@
+{
+  "name": "TermoConsentimento",
+  "type": "object",
+  "properties": {
+    "usuario_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio"
+    },
+    "tipo_termo": {
+      "type": "string",
+      "enum": [
+        "lgpd",
+        "uso_servicos",
+        "telemedicina",
+        "compartilhamento_dados"
+      ],
+      "description": "Tipo de termo"
+    },
+    "versao_termo": {
+      "type": "string",
+      "description": "Vers\u00e3o do termo aceito"
+    },
+    "data_aceite": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora do aceite"
+    },
+    "ip_aceite": {
+      "type": "string",
+      "description": "IP de origem"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "Navegador usado"
+    },
+    "conteudo_termo": {
+      "type": "string",
+      "description": "Conte\u00fado completo do termo"
+    },
+    "aceito": {
+      "type": "boolean",
+      "default": true,
+      "description": "Termo aceito"
+    }
+  },
+  "required": [
+    "usuario_email",
+    "tipo_termo",
+    "versao_termo"
+  ]
+}

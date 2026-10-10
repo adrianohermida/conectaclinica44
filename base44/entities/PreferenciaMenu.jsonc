@@ -1,0 +1,38 @@
+{
+  "name": "PreferenciaMenu",
+  "type": "object",
+  "properties": {
+    "usuario_email": {
+      "type": "string",
+      "format": "email",
+      "description": "E-mail do usu\u00e1rio"
+    },
+    "itens_menu": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "ordem": {
+            "type": "number"
+          },
+          "visivel": {
+            "type": "boolean"
+          }
+        }
+      },
+      "description": "Ordem e visibilidade dos itens do menu"
+    }
+  },
+  "required": [
+    "usuario_email"
+  ]
+}

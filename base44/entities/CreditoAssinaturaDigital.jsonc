@@ -1,0 +1,55 @@
+{
+  "name": "CreditoAssinaturaDigital",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "tipo_credito": {
+      "type": "string",
+      "enum": [
+        "recarga",
+        "bonus",
+        "teste"
+      ],
+      "default": "recarga",
+      "description": "Origem do cr\u00e9dito"
+    },
+    "quantidade_adquirida": {
+      "type": "number",
+      "description": "Quantidade de cr\u00e9ditos comprados"
+    },
+    "quantidade_utilizada": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantidade j\u00e1 utilizada"
+    },
+    "quantidade_disponivel": {
+      "type": "number",
+      "description": "Cr\u00e9ditos restantes (calculado)"
+    },
+    "valor_pago": {
+      "type": "number",
+      "description": "Valor pago em reais"
+    },
+    "stripe_payment_id": {
+      "type": "string",
+      "description": "ID do pagamento Stripe"
+    },
+    "data_expiracao": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de expira\u00e7\u00e3o (opcional, para testes gratuitos)"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Cr\u00e9ditos ativos"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "quantidade_adquirida"
+  ]
+}

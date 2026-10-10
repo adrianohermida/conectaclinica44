@@ -1,0 +1,101 @@
+{
+  "name": "LogUsageIA",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket atendido"
+    },
+    "agente_ia_id": {
+      "type": "string",
+      "description": "ID do agente IA usado"
+    },
+    "modo": {
+      "type": "string",
+      "enum": [
+        "automatico",
+        "sugestao"
+      ],
+      "description": "Modo de uso: autom\u00e1tico ou sugest\u00e3o para atendente"
+    },
+    "prompt_enviado": {
+      "type": "string",
+      "description": "Resumo do prompt (primeiros 500 chars)"
+    },
+    "resposta_ia": {
+      "type": "string",
+      "description": "Resposta gerada pela IA"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "gerado",
+        "aceito",
+        "rejeitado"
+      ],
+      "default": "gerado",
+      "description": "Status da resposta"
+    },
+    "aceito": {
+      "type": "boolean",
+      "description": "Se atendente aceitou a sugest\u00e3o"
+    },
+    "motivo_rejeicao": {
+      "type": "string",
+      "description": "Por que foi rejeitado (opcional)"
+    },
+    "tempo_resposta_ms": {
+      "type": "number",
+      "description": "Tempo de resposta da IA em ms"
+    },
+    "resolveu_ticket": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se a resposta resolveu o ticket"
+    },
+    "csat_score": {
+      "type": "number",
+      "description": "Avalia\u00e7\u00e3o do cliente (1-5)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "ticket_id",
+    "agente_ia_id",
+    "modo",
+    "resposta_ia"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_log_ia_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status"
+      ],
+      "name": "idx_log_ia_status"
+    },
+    {
+      "fields": [
+        "ticket_id"
+      ],
+      "name": "idx_log_ia_ticket"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "aceito"
+      ],
+      "name": "idx_log_ia_aceite"
+    }
+  ]
+}

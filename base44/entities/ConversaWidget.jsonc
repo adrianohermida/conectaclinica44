@@ -1,0 +1,175 @@
+{
+  "name": "ConversaWidget",
+  "type": "object",
+  "properties": {
+    "sessao_id": {
+      "type": "string",
+      "description": "ID da sess\u00e3o (unique)"
+    },
+    "lead_id": {
+      "type": "string",
+      "description": "ID do LeadSite (se converteu)"
+    },
+    "mensagens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tool_calls": {
+            "type": "array"
+          }
+        }
+      },
+      "description": "Hist\u00f3rico completo da conversa"
+    },
+    "resultado": {
+      "type": "string",
+      "enum": [
+        "converteu",
+        "abandonou",
+        "escalou",
+        "resolvido",
+        "em_andamento"
+      ],
+      "description": "Resultado final"
+    },
+    "converteu_em": {
+      "type": "string",
+      "enum": [
+        "agendamento",
+        "ticket",
+        "lead_qualificado"
+      ],
+      "description": "Tipo de convers\u00e3o"
+    },
+    "intencao_detectada": {
+      "type": "string",
+      "enum": [
+        "comercial",
+        "suporte",
+        "duvida",
+        "demo",
+        "preco",
+        "outro"
+      ],
+      "description": "Inten\u00e7\u00e3o do usu\u00e1rio"
+    },
+    "sentimento": {
+      "type": "string",
+      "enum": [
+        "positivo",
+        "neutro",
+        "negativo",
+        "frustrado"
+      ],
+      "description": "Sentimento detectado por IA"
+    },
+    "tempo_resposta_media_ms": {
+      "type": "number",
+      "description": "Lat\u00eancia m\u00e9dia da IA"
+    },
+    "tempo_total_conversa_seg": {
+      "type": "number",
+      "description": "Dura\u00e7\u00e3o total"
+    },
+    "perguntas_sem_resposta": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Perguntas que IA n\u00e3o conseguiu responder"
+    },
+    "gaps_identificados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Gaps no FAQ/conhecimento"
+    },
+    "objecoes_registradas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objecao": {
+            "type": "string"
+          },
+          "resposta_ia": {
+            "type": "string"
+          },
+          "resolveu": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "custo_openai_usd": {
+      "type": "number",
+      "description": "Custo da conversa"
+    },
+    "analisado_por_ia": {
+      "type": "boolean",
+      "default": false
+    },
+    "insights_gerados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "sessao_id",
+    "mensagens"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "sessao_id"
+      ],
+      "name": "idx_conversa_sessao",
+      "unique": true
+    },
+    {
+      "fields": [
+        "-created_date"
+      ],
+      "name": "idx_conversa_timeline"
+    },
+    {
+      "fields": [
+        "resultado",
+        "-created_date"
+      ],
+      "name": "idx_conversa_resultado"
+    },
+    {
+      "fields": [
+        "analisado_por_ia",
+        "-created_date"
+      ],
+      "name": "idx_conversa_analise"
+    },
+    {
+      "fields": [
+        "intencao_detectada",
+        "resultado"
+      ],
+      "name": "idx_conversa_funil"
+    }
+  ]
+}

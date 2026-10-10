@@ -1,0 +1,83 @@
+{
+  "name": "ParcelamentoFiscal",
+  "type": "object",
+  "properties": {
+    "orgao": {
+      "type": "string",
+      "description": "\u00d3rg\u00e3o do parcelamento"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do parcelamento"
+    },
+    "tipo_tributo": {
+      "type": "string",
+      "enum": [
+        "federal",
+        "estadual",
+        "municipal",
+        "previdenciario",
+        "trabalhista",
+        "outro"
+      ],
+      "description": "Tipo de tributo"
+    },
+    "numero_processo": {
+      "type": "string",
+      "description": "N\u00famero do processo/parcelamento"
+    },
+    "valor_total": {
+      "type": "number",
+      "description": "Valor total do d\u00e9bito"
+    },
+    "valor_parcela": {
+      "type": "number",
+      "description": "Valor de cada parcela"
+    },
+    "total_parcelas": {
+      "type": "number",
+      "description": "Total de parcelas"
+    },
+    "parcelas_pagas": {
+      "type": "number",
+      "default": 0,
+      "description": "Parcelas j\u00e1 pagas"
+    },
+    "dia_vencimento": {
+      "type": "number",
+      "description": "Dia do m\u00eas para vencimento"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio do parcelamento"
+    },
+    "data_fim_prevista": {
+      "type": "string",
+      "format": "date",
+      "description": "Data prevista para fim"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativo",
+        "quitado",
+        "inadimplente",
+        "cancelado"
+      ],
+      "default": "ativo",
+      "description": "Status do parcelamento"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "orgao",
+    "descricao",
+    "tipo_tributo",
+    "valor_parcela",
+    "total_parcelas"
+  ]
+}

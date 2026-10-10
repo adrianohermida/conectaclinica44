@@ -1,0 +1,78 @@
+{
+  "name": "PastaCompliance",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ID da cl\u00ednica (null = SuperAdmin global)"
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome da pasta"
+    },
+    "pasta_pai_id": {
+      "type": "string",
+      "description": "ID da pasta pai (null = raiz)"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o da pasta"
+    },
+    "cor": {
+      "type": "string",
+      "default": "#7E57FF",
+      "description": "Cor da pasta (hex)"
+    },
+    "ordem": {
+      "type": "number",
+      "default": 0,
+      "description": "Ordem de exibi\u00e7\u00e3o"
+    },
+    "compartilhamento_publico": {
+      "type": "boolean",
+      "default": false,
+      "description": "Pasta compartilhada publicamente"
+    },
+    "token_compartilhamento": {
+      "type": "string",
+      "description": "Token \u00fanico para acesso p\u00fablico"
+    },
+    "link_compartilhamento": {
+      "type": "string",
+      "description": "Link p\u00fablico de compartilhamento"
+    },
+    "compartilhado_por": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio que compartilhou"
+    },
+    "compartilhado_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do compartilhamento"
+    }
+  },
+  "required": [
+    "nome"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "pasta_pai_id",
+        "ordem"
+      ],
+      "name": "idx_pastas_hierarquia_multitenant"
+    },
+    {
+      "fields": [
+        "token_compartilhamento"
+      ],
+      "name": "idx_pastas_token",
+      "unique": true,
+      "sparse": true
+    }
+  ]
+}

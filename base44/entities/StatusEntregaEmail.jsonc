@@ -1,0 +1,111 @@
+{
+  "name": "StatusEntregaEmail",
+  "type": "object",
+  "properties": {
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket relacionado"
+    },
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multitenant)"
+    },
+    "mensagem_id": {
+      "type": "string",
+      "description": "ID da mensagem enviada"
+    },
+    "destinatario_email": {
+      "type": "string",
+      "description": "Email do destinat\u00e1rio"
+    },
+    "assunto": {
+      "type": "string",
+      "description": "Assunto do email"
+    },
+    "status_envio": {
+      "type": "string",
+      "enum": [
+        "enviado",
+        "entregue",
+        "aberto",
+        "falha",
+        "bounce"
+      ],
+      "default": "enviado",
+      "description": "Status da entrega"
+    },
+    "data_envio": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora do envio"
+    },
+    "data_ultima_atividade": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da \u00faltima atividade (abertura/clique)"
+    },
+    "sendgrid_message_id": {
+      "type": "string",
+      "description": "Message ID do SendGrid (para tracking)"
+    },
+    "provedor": {
+      "type": "string",
+      "enum": [
+        "base44_builtin",
+        "sendgrid",
+        "smtp_custom"
+      ],
+      "default": "base44_builtin",
+      "description": "Provedor usado no envio"
+    },
+    "total_aberturas": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantas vezes foi aberto"
+    },
+    "total_cliques": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantos cliques em links"
+    },
+    "erro_descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do erro se falhou"
+    },
+    "eventos_raw": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Eventos brutos do webhook SendGrid"
+    }
+  },
+  "required": [
+    "ticket_id",
+    "clinica_id",
+    "destinatario_email",
+    "data_envio"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "ticket_id",
+        "-data_envio"
+      ],
+      "name": "idx_status_ticket"
+    },
+    {
+      "fields": [
+        "sendgrid_message_id"
+      ],
+      "name": "idx_status_message_id"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-data_envio"
+      ],
+      "name": "idx_status_clinica"
+    }
+  ]
+}

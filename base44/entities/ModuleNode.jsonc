@@ -1,0 +1,82 @@
+{
+  "name": "ModuleNode",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nome do m\u00f3dulo"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "P\u00e1ginas do m\u00f3dulo"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Componentes usados"
+    },
+    "queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Queries (React Query keys)"
+    },
+    "mutations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Mutations"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Entidades usadas"
+    },
+    "functions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Backend functions"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Depend\u00eancias de outros m\u00f3dulos"
+    },
+    "score_complexity": {
+      "type": "number",
+      "description": "Score de complexidade (0-100)"
+    },
+    "score_maintainability": {
+      "type": "number",
+      "description": "Score de manutenibilidade (0-100)"
+    },
+    "bundle_size_kb": {
+      "type": "number",
+      "description": "Tamanho do bundle (KB)"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "name"
+      ],
+      "unique": true
+    }
+  ]
+}

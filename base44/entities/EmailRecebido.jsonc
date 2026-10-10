@@ -1,0 +1,91 @@
+{
+  "name": "EmailRecebido",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "config_email_id": {
+      "type": "string",
+      "description": "ID da ConfiguracaoEmail que recebeu"
+    },
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket criado a partir deste email"
+    },
+    "from_email": {
+      "type": "string",
+      "description": "Email do remetente"
+    },
+    "to_email": {
+      "type": "string",
+      "description": "Email destinat\u00e1rio (alias)"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Assunto do email"
+    },
+    "body_text": {
+      "type": "string",
+      "description": "Corpo em texto plano"
+    },
+    "body_html": {
+      "type": "string",
+      "description": "Corpo em HTML"
+    },
+    "raw_envelope": {
+      "type": "string",
+      "description": "Envelope JSON do SendGrid"
+    },
+    "attachments_count": {
+      "type": "number",
+      "default": 0,
+      "description": "N\u00famero de anexos"
+    },
+    "processed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Email processado e ticket criado"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Mensagem de erro se falhou"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "from_email",
+    "to_email"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_email_recebido_timeline"
+    },
+    {
+      "fields": [
+        "ticket_id"
+      ],
+      "name": "idx_email_recebido_ticket",
+      "sparse": true
+    },
+    {
+      "fields": [
+        "to_email",
+        "-created_date"
+      ],
+      "name": "idx_email_recebido_alias"
+    },
+    {
+      "fields": [
+        "processed",
+        "-created_date"
+      ],
+      "name": "idx_email_recebido_processed"
+    }
+  ]
+}

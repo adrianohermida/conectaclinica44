@@ -1,0 +1,57 @@
+{
+  "name": "Feriado",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do feriado"
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome do feriado"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "nacional",
+        "estadual",
+        "municipal"
+      ],
+      "description": "Tipo do feriado"
+    },
+    "uf": {
+      "type": "string",
+      "description": "Estado (se estadual)"
+    },
+    "municipio_ibge": {
+      "type": "string",
+      "description": "C\u00f3digo IBGE munic\u00edpio (se municipal)"
+    },
+    "legislacao": {
+      "type": "string",
+      "description": "Legisla\u00e7\u00e3o que instituiu"
+    }
+  },
+  "required": [
+    "data",
+    "nome",
+    "tipo"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "data",
+        "tipo"
+      ],
+      "name": "idx_feriado_data"
+    },
+    {
+      "fields": [
+        "uf",
+        "data"
+      ],
+      "name": "idx_feriado_uf"
+    }
+  ]
+}

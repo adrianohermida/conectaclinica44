@@ -1,0 +1,119 @@
+{
+  "name": "AssinaturaClinica",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "plano_slug": {
+      "type": "string",
+      "enum": [
+        "starter",
+        "profissional",
+        "enterprise"
+      ],
+      "description": "Plano base contratado"
+    },
+    "stripe_subscription_id": {
+      "type": "string",
+      "description": "ID da subscription Stripe (plano base)"
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "description": "ID do customer Stripe"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativa",
+        "cancelada",
+        "pausada",
+        "trial"
+      ],
+      "default": "trial",
+      "description": "Status da assinatura"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio"
+    },
+    "data_fim_trial": {
+      "type": "string",
+      "format": "date",
+      "description": "Fim do per\u00edodo trial"
+    },
+    "data_cancelamento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de cancelamento"
+    },
+    "modulos_adicionais": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "M\u00f3dulos pagos adicionais (ex: secretaria_ia)"
+    },
+    "ia_premium_ativa": {
+      "type": "boolean",
+      "default": false,
+      "description": "FASE 5: M\u00f3dulo IA Premium ativo"
+    },
+    "ia_premium_desde": {
+      "type": "string",
+      "format": "date-time",
+      "description": "FASE 5: Quando ativou IA Premium"
+    },
+    "stripe_subscription_id_ia": {
+      "type": "string",
+      "description": "FASE 5: Subscription Stripe do m\u00f3dulo IA"
+    },
+    "valor_mensal_brl": {
+      "type": "number",
+      "description": "Valor mensal total (plano + addons)"
+    },
+    "proxima_cobranca": {
+      "type": "string",
+      "format": "date",
+      "description": "Data pr\u00f3xima cobran\u00e7a"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "plano_slug",
+    "status"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id"
+      ],
+      "name": "idx_assinatura_clinica",
+      "unique": true
+    },
+    {
+      "fields": [
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_assinatura_status"
+    },
+    {
+      "fields": [
+        "stripe_subscription_id"
+      ],
+      "name": "idx_assinatura_stripe",
+      "unique": true,
+      "sparse": true
+    },
+    {
+      "fields": [
+        "ia_premium_ativa"
+      ],
+      "name": "idx_assinatura_ia_premium"
+    }
+  ]
+}

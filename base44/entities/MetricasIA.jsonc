@@ -1,0 +1,50 @@
+{
+  "name": "MetricasIA",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da m\u00e9trica"
+    },
+    "tipo_analise": {
+      "type": "string",
+      "description": "Tipo de an\u00e1lise executada"
+    },
+    "total_chamadas": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de chamadas"
+    },
+    "cache_hits": {
+      "type": "number",
+      "default": 0,
+      "description": "Chamadas atendidas por cache"
+    },
+    "custo_total_usd": {
+      "type": "number",
+      "default": 0,
+      "description": "Custo total em USD"
+    },
+    "economia_cache_usd": {
+      "type": "number",
+      "default": 0,
+      "description": "Economia com cache"
+    },
+    "tempo_medio_resposta_ms": {
+      "type": "number",
+      "description": "Tempo m\u00e9dio de resposta"
+    },
+    "usuarios_unicos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails dos usu\u00e1rios que usaram IA"
+    }
+  },
+  "required": [
+    "data",
+    "tipo_analise"
+  ]
+}

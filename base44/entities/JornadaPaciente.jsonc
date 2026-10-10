@@ -1,0 +1,65 @@
+{
+  "name": "JornadaPaciente",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome do paciente"
+    },
+    "estagio_atual": {
+      "type": "string",
+      "enum": [
+        "novo",
+        "triagem",
+        "tratamento",
+        "acompanhamento",
+        "alta"
+      ],
+      "default": "novo",
+      "description": "Est\u00e1gio atual"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "paciente_id",
+    "paciente_nome"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_jornada_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "paciente_id",
+        "-created_date"
+      ],
+      "name": "idx_jornada_paciente"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "estagio_atual",
+        "-created_date"
+      ],
+      "name": "idx_jornada_estagio"
+    }
+  ]
+}

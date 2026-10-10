@@ -1,0 +1,121 @@
+{
+  "name": "PlanoModulo",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome do plano"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do plano"
+    },
+    "preco_mensal": {
+      "type": "number",
+      "description": "Pre\u00e7o mensal em reais"
+    },
+    "preco_anual": {
+      "type": "number",
+      "description": "Pre\u00e7o anual em reais"
+    },
+    "stripe_product_id": {
+      "type": "string",
+      "description": "Stripe Product ID (prod_XXX)"
+    },
+    "stripe_price_id_mensal": {
+      "type": "string",
+      "description": "ID pre\u00e7o mensal Stripe"
+    },
+    "stripe_price_id_anual": {
+      "type": "string",
+      "description": "ID pre\u00e7o anual Stripe"
+    },
+    "modulos_inclusos": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "dashboard",
+          "agenda",
+          "pacientes",
+          "prontuarios",
+          "prescricao_eletronica",
+          "produtos",
+          "atendimento",
+          "administracao",
+          "relatorios",
+          "financeiro",
+          "estoque",
+          "jornada",
+          "planos_tratamento",
+          "analise_ia",
+          "colaboracao",
+          "telemedicina",
+          "gestao_equipe"
+        ]
+      },
+      "description": "M\u00f3dulos inclusos"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Plano ativo"
+    },
+    "ordem": {
+      "type": "number",
+      "description": "Ordem de exibi\u00e7\u00e3o"
+    },
+    "destaque": {
+      "type": "boolean",
+      "default": false,
+      "description": "Plano em destaque"
+    },
+    "beta_clinicas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Cl\u00ednicas beta"
+    },
+    "limite_emails_dia": {
+      "type": "number",
+      "default": 30,
+      "description": "Limite de emails/dia"
+    },
+    "limite_usuarios": {
+      "type": "number",
+      "default": 3,
+      "description": "Limite de usu\u00e1rios"
+    },
+    "limite_storage_gb": {
+      "type": "number",
+      "default": 5,
+      "description": "Limite storage GB"
+    },
+    "storage_gb": {
+      "type": "number",
+      "default": 5,
+      "description": "Storage inclu\u00eddo em GB (Starter=5, Profissional=50, Enterprise=500)"
+    },
+    "preco_gb_adicional": {
+      "type": "number",
+      "default": 10,
+      "description": "Pre\u00e7o por GB adicional/m\u00eas em BRL"
+    }
+  },
+  "required": [
+    "nome",
+    "preco_mensal",
+    "modulos_inclusos",
+    "stripe_product_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "stripe_product_id"
+      ],
+      "unique": true,
+      "name": "idx_plano_stripe_product"
+    }
+  ]
+}

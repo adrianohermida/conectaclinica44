@@ -1,0 +1,185 @@
+{
+  "name": "DocumentoAnaliseIA",
+  "type": "object",
+  "properties": {
+    "documento_id": {
+      "type": "string",
+      "description": "ID do documento analisado"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome do paciente"
+    },
+    "tipo_documento": {
+      "type": "string",
+      "enum": [
+        "exame_sangue",
+        "exame_imagem",
+        "raio_x",
+        "tomografia",
+        "ressonancia",
+        "ultrassom",
+        "eletro",
+        "laudo_medico",
+        "receita",
+        "relatorio",
+        "outro"
+      ],
+      "description": "Tipo de documento"
+    },
+    "nome_arquivo": {
+      "type": "string",
+      "description": "Nome do arquivo original"
+    },
+    "arquivo_url": {
+      "type": "string",
+      "description": "URL do arquivo original"
+    },
+    "data_analise": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data da an\u00e1lise"
+    },
+    "analise_ia": {
+      "type": "object",
+      "properties": {
+        "resumo": {
+          "type": "string"
+        },
+        "achados_principais": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "valores_criticos": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "sugestoes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nivel_urgencia": {
+          "type": "string",
+          "enum": [
+            "baixo",
+            "medio",
+            "alto",
+            "critico"
+          ]
+        },
+        "confidence_score": {
+          "type": "number"
+        }
+      },
+      "description": "Resultado da an\u00e1lise por IA"
+    },
+    "dados_extraidos": {
+      "type": "object",
+      "description": "Dados estruturados extra\u00eddos do documento"
+    },
+    "confianca_extracao": {
+      "type": "number",
+      "description": "Confian\u00e7a da extra\u00e7\u00e3o de dados (0-100)"
+    },
+    "validado_por": {
+      "type": "string",
+      "description": "M\u00e9dico que validou a an\u00e1lise"
+    },
+    "data_validacao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data da valida\u00e7\u00e3o m\u00e9dica"
+    },
+    "status_validacao": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "aprovado",
+        "aprovado_com_ressalvas",
+        "rejeitado"
+      ],
+      "default": "pendente",
+      "description": "Status da valida\u00e7\u00e3o m\u00e9dica"
+    },
+    "observacoes_validacao": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es da valida\u00e7\u00e3o"
+    },
+    "correcoes_medico": {
+      "type": "string",
+      "description": "Corre\u00e7\u00f5es feitas pelo m\u00e9dico"
+    },
+    "observacoes_medico": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es do m\u00e9dico sobre a an\u00e1lise"
+    },
+    "alertas_gerados": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "type": "string"
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "prioridade": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Alertas gerados pela IA"
+    },
+    "categoria_automatica": {
+      "type": "string",
+      "description": "Categoria identificada automaticamente pela IA"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags para busca e organiza\u00e7\u00e3o"
+    }
+  },
+  "required": [
+    "paciente_id",
+    "tipo_documento",
+    "arquivo_url",
+    "analise_ia"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "paciente_id",
+        "-data_analise"
+      ],
+      "name": "idx_analise_paciente_timeline"
+    },
+    {
+      "fields": [
+        "status_validacao",
+        "-data_analise"
+      ],
+      "name": "idx_analise_status_validacao"
+    },
+    {
+      "fields": [
+        "tipo_documento",
+        "-data_analise"
+      ],
+      "name": "idx_analise_tipo_documento"
+    }
+  ]
+}

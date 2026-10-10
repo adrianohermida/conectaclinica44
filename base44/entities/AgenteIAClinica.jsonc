@@ -1,0 +1,99 @@
+{
+  "name": "AgenteIAClinica",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "nome_agente": {
+      "type": "string",
+      "default": "Assistente Virtual",
+      "description": "Nome da secret\u00e1ria IA (Clara, Dra. Ana, etc)"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "URL avatar da IA"
+    },
+    "personalidade": {
+      "type": "string",
+      "enum": [
+        "profissional",
+        "caloroso",
+        "tecnico"
+      ],
+      "default": "profissional",
+      "description": "Tom de voz do agente"
+    },
+    "instrucoes_customizadas": {
+      "type": "string",
+      "description": "Instru\u00e7\u00f5es espec\u00edficas da cl\u00ednica (hor\u00e1rio, servi\u00e7os, etc)"
+    },
+    "base_conhecimento_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs das FAQs vinculadas ao agente"
+    },
+    "agente_base44_nome": {
+      "type": "string",
+      "description": "Nome t\u00e9cnico do agent criado (secretaria_ia_XXX)"
+    },
+    "limites": {
+      "type": "object",
+      "properties": {
+        "max_msg_dia": {
+          "type": "number",
+          "default": 100
+        },
+        "custo_max_mensal_brl": {
+          "type": "number",
+          "default": 300
+        }
+      },
+      "description": "Limites de uso"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Agente ativo"
+    },
+    "total_interacoes": {
+      "type": "number",
+      "default": 0,
+      "description": "Total intera\u00e7\u00f5es processadas"
+    },
+    "custo_total_mes_brl": {
+      "type": "number",
+      "default": 0,
+      "description": "Custo acumulado no m\u00eas"
+    },
+    "ultima_resetagem": {
+      "type": "string",
+      "format": "date",
+      "description": "\u00daltima vez que contadores foram zerados"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "nome_agente",
+    "agente_base44_nome"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id"
+      ],
+      "name": "idx_agente_clinica",
+      "unique": true
+    },
+    {
+      "fields": [
+        "agente_base44_nome"
+      ],
+      "name": "idx_agente_nome",
+      "unique": true
+    }
+  ]
+}

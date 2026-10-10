@@ -1,0 +1,114 @@
+{
+  "name": "ConsumoWidgetIA",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "UUID da sess\u00e3o widget"
+    },
+    "visitante_id": {
+      "type": "string",
+      "description": "Identificador visitante (email ou UUID an\u00f4nimo)"
+    },
+    "tipo_consumo": {
+      "type": "string",
+      "enum": [
+        "auto_resposta",
+        "sugestao_resposta",
+        "categorizacao",
+        "sentimento",
+        "roteamento"
+      ],
+      "description": "Tipo de opera\u00e7\u00e3o IA"
+    },
+    "prompt_enviado": {
+      "type": "string",
+      "description": "Prompt enviado ao LLM"
+    },
+    "tokens_input": {
+      "type": "number",
+      "description": "Tokens enviados"
+    },
+    "tokens_output": {
+      "type": "number",
+      "description": "Tokens recebidos"
+    },
+    "tokens_total": {
+      "type": "number",
+      "description": "Total tokens (input + output)"
+    },
+    "custo_real_usd": {
+      "type": "number",
+      "description": "Custo real OpenAI em USD (calculado por modelo)"
+    },
+    "custo_cobrado_brl": {
+      "type": "number",
+      "description": "Custo cobrado do cliente em BRL (markup 300%)"
+    },
+    "creditos_consumidos": {
+      "type": "number",
+      "description": "Cr\u00e9ditos debitados (1 cr\u00e9dito = R$9,00)"
+    },
+    "modelo_llm": {
+      "type": "string",
+      "default": "gpt-4o-mini",
+      "description": "Modelo LLM usado"
+    },
+    "latencia_ms": {
+      "type": "number",
+      "description": "Tempo resposta em ms"
+    },
+    "sucesso": {
+      "type": "boolean",
+      "description": "Requisi\u00e7\u00e3o bem-sucedida"
+    },
+    "erro_msg": {
+      "type": "string",
+      "description": "Mensagem de erro se falhou"
+    },
+    "origem": {
+      "type": "string",
+      "enum": [
+        "widget_publico",
+        "atendimento_interno",
+        "sugestao_resposta"
+      ],
+      "description": "Origem do consumo"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "tipo_consumo",
+    "tokens_total",
+    "creditos_consumidos",
+    "origem"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_consumo_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "session_id"
+      ],
+      "name": "idx_consumo_sessao"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "tipo_consumo",
+        "-created_date"
+      ],
+      "name": "idx_consumo_tipo"
+    }
+  ]
+}

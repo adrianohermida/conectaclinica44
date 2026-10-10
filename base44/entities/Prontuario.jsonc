@@ -1,0 +1,176 @@
+{
+  "name": "Prontuario",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome do paciente"
+    },
+    "medico_id": {
+      "type": "string",
+      "description": "ID do m\u00e9dico (foreign key Medico.id) - OBRIGAT\u00d3RIO CFM"
+    },
+    "medico_crm": {
+      "type": "string",
+      "description": "CRM do m\u00e9dico respons\u00e1vel (deprecated - usar medico_id)"
+    },
+    "medico_nome": {
+      "type": "string",
+      "description": "Nome do m\u00e9dico respons\u00e1vel"
+    },
+    "data_atendimento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do atendimento"
+    },
+    "hora_atendimento": {
+      "type": "string",
+      "description": "Hora do atendimento"
+    },
+    "tipo_atendimento": {
+      "type": "string",
+      "enum": [
+        "consulta",
+        "retorno",
+        "procedimento",
+        "exame",
+        "teleconsulta"
+      ],
+      "description": "Tipo de atendimento"
+    },
+    "motivo_consulta": {
+      "type": "string",
+      "description": "Motivo da consulta"
+    },
+    "queixa_principal": {
+      "type": "string",
+      "description": "Queixa principal do paciente"
+    },
+    "historia_doenca_atual": {
+      "type": "string",
+      "description": "Hist\u00f3ria da doen\u00e7a atual (HDA)"
+    },
+    "exame_fisico": {
+      "type": "object",
+      "description": "Exame f\u00edsico completo"
+    },
+    "hipotese_diagnostica": {
+      "type": "string",
+      "description": "Hip\u00f3tese diagn\u00f3stica (CID-10)"
+    },
+    "conduta": {
+      "type": "string",
+      "description": "Conduta m\u00e9dica adotada"
+    },
+    "prescricao_id": {
+      "type": "string",
+      "description": "ID da prescri\u00e7\u00e3o eletr\u00f4nica vinculada"
+    },
+    "status_prontuario": {
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "finalizado",
+        "assinado",
+        "retificado"
+      ],
+      "default": "rascunho",
+      "description": "Status do prontu\u00e1rio"
+    },
+    "assinatura_digital": {
+      "type": "object",
+      "description": "Dados da assinatura digital ICP-Brasil"
+    },
+    "acessos_externos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "usuario_email": {
+            "type": "string"
+          },
+          "usuario_nome": {
+            "type": "string"
+          },
+          "justificativa": {
+            "type": "string"
+          },
+          "data_acesso": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ip": {
+            "type": "string"
+          }
+        }
+      },
+      "default": [],
+      "description": "LGPD/CFM: Registro de acessos cross-tenant com justificativa obrigat\u00f3ria"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "paciente_id",
+    "paciente_nome",
+    "medico_id",
+    "medico_nome",
+    "queixa_principal"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "paciente_id",
+        "-data_atendimento"
+      ],
+      "name": "idx_prontuario_paciente_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-data_atendimento",
+        "status_prontuario"
+      ],
+      "name": "idx_prontuario_list_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "medico_crm",
+        "-data_atendimento"
+      ],
+      "name": "idx_prontuario_medico_crm_deprecated"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "medico_id",
+        "-data_atendimento"
+      ],
+      "name": "idx_prontuario_medico_id_novo"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status_prontuario",
+        "-updated_date"
+      ],
+      "name": "idx_prontuario_status"
+    },
+    {
+      "fields": [
+        "medico_id"
+      ],
+      "name": "idx_medico_foreign_key",
+      "sparse": true
+    }
+  ]
+}

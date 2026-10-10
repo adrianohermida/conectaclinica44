@@ -1,0 +1,51 @@
+{
+  "name": "MetricaPerformance",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (opcional, m\u00e9tricas globais se null)"
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "Rota/p\u00e1gina medida (ex: /Pacientes, /Prontuarios)"
+    },
+    "metrica_tipo": {
+      "type": "string",
+      "enum": [
+        "latencia",
+        "erro",
+        "throughput",
+        "render"
+      ],
+      "description": "Tipo de m\u00e9trica"
+    },
+    "valor": {
+      "type": "number",
+      "description": "Valor da m\u00e9trica (ms para lat\u00eancia)"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Momento da coleta"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "Navegador/dispositivo"
+    },
+    "erro_msg": {
+      "type": "string",
+      "description": "Mensagem de erro (se aplic\u00e1vel)"
+    },
+    "stack_trace": {
+      "type": "string",
+      "description": "Stack trace (se erro)"
+    }
+  },
+  "required": [
+    "endpoint",
+    "metrica_tipo",
+    "valor",
+    "timestamp"
+  ]
+}

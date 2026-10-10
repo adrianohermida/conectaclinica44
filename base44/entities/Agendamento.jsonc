@@ -1,0 +1,147 @@
+{
+  "name": "Agendamento",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome do paciente"
+    },
+    "data": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da consulta"
+    },
+    "horario": {
+      "type": "string",
+      "description": "Hor\u00e1rio da consulta"
+    },
+    "tipo_consulta": {
+      "type": "string",
+      "enum": [
+        "presencial",
+        "telemedicina"
+      ],
+      "default": "presencial",
+      "description": "Tipo de atendimento"
+    },
+    "especialidade": {
+      "type": "string",
+      "enum": [
+        "clinica_geral",
+        "medicina_integrativa",
+        "cirurgia_geral",
+        "medicina_preventiva",
+        "home_care",
+        "outro"
+      ],
+      "description": "Especialidade m\u00e9dica"
+    },
+    "medico": {
+      "type": "string",
+      "description": "Nome do m\u00e9dico"
+    },
+    "medico_id": {
+      "type": "string",
+      "description": "ID do m\u00e9dico (refer\u00eancia)"
+    },
+    "medico_crm": {
+      "type": "string",
+      "description": "CRM principal do m\u00e9dico respons\u00e1vel"
+    },
+    "tratamento": {
+      "type": "string",
+      "description": "Tipo de tratamento/procedimento"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "agendado",
+        "confirmado",
+        "em_atendimento",
+        "concluido",
+        "cancelado"
+      ],
+      "default": "agendado",
+      "description": "Status do agendamento"
+    },
+    "valor": {
+      "type": "number",
+      "description": "Valor da consulta"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es do agendamento"
+    },
+    "link_telemedicina": {
+      "type": "string",
+      "description": "Link para videochamada"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "paciente_nome",
+    "data",
+    "horario",
+    "tipo_consulta"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "data",
+        "horario",
+        "medico"
+      ],
+      "unique": true,
+      "name": "unique_slot_per_doctor",
+      "partialFilterExpression": {
+        "status": {
+          "$ne": "cancelado"
+        },
+        "medico": {
+          "$exists": true,
+          "$ne": ""
+        }
+      }
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-data"
+      ],
+      "name": "idx_agendamento_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-data"
+      ],
+      "name": "idx_agendamento_status_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "paciente_id",
+        "-data"
+      ],
+      "name": "idx_agendamento_paciente"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "medico",
+        "-data"
+      ],
+      "name": "idx_agendamento_medico_optimized"
+    }
+  ]
+}

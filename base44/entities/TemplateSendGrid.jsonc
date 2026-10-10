@@ -1,0 +1,100 @@
+{
+  "name": "TemplateSendGrid",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (null = global SuperAdmin)"
+    },
+    "template_sendgrid_id": {
+      "type": "string",
+      "description": "ID do template no SendGrid"
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome do template"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "reset_senha",
+        "2fa_codigo",
+        "pagamento_falhou",
+        "trial_expirando",
+        "credito_baixo",
+        "lembrete_consulta",
+        "convite_equipe",
+        "link_telemedicina",
+        "cobranca",
+        "alerta_vencimento",
+        "fatura_mensal",
+        "prontuario_pronto",
+        "exame_anexado",
+        "receita_digital",
+        "colaboracao_mencionado",
+        "digest_agenda",
+        "relatorio_semanal",
+        "campanha_marketing",
+        "alerta_estoque",
+        "termo_pendente",
+        "certidao_vence",
+        "ticket_criado"
+      ],
+      "description": "Tipo do template transacional"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "auth",
+        "billing",
+        "clinic",
+        "admin",
+        "compliance"
+      ],
+      "description": "Categoria do template"
+    },
+    "variaveis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de vari\u00e1veis din\u00e2micas"
+    },
+    "html_preview": {
+      "type": "string",
+      "description": "HTML para preview (Sprint 4)"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Template ativo"
+    },
+    "uso_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Contador de uso"
+    }
+  },
+  "required": [
+    "tipo",
+    "nome",
+    "template_sendgrid_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "tipo",
+        "ativo"
+      ],
+      "name": "idx_template_tipo_ativo"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "tipo"
+      ],
+      "name": "idx_template_clinica_tipo",
+      "sparse": true
+    }
+  ]
+}

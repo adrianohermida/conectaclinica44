@@ -1,0 +1,91 @@
+{
+  "name": "ConfiguracaoPublicidade",
+  "type": "object",
+  "properties": {
+    "page_name": {
+      "type": "string",
+      "description": "Nome da p\u00e1gina (ex: DashboardCompleto, Agenda)"
+    },
+    "page_path": {
+      "type": "string",
+      "description": "Path da p\u00e1gina (ex: /DashboardCompleto)"
+    },
+    "permite_acesso_publico": {
+      "type": "boolean",
+      "default": false,
+      "description": "Toggle: permite acesso tempor\u00e1rio SEM autentica\u00e7\u00e3o (para PageSpeed Insights)"
+    },
+    "motivo_publicacao": {
+      "type": "string",
+      "enum": [
+        "pagespeed_insights",
+        "teste_desempenho",
+        "demo_publico",
+        "manutencao"
+      ],
+      "description": "Motivo da publica\u00e7\u00e3o tempor\u00e1ria"
+    },
+    "ativado_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi ativado acesso p\u00fablico"
+    },
+    "ativado_por": {
+      "type": "string",
+      "description": "Email do admin que ativou"
+    },
+    "desativar_automaticamente_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Auto-desativar ap\u00f3s X horas (seguran\u00e7a)"
+    },
+    "url_pagespeed": {
+      "type": "string",
+      "description": "URL do relat\u00f3rio PageSpeed gerado"
+    },
+    "score_performance": {
+      "type": "number",
+      "description": "Score PageSpeed Performance (0-100)"
+    },
+    "score_accessibility": {
+      "type": "number",
+      "description": "Score Accessibility (0-100)"
+    },
+    "score_seo": {
+      "type": "number",
+      "description": "Score SEO (0-100)"
+    },
+    "ultima_medicao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima execu\u00e7\u00e3o PageSpeed"
+    },
+    "alertas_seguranca": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alertas de seguran\u00e7a (ex: 'P\u00e1gina com dados sens\u00edveis exposta')"
+    }
+  },
+  "required": [
+    "page_name",
+    "page_path"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "page_name"
+      ],
+      "name": "idx_config_page",
+      "unique": true
+    },
+    {
+      "fields": [
+        "permite_acesso_publico",
+        "-updated_date"
+      ],
+      "name": "idx_config_publico"
+    }
+  ]
+}

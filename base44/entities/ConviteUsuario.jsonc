@@ -1,0 +1,140 @@
+{
+  "name": "ConviteUsuario",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "clinica_nome": {
+      "type": "string",
+      "description": "Nome da cl\u00ednica"
+    },
+    "email_convidado": {
+      "type": "string",
+      "description": "Email do convidado"
+    },
+    "perfil_atribuido": {
+      "type": "string",
+      "enum": [
+        "medico",
+        "recepcionista",
+        "financeiro",
+        "admin"
+      ],
+      "description": "Perfil que ser\u00e1 atribu\u00eddo"
+    },
+    "token": {
+      "type": "string",
+      "description": "Token \u00fanico do convite"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "aceito",
+        "recusado",
+        "expirado",
+        "cancelado"
+      ],
+      "default": "pendente",
+      "description": "Status do convite"
+    },
+    "status_email": {
+      "type": "string",
+      "enum": [
+        "enviando",
+        "enviado",
+        "entregue",
+        "aberto",
+        "clicado",
+        "bounce",
+        "spam",
+        "erro"
+      ],
+      "default": "enviando",
+      "description": "Status rastreamento SendGrid"
+    },
+    "sendgrid_message_id": {
+      "type": "string",
+      "description": "ID da mensagem SendGrid para tracking"
+    },
+    "data_envio": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do envio"
+    },
+    "data_entrega": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data que foi entregue (SendGrid delivered)"
+    },
+    "data_leitura": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data que foi aberto (SendGrid open)"
+    },
+    "data_clique": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data que clicou no link"
+    },
+    "data_expiracao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data de expira\u00e7\u00e3o (7 dias)"
+    },
+    "data_aceite": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data que foi aceito"
+    },
+    "convidado_por_email": {
+      "type": "string",
+      "description": "Email de quem convidou"
+    },
+    "tentativas_envio": {
+      "type": "number",
+      "default": 0,
+      "description": "Contador de tentativas de reenvio"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "email_convidado",
+    "perfil_atribuido",
+    "token"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "token"
+      ],
+      "name": "idx_convite_token",
+      "unique": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_convites_clinica"
+    },
+    {
+      "fields": [
+        "email_convidado",
+        "clinica_id",
+        "status"
+      ],
+      "name": "idx_convite_email_clinica"
+    },
+    {
+      "fields": [
+        "sendgrid_message_id"
+      ],
+      "name": "idx_sendgrid_tracking",
+      "sparse": true
+    }
+  ]
+}

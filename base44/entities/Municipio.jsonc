@@ -1,0 +1,36 @@
+{
+  "name": "Municipio",
+  "type": "object",
+  "properties": {
+    "codigo_ibge": {
+      "type": "string",
+      "description": "C\u00f3digo IBGE do munic\u00edpio"
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome do munic\u00edpio"
+    },
+    "uf": {
+      "type": "string",
+      "description": "Sigla do estado"
+    },
+    "estado_nome": {
+      "type": "string",
+      "description": "Nome do estado"
+    }
+  },
+  "required": [
+    "codigo_ibge",
+    "nome",
+    "uf"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "uf",
+        "nome"
+      ],
+      "name": "idx_municipio_uf_nome"
+    }
+  ]
+}

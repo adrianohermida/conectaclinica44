@@ -1,0 +1,78 @@
+{
+  "name": "PlanoTratamento",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome do paciente"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo do plano"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o detalhada"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativo",
+        "concluido",
+        "pausado",
+        "cancelado"
+      ],
+      "default": "ativo",
+      "description": "Status do plano"
+    },
+    "progresso_percentual": {
+      "type": "number",
+      "default": 0,
+      "description": "Progresso (%)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "paciente_id",
+    "paciente_nome",
+    "titulo"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_plano_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "paciente_id",
+        "-created_date"
+      ],
+      "name": "idx_plano_paciente"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_plano_status"
+    }
+  ]
+}

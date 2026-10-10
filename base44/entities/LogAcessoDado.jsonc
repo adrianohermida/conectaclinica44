@@ -1,0 +1,118 @@
+{
+  "name": "LogAcessoDado",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "usuario_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio que acessou"
+    },
+    "usuario_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio"
+    },
+    "entidade": {
+      "type": "string",
+      "description": "Entidade acessada (Paciente, Prontuario, etc)"
+    },
+    "registro_id": {
+      "type": "string",
+      "description": "ID do registro acessado"
+    },
+    "tipo_acesso": {
+      "type": "string",
+      "enum": [
+        "consulta_ia",
+        "busca_semantica_ia",
+        "leitura_manual",
+        "edicao",
+        "exportacao"
+      ],
+      "description": "Tipo de acesso realizado"
+    },
+    "finalidade": {
+      "type": "string",
+      "description": "Finalidade do acesso (ex: assistencia_clinica_ia)"
+    },
+    "base_legal": {
+      "type": "string",
+      "enum": [
+        "consentimento",
+        "execucao_contrato",
+        "obrigacao_legal",
+        "interesse_legitimo",
+        "protecao_vida"
+      ],
+      "description": "Base legal LGPD"
+    },
+    "dados_acessados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de campos/dados acessados"
+    },
+    "contexto": {
+      "type": "string",
+      "description": "Contexto do acesso (pergunta, opera\u00e7\u00e3o, etc)"
+    },
+    "ip_origem": {
+      "type": "string",
+      "description": "IP de origem"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "User agent"
+    },
+    "sucesso": {
+      "type": "boolean",
+      "default": true,
+      "description": "Acesso bem-sucedido?"
+    },
+    "motivo_falha": {
+      "type": "string",
+      "description": "Motivo de falha (se aplic\u00e1vel)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "usuario_id",
+    "entidade",
+    "tipo_acesso",
+    "base_legal"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_log_acesso_timeline"
+    },
+    {
+      "fields": [
+        "usuario_email",
+        "-created_date"
+      ],
+      "name": "idx_log_acesso_usuario"
+    },
+    {
+      "fields": [
+        "entidade",
+        "registro_id",
+        "-created_date"
+      ],
+      "name": "idx_log_acesso_registro"
+    },
+    {
+      "fields": [
+        "tipo_acesso",
+        "-created_date"
+      ],
+      "name": "idx_log_acesso_tipo"
+    }
+  ]
+}

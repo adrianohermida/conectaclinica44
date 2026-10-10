@@ -1,0 +1,120 @@
+{
+  "name": "RouteNode",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "Caminho da rota (ex: /Dashboard, /Pacientes)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "public",
+        "auth",
+        "admin",
+        "superadmin"
+      ],
+      "description": "Tipo de acesso"
+    },
+    "module": {
+      "type": "string",
+      "description": "M\u00f3dulo associado"
+    },
+    "entry_point": {
+      "type": "boolean",
+      "default": false,
+      "description": "Rota de entrada"
+    },
+    "guards": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Guards aplicados (RouteGuard, ModuloGuard, etc)"
+    },
+    "tenants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tenant IDs que acessam"
+    },
+    "score_perf": {
+      "type": "number",
+      "description": "Score de performance (0-100)"
+    },
+    "score_error": {
+      "type": "number",
+      "description": "Taxa de erro (%)"
+    },
+    "tti_ms": {
+      "type": "number",
+      "description": "Time to Interactive (ms)"
+    },
+    "inp_ms": {
+      "type": "number",
+      "description": "Interaction to Next Paint (ms)"
+    },
+    "visits_30d": {
+      "type": "number",
+      "default": 0,
+      "description": "Visitas nos \u00faltimos 30 dias"
+    },
+    "drop_off_rate": {
+      "type": "number",
+      "description": "Taxa de abandono (%)"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Componentes usados"
+    },
+    "queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Queries usadas (queryKey)"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Entidades acessadas"
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs dos Issues relacionados"
+    }
+  },
+  "required": [
+    "path",
+    "type"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "path"
+      ],
+      "unique": true
+    },
+    {
+      "fields": [
+        "module",
+        "-visits_30d"
+      ]
+    },
+    {
+      "fields": [
+        "type",
+        "-score_perf"
+      ]
+    }
+  ]
+}

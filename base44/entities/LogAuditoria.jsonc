@@ -1,0 +1,70 @@
+{
+  "name": "LogAuditoria",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "tipo_operacao": {
+      "type": "string",
+      "enum": [
+        "criar_ticket",
+        "atualizar_ticket",
+        "deletar_ticket",
+        "enviar_mensagem",
+        "enviar_notificacao",
+        "invocar_agente_ia",
+        "atribuir_ticket",
+        "acesso_mensagem",
+        "atualizar_config",
+        "acesso_dados_paciente",
+        "exportar_dados",
+        "outro"
+      ],
+      "description": "Tipo de opera\u00e7\u00e3o auditada"
+    },
+    "usuario_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio que executou"
+    },
+    "usuario_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio"
+    },
+    "entidade_afetada": {
+      "type": "string",
+      "description": "Nome da entidade (Ticket, MensagemTicket, etc)"
+    },
+    "entidade_id": {
+      "type": "string",
+      "description": "ID do registro afetado"
+    },
+    "detalhes": {
+      "type": "object",
+      "description": "Detalhes da opera\u00e7\u00e3o (JSON)"
+    },
+    "ip_origem": {
+      "type": "string",
+      "description": "IP do cliente"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "User agent do navegador"
+    },
+    "sucesso": {
+      "type": "boolean",
+      "default": true,
+      "description": "Opera\u00e7\u00e3o bem-sucedida?"
+    },
+    "erro": {
+      "type": "string",
+      "description": "Mensagem de erro (se falhou)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "tipo_operacao",
+    "usuario_id"
+  ]
+}

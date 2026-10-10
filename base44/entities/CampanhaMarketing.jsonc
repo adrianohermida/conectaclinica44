@@ -1,0 +1,95 @@
+{
+  "name": "CampanhaMarketing",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome da campanha"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "email",
+        "whatsapp",
+        "sms",
+        "retargeting"
+      ],
+      "default": "email",
+      "description": "Tipo de campanha"
+    },
+    "segmento_alvo": {
+      "type": "string",
+      "enum": [
+        "todos_leads",
+        "hot",
+        "warm",
+        "cold",
+        "clientes_ativos",
+        "churn",
+        "custom"
+      ],
+      "description": "Segmento alvo"
+    },
+    "filtros_custom": {
+      "type": "object",
+      "description": "Filtros customizados (query JSON)"
+    },
+    "assunto": {
+      "type": "string",
+      "description": "Assunto (email)"
+    },
+    "corpo": {
+      "type": "string",
+      "description": "Corpo da mensagem (markdown/HTML)"
+    },
+    "cta_texto": {
+      "type": "string",
+      "description": "Texto do CTA"
+    },
+    "cta_url": {
+      "type": "string",
+      "description": "URL do CTA"
+    },
+    "agendada_para": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora de envio"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "agendada",
+        "enviando",
+        "concluida",
+        "cancelada"
+      ],
+      "default": "rascunho"
+    },
+    "enviados": {
+      "type": "number",
+      "default": 0
+    },
+    "aberturas": {
+      "type": "number",
+      "default": 0
+    },
+    "cliques": {
+      "type": "number",
+      "default": 0
+    },
+    "conversoes": {
+      "type": "number",
+      "default": 0
+    },
+    "bounces": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "nome",
+    "tipo",
+    "segmento_alvo"
+  ]
+}

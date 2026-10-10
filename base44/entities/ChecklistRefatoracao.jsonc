@@ -1,0 +1,113 @@
+{
+  "name": "ChecklistRefatoracao",
+  "type": "object",
+  "properties": {
+    "pagina": {
+      "type": "string",
+      "description": "Nome da p\u00e1gina"
+    },
+    "caminho": {
+      "type": "string",
+      "description": "Caminho do arquivo (pages/NomePagina.jsx)"
+    },
+    "grupo": {
+      "type": "string",
+      "enum": [
+        "gestao_clinica",
+        "financeiro",
+        "produtos_estoque",
+        "ia_inovacao",
+        "administracao",
+        "compliance",
+        "relatorios_performance",
+        "suporte"
+      ],
+      "description": "Grupo de navega\u00e7\u00e3o"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "critica",
+        "alta",
+        "media",
+        "baixa"
+      ],
+      "default": "media",
+      "description": "Prioridade de refatora\u00e7\u00e3o"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "em_progresso",
+        "completo",
+        "bloqueado"
+      ],
+      "default": "pendente",
+      "description": "Status da refatora\u00e7\u00e3o"
+    },
+    "impacto_conversao": {
+      "type": "boolean",
+      "default": false,
+      "description": "Impacta diretamente convers\u00e3o de clientes?"
+    },
+    "impacto_retencao": {
+      "type": "boolean",
+      "default": false,
+      "description": "Impacta reten\u00e7\u00e3o de clientes?"
+    },
+    "problemas_branding": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Problemas de branding identificados"
+    },
+    "problemas_mobile": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Problemas de responsividade"
+    },
+    "problemas_navegacao": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Problemas de navega\u00e7\u00e3o/acesso"
+    },
+    "tempo_estimado_horas": {
+      "type": "number",
+      "description": "Horas estimadas para refatorar"
+    },
+    "custo_oportunidade_brl": {
+      "type": "number",
+      "description": "Custo de oportunidade em R$ (tempo \u00d7 valor hora)"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date-time",
+      "description": "In\u00edcio da refatora\u00e7\u00e3o"
+    },
+    "data_conclusao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Conclus\u00e3o da refatora\u00e7\u00e3o"
+    },
+    "responsavel": {
+      "type": "string",
+      "description": "Quem est\u00e1 refatorando"
+    },
+    "notas": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "pagina",
+    "caminho",
+    "grupo",
+    "prioridade"
+  ]
+}

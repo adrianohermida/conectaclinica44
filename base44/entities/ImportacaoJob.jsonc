@@ -1,0 +1,83 @@
+{
+  "name": "ImportacaoJob",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "tipo_entidade": {
+      "type": "string",
+      "enum": [
+        "Contato",
+        "Produto",
+        "Prontuario",
+        "Agendamento"
+      ],
+      "description": "Tipo de entidade importada"
+    },
+    "arquivo_url": {
+      "type": "string",
+      "description": "URL arquivo CSV/XLS"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "processando",
+        "concluido",
+        "erro"
+      ],
+      "default": "pendente"
+    },
+    "total_registros": {
+      "type": "number",
+      "default": 0
+    },
+    "processados": {
+      "type": "number",
+      "default": 0
+    },
+    "sucesso": {
+      "type": "number",
+      "default": 0
+    },
+    "erros": {
+      "type": "number",
+      "default": 0
+    },
+    "erros_detalhes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "linha": {
+            "type": "number"
+          },
+          "erro": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "usuario_id": {
+      "type": "string"
+    },
+    "usuario_nome": {
+      "type": "string"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_fim": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "tipo_entidade",
+    "arquivo_url"
+  ]
+}

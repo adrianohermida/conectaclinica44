@@ -1,0 +1,74 @@
+{
+  "name": "FAQ",
+  "type": "object",
+  "properties": {
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "agendamentos",
+        "telemedicina",
+        "tratamentos",
+        "pagamento",
+        "exames",
+        "receitas",
+        "geral"
+      ],
+      "description": "Categoria da pergunta"
+    },
+    "pergunta": {
+      "type": "string",
+      "description": "Pergunta frequente"
+    },
+    "resposta": {
+      "type": "string",
+      "description": "Resposta detalhada"
+    },
+    "ordem": {
+      "type": "number",
+      "description": "Ordem de exibi\u00e7\u00e3o"
+    },
+    "visualizacoes": {
+      "type": "number",
+      "default": 0,
+      "description": "N\u00famero de visualiza\u00e7\u00f5es"
+    },
+    "util": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantas pessoas acharam \u00fatil"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags para busca"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "FAQ ativo"
+    }
+  },
+  "required": [
+    "categoria",
+    "pergunta",
+    "resposta"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "categoria",
+        "-visualizacoes"
+      ],
+      "name": "idx_faq_categoria"
+    },
+    {
+      "fields": [
+        "ativo",
+        "-ordem"
+      ],
+      "name": "idx_faq_ativo"
+    }
+  ]
+}

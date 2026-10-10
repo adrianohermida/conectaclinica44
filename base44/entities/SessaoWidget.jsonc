@@ -1,0 +1,124 @@
+{
+  "name": "SessaoWidget",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "UUID \u00fanico da sess\u00e3o"
+    },
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket criado (se converteu)"
+    },
+    "visitante_nome": {
+      "type": "string",
+      "description": "Nome do visitante"
+    },
+    "visitante_email": {
+      "type": "string",
+      "description": "Email do visitante"
+    },
+    "visitante_telefone": {
+      "type": "string",
+      "description": "Telefone do visitante"
+    },
+    "origem_url": {
+      "type": "string",
+      "description": "URL onde widget foi aberto"
+    },
+    "origem_utm": {
+      "type": "object",
+      "description": "Par\u00e2metros UTM capturados"
+    },
+    "total_mensagens": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de mensagens trocadas"
+    },
+    "ia_ativa": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se usou auto-resposta IA"
+    },
+    "tokens_consumidos": {
+      "type": "number",
+      "default": 0,
+      "description": "Total tokens gastos nesta sess\u00e3o"
+    },
+    "creditos_consumidos": {
+      "type": "number",
+      "default": 0,
+      "description": "Total cr\u00e9ditos consumidos"
+    },
+    "converteu_ticket": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se virou ticket de atendimento"
+    },
+    "converteu_lead": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se virou lead qualificado"
+    },
+    "data_conversao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando converteu"
+    },
+    "duracao_segundos": {
+      "type": "number",
+      "description": "Dura\u00e7\u00e3o da sess\u00e3o em segundos"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativa",
+        "encerrada",
+        "convertida",
+        "abandonada"
+      ],
+      "default": "ativa",
+      "description": "Status da sess\u00e3o"
+    },
+    "sentimento_final": {
+      "type": "string",
+      "enum": [
+        "positivo",
+        "neutro",
+        "negativo"
+      ],
+      "description": "Sentimento final detectado"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "session_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_sessao_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "converteu_ticket"
+      ],
+      "name": "idx_sessao_conversao"
+    },
+    {
+      "fields": [
+        "session_id"
+      ],
+      "name": "idx_sessao_uuid",
+      "unique": true
+    }
+  ]
+}

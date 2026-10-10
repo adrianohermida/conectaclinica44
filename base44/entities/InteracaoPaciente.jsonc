@@ -1,0 +1,119 @@
+{
+  "name": "InteracaoPaciente",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "contato_id": {
+      "type": "string",
+      "description": "ID do contato"
+    },
+    "tipo_interacao": {
+      "type": "string",
+      "enum": [
+        "email",
+        "ticket",
+        "ligacao",
+        "whatsapp",
+        "presencial",
+        "videoconferencia",
+        "portal",
+        "outro"
+      ],
+      "description": "Tipo de intera\u00e7\u00e3o"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o da intera\u00e7\u00e3o"
+    },
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket relacionado (se aplic\u00e1vel)"
+    },
+    "agendamento_id": {
+      "type": "string",
+      "description": "ID do agendamento relacionado (se aplic\u00e1vel)"
+    },
+    "registrado_por": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio que registrou"
+    },
+    "registrado_por_nome": {
+      "type": "string",
+      "description": "Nome do usu\u00e1rio que registrou"
+    },
+    "visualizado_por": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs dos usu\u00e1rios que visualizaram"
+    },
+    "duracao_minutos": {
+      "type": "number",
+      "description": "Dura\u00e7\u00e3o da intera\u00e7\u00e3o em minutos"
+    },
+    "data_interacao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da intera\u00e7\u00e3o"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativo",
+        "arquivado",
+        "pendente_exclusao"
+      ],
+      "default": "ativo",
+      "description": "Status da intera\u00e7\u00e3o"
+    },
+    "solicitacao_exclusao": {
+      "type": "object",
+      "properties": {
+        "solicitante_id": {
+          "type": "string"
+        },
+        "solicitante_nome": {
+          "type": "string"
+        },
+        "data_solicitacao": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "motivo": {
+          "type": "string"
+        }
+      },
+      "description": "Dados da solicita\u00e7\u00e3o de exclus\u00e3o pendente"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "contato_id",
+    "tipo_interacao",
+    "descricao",
+    "registrado_por",
+    "registrado_por_nome"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "contato_id",
+        "-data_interacao"
+      ],
+      "name": "idx_interacao_contato"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "tipo_interacao",
+        "-data_interacao"
+      ],
+      "name": "idx_interacao_tipo"
+    }
+  ]
+}

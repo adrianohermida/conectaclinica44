@@ -1,0 +1,94 @@
+{
+  "name": "PrecisaoRespostaIA",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "agente_ia_id": {
+      "type": "string",
+      "description": "ID do agente IA"
+    },
+    "tipo_consulta": {
+      "type": "string",
+      "enum": [
+        "historico_paciente",
+        "busca_semantica",
+        "sugestao_ticket",
+        "agendamento"
+      ],
+      "description": "Tipo de consulta realizada"
+    },
+    "pergunta_original": {
+      "type": "string",
+      "description": "Pergunta do usu\u00e1rio (m\u00e1x 500 chars)"
+    },
+    "resposta_ia": {
+      "type": "string",
+      "description": "Resposta gerada pela IA"
+    },
+    "validada_por": {
+      "type": "string",
+      "description": "Email do m\u00e9dico/admin que validou"
+    },
+    "avaliacao": {
+      "type": "string",
+      "enum": [
+        "correta",
+        "parcialmente_correta",
+        "incorreta",
+        "nao_validada"
+      ],
+      "default": "nao_validada",
+      "description": "Avalia\u00e7\u00e3o da precis\u00e3o"
+    },
+    "feedback": {
+      "type": "string",
+      "description": "Feedback textual do validador"
+    },
+    "tempo_resposta_ms": {
+      "type": "number",
+      "description": "Lat\u00eancia da resposta"
+    },
+    "contexto_usado": {
+      "type": "object",
+      "description": "Metadados do contexto (total prontu\u00e1rios, etc)"
+    },
+    "data_validacao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp da valida\u00e7\u00e3o"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "agente_ia_id",
+    "tipo_consulta",
+    "pergunta_original",
+    "resposta_ia"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_precisao_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "avaliacao"
+      ],
+      "name": "idx_precisao_avaliacao"
+    },
+    {
+      "fields": [
+        "agente_ia_id",
+        "-created_date"
+      ],
+      "name": "idx_precisao_agente"
+    }
+  ]
+}

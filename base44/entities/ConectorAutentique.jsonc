@@ -1,0 +1,118 @@
+{
+  "name": "ConectorAutentique",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome do conector (ex: Produ\u00e7\u00e3o, Sandbox, Homologa\u00e7\u00e3o)"
+    },
+    "ambiente": {
+      "type": "string",
+      "enum": [
+        "sandbox",
+        "producao",
+        "homologacao"
+      ],
+      "default": "sandbox",
+      "description": "Ambiente alvo"
+    },
+    "webhook_url": {
+      "type": "string",
+      "description": "URL do webhook configurado"
+    },
+    "api_key": {
+      "type": "string",
+      "description": "Chave API Autentique (armazenada como refer\u00eancia, n\u00e3o expor)"
+    },
+    "secret_key_ref": {
+      "type": "string",
+      "description": "Nome do secret no sistema (ex: AUTENTIQUE_SECRET_KEY)"
+    },
+    "formato": {
+      "type": "string",
+      "enum": [
+        "JSON",
+        "XML"
+      ],
+      "default": "JSON",
+      "description": "Formato de payload"
+    },
+    "autenticacao_hmac": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se usa valida\u00e7\u00e3o HMAC SHA-256"
+    },
+    "ip_fixo": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se usa IP fixo para envio"
+    },
+    "eventos_ativos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "document.created",
+        "document.updated",
+        "document.deleted",
+        "document.finished"
+      ],
+      "description": "Eventos que disparam webhook"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se conector est\u00e1 ativo"
+    },
+    "ultimo_teste": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sucesso",
+            "erro"
+          ]
+        },
+        "response_schema": {
+          "type": "object"
+        },
+        "latencia_ms": {
+          "type": "number"
+        },
+        "erro_detalhes": {
+          "type": "string"
+        }
+      },
+      "description": "Resultado do \u00faltimo teste executado"
+    },
+    "estatisticas": {
+      "type": "object",
+      "properties": {
+        "total_webhooks_recebidos": {
+          "type": "number",
+          "default": 0
+        },
+        "total_testes_executados": {
+          "type": "number",
+          "default": 0
+        },
+        "taxa_sucesso": {
+          "type": "number",
+          "default": 100
+        }
+      },
+      "default": {}
+    }
+  },
+  "required": [
+    "nome",
+    "ambiente",
+    "webhook_url"
+  ]
+}

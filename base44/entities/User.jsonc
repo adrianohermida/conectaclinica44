@@ -1,0 +1,76 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone de contato"
+    },
+    "cargo": {
+      "type": "string",
+      "description": "Cargo/Fun\u00e7\u00e3o"
+    },
+    "permissoes_customizadas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Permiss\u00f5es espec\u00edficas"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "URL do avatar"
+    },
+    "chat_session_id": {
+      "type": "string",
+      "description": "Sess\u00e3o ativa do chat IA"
+    },
+    "chat_online": {
+      "type": "boolean",
+      "default": false,
+      "description": "Status online no chat"
+    },
+    "ultima_atividade": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima atividade"
+    },
+    "timezone_configurado": {
+      "type": "string",
+      "default": "America/Sao_Paulo",
+      "description": "Timezone IANA (ex: America/Sao_Paulo, America/Fortaleza, America/Manaus)"
+    },
+    "preferencias_notificacao": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "boolean",
+          "default": true
+        },
+        "push": {
+          "type": "boolean",
+          "default": true
+        },
+        "whatsapp": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "description": "Prefer\u00eancias de canal de notifica\u00e7\u00e3o"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "telefone",
+    "cargo",
+    "permissoes_customizadas",
+    "avatar_url",
+    "chat_session_id",
+    "ultima_atividade",
+    "preferencias_notificacao"
+  ]
+}

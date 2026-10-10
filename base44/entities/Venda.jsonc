@@ -1,0 +1,132 @@
+{
+  "name": "Venda",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome do paciente/cliente"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente"
+    },
+    "data_venda": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da venda"
+    },
+    "itens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "produto_id": {
+            "type": "string"
+          },
+          "produto": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "number"
+          },
+          "preco_unitario": {
+            "type": "number"
+          },
+          "subtotal": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Itens vendidos"
+    },
+    "valor_total": {
+      "type": "number",
+      "description": "Valor total dos itens"
+    },
+    "desconto": {
+      "type": "number",
+      "default": 0,
+      "description": "Desconto aplicado"
+    },
+    "valor_final": {
+      "type": "number",
+      "description": "Valor final ap\u00f3s desconto"
+    },
+    "forma_pagamento": {
+      "type": "string",
+      "enum": [
+        "dinheiro",
+        "debito",
+        "credito",
+        "pix",
+        "transferencia",
+        "convenio"
+      ],
+      "description": "Forma de pagamento"
+    },
+    "status_pagamento": {
+      "type": "string",
+      "enum": [
+        "pago",
+        "pendente",
+        "cancelado"
+      ],
+      "default": "pendente",
+      "description": "Status do pagamento"
+    },
+    "conta_receber_id": {
+      "type": "string",
+      "description": "ID da conta a receber gerada automaticamente"
+    },
+    "vendedor_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio que realizou a venda"
+    },
+    "vendedor_nome": {
+      "type": "string",
+      "description": "Nome do vendedor"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "data_venda",
+    "valor_final"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-data_venda"
+      ],
+      "name": "idx_venda_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status_pagamento",
+        "-data_venda"
+      ],
+      "name": "idx_venda_status_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "paciente_id",
+        "-data_venda"
+      ],
+      "name": "idx_venda_paciente"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "vendedor_id",
+        "-data_venda"
+      ],
+      "name": "idx_venda_vendedor"
+    }
+  ]
+}

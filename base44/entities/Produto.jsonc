@@ -1,0 +1,203 @@
+{
+  "name": "Produto",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome do produto/servi\u00e7o/medicamento"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "produto",
+        "servico",
+        "tratamento",
+        "exame",
+        "procedimento",
+        "medicamento"
+      ],
+      "description": "Tipo do item"
+    },
+    "categoria": {
+      "type": "string",
+      "description": "Categoria espec\u00edfica"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o detalhada"
+    },
+    "duracao": {
+      "type": "string",
+      "description": "Dura\u00e7\u00e3o (servi\u00e7os/tratamentos)"
+    },
+    "preco_base": {
+      "type": "number",
+      "description": "Pre\u00e7o base de venda"
+    },
+    "preco_minimo": {
+      "type": "number",
+      "description": "Pre\u00e7o m\u00ednimo"
+    },
+    "preco_maximo": {
+      "type": "number",
+      "description": "Pre\u00e7o m\u00e1ximo"
+    },
+    "custo": {
+      "type": "number",
+      "description": "Custo do item"
+    },
+    "margem_lucro": {
+      "type": "number",
+      "description": "Margem de lucro em %"
+    },
+    "principio_ativo": {
+      "type": "string",
+      "description": "Princ\u00edpio ativo (medicamentos)"
+    },
+    "fabricante": {
+      "type": "string",
+      "description": "Fabricante/Laborat\u00f3rio"
+    },
+    "codigo_barras": {
+      "type": "string",
+      "description": "C\u00f3digo de barras EAN"
+    },
+    "registro_anvisa": {
+      "type": "string",
+      "description": "Registro ANVISA"
+    },
+    "apresentacao": {
+      "type": "string",
+      "description": "Apresenta\u00e7\u00e3o do produto"
+    },
+    "dosagem": {
+      "type": "string",
+      "description": "Dosagem (medicamentos)"
+    },
+    "unidade_medida": {
+      "type": "string",
+      "enum": [
+        "comprimido",
+        "capsula",
+        "ml",
+        "mg",
+        "ampola",
+        "frasco",
+        "caixa",
+        "unidade"
+      ],
+      "default": "unidade",
+      "description": "Unidade de medida"
+    },
+    "quantidade_estoque": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantidade em estoque"
+    },
+    "estoque_minimo": {
+      "type": "number",
+      "default": 0,
+      "description": "Estoque m\u00ednimo"
+    },
+    "estoque_maximo": {
+      "type": "number",
+      "default": 0,
+      "description": "Estoque m\u00e1ximo"
+    },
+    "lote": {
+      "type": "string",
+      "description": "N\u00famero do lote"
+    },
+    "validade": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de validade"
+    },
+    "localizacao": {
+      "type": "string",
+      "description": "Localiza\u00e7\u00e3o f\u00edsica no estoque"
+    },
+    "fornecedor": {
+      "type": "string",
+      "description": "Fornecedor"
+    },
+    "tarja": {
+      "type": "string",
+      "enum": [
+        "sem_tarja",
+        "amarela",
+        "vermelha",
+        "preta"
+      ],
+      "description": "Tarja (medicamentos)"
+    },
+    "receita_obrigatoria": {
+      "type": "boolean",
+      "default": false,
+      "description": "Requer receita m\u00e9dica"
+    },
+    "controlado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Medicamento controlado"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Item ativo no cat\u00e1logo"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es gerais"
+    },
+    "tabelas_preco": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nome_tabela": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Tabelas de pre\u00e7o por plano/conv\u00eanio"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "nome",
+    "tipo",
+    "preco_base"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_produto_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "ativo",
+        "-created_date"
+      ],
+      "name": "idx_produto_ativo"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "tipo"
+      ],
+      "name": "idx_produto_tipo"
+    }
+  ]
+}

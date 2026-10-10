@@ -1,0 +1,268 @@
+{
+  "name": "DocumentoCompliance",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ID da cl\u00ednica (null = SuperAdmin global)"
+    },
+    "pasta_id": {
+      "type": "string",
+      "description": "ID da pasta (null = raiz)"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo do documento"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o detalhada"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "certidao",
+        "fiscal",
+        "contabil",
+        "juridico",
+        "contrato",
+        "politica",
+        "exame",
+        "laudo",
+        "atestado",
+        "receita",
+        "prontuario",
+        "outros"
+      ],
+      "default": "outros",
+      "description": "Categoria do documento"
+    },
+    "vinculado_a": {
+      "type": "object",
+      "properties": {
+        "tipo": {
+          "type": "string",
+          "enum": [
+            "paciente",
+            "contato",
+            "prontuario",
+            "agendamento",
+            "ticket",
+            "nenhum"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "nome": {
+          "type": "string"
+        }
+      },
+      "description": "V\u00ednculo com entidade cl\u00ednica"
+    },
+    "arquivo_url": {
+      "type": "string",
+      "description": "URL do arquivo armazenado"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "URL do thumbnail (200px, WebP comprimido)"
+    },
+    "url_externa": {
+      "type": "string",
+      "description": "URL externa (Swagger, API docs, etc)"
+    },
+    "tipo_documento": {
+      "type": "string",
+      "enum": [
+        "arquivo",
+        "link_externo",
+        "api_doc",
+        "swagger"
+      ],
+      "default": "arquivo",
+      "description": "Tipo do documento"
+    },
+    "tipo_arquivo": {
+      "type": "string",
+      "description": "Extens\u00e3o (pdf, docx, html, csv, txt, jpg, png, webp, etc)"
+    },
+    "tamanho_bytes": {
+      "type": "number",
+      "description": "Tamanho do arquivo em bytes"
+    },
+    "tamanho_original_bytes": {
+      "type": "number",
+      "description": "Tamanho antes da compress\u00e3o (se aplic\u00e1vel)"
+    },
+    "comprimido": {
+      "type": "boolean",
+      "default": false,
+      "description": "Arquivo foi comprimido automaticamente"
+    },
+    "economia_compressao_percent": {
+      "type": "number",
+      "description": "Percentual economizado na compress\u00e3o"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags para busca"
+    },
+    "indexado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indexado por IA"
+    },
+    "conteudo_extraido": {
+      "type": "string",
+      "description": "Texto extra\u00eddo pela IA"
+    },
+    "embeddings": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Vetor de embeddings para busca sem\u00e2ntica"
+    },
+    "versao": {
+      "type": "number",
+      "default": 1,
+      "description": "Vers\u00e3o do documento"
+    },
+    "url_origem": {
+      "type": "string",
+      "description": "URL original (se importado)"
+    },
+    "hash_sha256": {
+      "type": "string",
+      "description": "Hash SHA-256 para detec\u00e7\u00e3o de duplicidade"
+    },
+    "conexao_id": {
+      "type": "string",
+      "description": "ID da conex\u00e3o (se faz parte de uma)"
+    },
+    "ordem_conexao": {
+      "type": "number",
+      "description": "Ordem dentro da conex\u00e3o"
+    },
+    "compartilhamento_publico": {
+      "type": "boolean",
+      "default": false,
+      "description": "Documento compartilhado publicamente"
+    },
+    "token_compartilhamento": {
+      "type": "string",
+      "description": "Token \u00fanico para acesso p\u00fablico"
+    },
+    "link_compartilhamento": {
+      "type": "string",
+      "description": "Link p\u00fablico de compartilhamento"
+    },
+    "compartilhado_por": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio que compartilhou"
+    },
+    "compartilhado_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do compartilhamento"
+    },
+    "storage_provider": {
+      "type": "string",
+      "enum": [
+        "base44",
+        "google_drive"
+      ],
+      "default": "base44",
+      "description": "Provedor de armazenamento"
+    },
+    "drive_file_id": {
+      "type": "string",
+      "description": "ID do arquivo no Google Drive (se provider = google_drive)"
+    }
+  },
+  "required": [
+    "titulo"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "pasta_id",
+        "-created_date"
+      ],
+      "name": "idx_docs_pasta_multitenant"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "categoria",
+        "-created_date"
+      ],
+      "name": "idx_docs_categoria_multitenant"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "tags"
+      ],
+      "name": "idx_docs_tags_multitenant"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "hash_sha256"
+      ],
+      "name": "idx_docs_hash_multitenant",
+      "sparse": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "conexao_id",
+        "ordem_conexao"
+      ],
+      "name": "idx_docs_conexao_multitenant",
+      "sparse": true
+    },
+    {
+      "fields": [
+        "token_compartilhamento"
+      ],
+      "name": "idx_docs_token",
+      "unique": true,
+      "sparse": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "vinculado_a.tipo",
+        "vinculado_a.id",
+        "-created_date"
+      ],
+      "name": "idx_docs_vinculo_multitenant",
+      "sparse": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-tamanho_bytes"
+      ],
+      "name": "idx_docs_size_multitenant"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "storage_provider",
+        "-created_date"
+      ],
+      "name": "idx_docs_provider_multitenant"
+    }
+  ]
+}

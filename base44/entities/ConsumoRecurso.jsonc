@@ -1,0 +1,122 @@
+{
+  "name": "ConsumoRecurso",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant isolation)"
+    },
+    "mes_referencia": {
+      "type": "string",
+      "description": "M\u00eas de refer\u00eancia YYYY-MM (ex: 2025-01)"
+    },
+    "recurso": {
+      "type": "string",
+      "enum": [
+        "prescricao_eletronica",
+        "secretaria_ia",
+        "assinatura_digital",
+        "storage_gb",
+        "telemedicina_minutos",
+        "analise_documentos_ia"
+      ],
+      "description": "Tipo de recurso consumido"
+    },
+    "quantidade_usada": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantidade consumida no m\u00eas"
+    },
+    "limite_plano": {
+      "type": "number",
+      "description": "Limite do plano atual (null = ilimitado)"
+    },
+    "percentual_uso": {
+      "type": "number",
+      "default": 0,
+      "description": "Percentual consumido (0-100)"
+    },
+    "bloqueado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Recurso bloqueado por atingir limite"
+    },
+    "alerta_80_enviado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Alerta 80% j\u00e1 enviado"
+    },
+    "alerta_100_enviado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Alerta 100% j\u00e1 enviado"
+    },
+    "ultima_atualizacao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima vez que foi atualizado"
+    },
+    "historico_uso": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quantidade_incrementada": {
+            "type": "number"
+          },
+          "usuario_email": {
+            "type": "string"
+          },
+          "entidade_vinculada_id": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Hist\u00f3rico detalhado de uso (\u00faltimos 100 registros)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "mes_referencia",
+    "recurso",
+    "quantidade_usada"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "mes_referencia",
+        "recurso"
+      ],
+      "name": "idx_consumo_unique",
+      "unique": true,
+      "comment": "CRITICAL: Um registro por cl\u00ednica+m\u00eas+recurso"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "recurso",
+        "-mes_referencia"
+      ],
+      "name": "idx_consumo_timeline"
+    },
+    {
+      "fields": [
+        "bloqueado",
+        "clinica_id"
+      ],
+      "name": "idx_consumo_bloqueados"
+    },
+    {
+      "fields": [
+        "percentual_uso",
+        "clinica_id"
+      ],
+      "name": "idx_consumo_alertas"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "MenuCustomizacaoClinica",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "menu_item_id": {
+      "type": "string",
+      "description": "ID do MenuSidebar customizado"
+    },
+    "ordem_customizada": {
+      "type": "number",
+      "description": "Ordem customizada pela cl\u00ednica"
+    },
+    "visivel_customizado": {
+      "type": "boolean",
+      "description": "Visibilidade customizada"
+    },
+    "favorito": {
+      "type": "boolean",
+      "default": false,
+      "description": "Item favoritado (aparece no topo)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "menu_item_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "ordem_customizada"
+      ],
+      "name": "idx_menu_custom_ordem"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "name": "Mensagem",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "remetente_id": {
+      "type": "string",
+      "description": "ID do remetente"
+    },
+    "remetente_nome": {
+      "type": "string",
+      "description": "Nome do remetente"
+    },
+    "destinatario_id": {
+      "type": "string",
+      "description": "ID do destinat\u00e1rio"
+    },
+    "destinatario_nome": {
+      "type": "string",
+      "description": "Nome do destinat\u00e1rio"
+    },
+    "mensagem": {
+      "type": "string",
+      "description": "Conte\u00fado da mensagem"
+    },
+    "lida": {
+      "type": "boolean",
+      "default": false,
+      "description": "Mensagem lida"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "remetente_nome",
+    "destinatario_nome",
+    "mensagem"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_mensagem_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "destinatario_id",
+        "lida",
+        "-created_date"
+      ],
+      "name": "idx_mensagem_destinatario"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "remetente_id",
+        "-created_date"
+      ],
+      "name": "idx_mensagem_remetente"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "NotaInterna",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket relacionado"
+    },
+    "autor_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio que criou a nota"
+    },
+    "autor_nome": {
+      "type": "string",
+      "description": "Nome do autor"
+    },
+    "conteudo": {
+      "type": "string",
+      "description": "Conte\u00fado da nota privada"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "contexto",
+        "alerta",
+        "decisao",
+        "observacao"
+      ],
+      "default": "observacao",
+      "description": "Tipo de nota interna"
+    },
+    "visivel_apenas_equipe": {
+      "type": "boolean",
+      "default": true,
+      "description": "Nota privada - n\u00e3o vis\u00edvel ao cliente"
+    },
+    "mencionados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs de usu\u00e1rios mencionados (@)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "ticket_id",
+    "autor_id",
+    "autor_nome",
+    "conteudo"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "ticket_id",
+        "-created_date"
+      ],
+      "name": "idx_nota_ticket_timeline",
+      "comment": "CRITICAL: Multi-tenant isolation - SEMPRE query com clinica_id + ticket_id"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_nota_timeline"
+    },
+    {
+      "fields": [
+        "ticket_id",
+        "clinica_id"
+      ],
+      "name": "idx_nota_ticket_validation",
+      "comment": "SECURITY: Valida\u00e7\u00e3o r\u00e1pida ownership - previne cross-tenant leaks"
+    }
+  ]
+}

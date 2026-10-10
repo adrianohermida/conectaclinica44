@@ -1,0 +1,77 @@
+{
+  "name": "UsuarioClinica",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio (User.id)"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio (cache)"
+    },
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "clinica_nome": {
+      "type": "string",
+      "description": "Nome da cl\u00ednica (cache)"
+    },
+    "perfil": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "medico",
+        "recepcionista",
+        "financeiro"
+      ],
+      "description": "Perfil/cargo nesta cl\u00ednica"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "V\u00ednculo ativo"
+    },
+    "data_entrada": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando entrou na equipe"
+    },
+    "data_saida": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando saiu da equipe"
+    }
+  },
+  "required": [
+    "user_id",
+    "user_email",
+    "clinica_id",
+    "perfil"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "user_id",
+        "clinica_id"
+      ],
+      "name": "idx_usuario_clinica_unique",
+      "unique": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "ativo",
+        "-created_date"
+      ],
+      "name": "idx_equipe_clinica"
+    },
+    {
+      "fields": [
+        "user_email"
+      ],
+      "name": "idx_usuario_email"
+    }
+  ]
+}

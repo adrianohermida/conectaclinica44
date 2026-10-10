@@ -1,0 +1,269 @@
+{
+  "name": "PrescricaoEletronica",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (CRITICAL: multi-tenant isolation)"
+    },
+    "medico_id": {
+      "type": "string",
+      "description": "ID do Medico (foreign key Medico.id) - OBRIGAT\u00d3RIO CFM 1.821/07"
+    },
+    "medico_nome": {
+      "type": "string",
+      "description": "Nome do m\u00e9dico (cache)"
+    },
+    "medico_crm": {
+      "type": "string",
+      "description": "CRM formatado (ex: 12345/AM) - OBRIGAT\u00d3RIO na receita impressa CFM"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente (Contato.id)"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome completo do paciente"
+    },
+    "paciente_cpf": {
+      "type": "string",
+      "description": "CPF do paciente"
+    },
+    "prontuario_id": {
+      "type": "string",
+      "description": "ID do Prontuario vinculado - OBRIGAT\u00d3RIO CFM Art. 16"
+    },
+    "data_prescricao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data e hora da prescri\u00e7\u00e3o"
+    },
+    "medicamentos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nome_generico": {
+            "type": "string"
+          },
+          "nome_comercial": {
+            "type": "string"
+          },
+          "dose": {
+            "type": "string"
+          },
+          "unidade": {
+            "type": "string",
+            "enum": [
+              "mg",
+              "g",
+              "ml",
+              "UI",
+              "mcg",
+              "comprimido",
+              "capsula",
+              "aplicacao"
+            ]
+          },
+          "via_administracao": {
+            "type": "string",
+            "enum": [
+              "oral",
+              "intravenosa",
+              "intramuscular",
+              "subcutanea",
+              "topica",
+              "inalatoria",
+              "ocular",
+              "auricular",
+              "retal",
+              "vaginal",
+              "sublingual"
+            ]
+          },
+          "frequencia": {
+            "type": "string"
+          },
+          "duracao": {
+            "type": "string"
+          },
+          "quantidade_total": {
+            "type": "string"
+          },
+          "orientacoes": {
+            "type": "string"
+          },
+          "uso_continuo": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "nome_generico",
+          "dose",
+          "via_administracao",
+          "frequencia"
+        ]
+      },
+      "description": "Lista de medicamentos prescritos"
+    },
+    "tipo_receita": {
+      "type": "string",
+      "enum": [
+        "comum",
+        "controlada_b1",
+        "controlada_b2",
+        "antimicrobiano",
+        "especial"
+      ],
+      "default": "comum",
+      "description": "Tipo de receita (Portaria 344/98 SVS/MS)"
+    },
+    "orientacoes_gerais": {
+      "type": "string",
+      "description": "Orienta\u00e7\u00f5es gerais ao paciente"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "assinada",
+        "enviada",
+        "impressa",
+        "cancelada"
+      ],
+      "default": "rascunho",
+      "description": "Status da prescri\u00e7\u00e3o"
+    },
+    "assinatura_digital": {
+      "type": "object",
+      "properties": {
+        "autentique_document_id": {
+          "type": "string"
+        },
+        "autentique_uuid": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pendente",
+            "assinado",
+            "recusado"
+          ]
+        },
+        "assinado_em": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pdf_assinado_url": {
+          "type": "string"
+        },
+        "certificado_digital_usado": {
+          "type": "string"
+        }
+      },
+      "description": "Dados da assinatura digital ICP-Brasil"
+    },
+    "hash_sha256": {
+      "type": "string",
+      "description": "Hash SHA-256 do conte\u00fado (integridade CFM)"
+    },
+    "pdf_url": {
+      "type": "string",
+      "description": "URL do PDF gerado (Base44 storage)"
+    },
+    "documento_compliance_id": {
+      "type": "string",
+      "description": "ID do DocumentoCompliance vinculado (reposit\u00f3rio)"
+    },
+    "impressa": {
+      "type": "boolean",
+      "default": false,
+      "description": "Prescri\u00e7\u00e3o impressa pelo paciente"
+    },
+    "impressa_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da impress\u00e3o"
+    },
+    "enviada_email": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enviada para email do paciente"
+    },
+    "enviada_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora do envio por email"
+    },
+    "validade_dias": {
+      "type": "number",
+      "default": 30,
+      "description": "Validade da receita em dias (padr\u00e3o 30 dias, controlados 30, antimicrobianos 10)"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Metadados adicionais (CID-10, justificativa m\u00e9dica, etc)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "medico_id",
+    "medico_crm",
+    "paciente_id",
+    "paciente_nome",
+    "prontuario_id",
+    "medicamentos"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "paciente_id",
+        "-data_prescricao"
+      ],
+      "name": "idx_prescricao_paciente_timeline",
+      "comment": "CRITICAL: Multi-tenant - hist\u00f3rico de prescri\u00e7\u00f5es do paciente"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "medico_id",
+        "-data_prescricao"
+      ],
+      "name": "idx_prescricao_medico_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "prontuario_id"
+      ],
+      "name": "idx_prescricao_prontuario"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-data_prescricao"
+      ],
+      "name": "idx_prescricao_status"
+    },
+    {
+      "fields": [
+        "medico_id"
+      ],
+      "name": "idx_medico_foreign_key",
+      "sparse": true
+    },
+    {
+      "fields": [
+        "hash_sha256"
+      ],
+      "name": "idx_prescricao_hash",
+      "unique": true,
+      "sparse": true
+    }
+  ]
+}

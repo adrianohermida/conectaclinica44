@@ -1,0 +1,76 @@
+{
+  "name": "ColaboracaoMedica",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo da discuss\u00e3o"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "segunda_opiniao",
+        "caso_complexo",
+        "discussao_clinica",
+        "interconsulta",
+        "protocolo"
+      ],
+      "description": "Tipo de colabora\u00e7\u00e3o"
+    },
+    "medico_solicitante": {
+      "type": "string",
+      "description": "M\u00e9dico que iniciou"
+    },
+    "descricao_caso": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do caso"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "aberto",
+        "em_discussao",
+        "resolvido",
+        "fechado"
+      ],
+      "default": "aberto",
+      "description": "Status"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "titulo",
+    "tipo",
+    "medico_solicitante",
+    "descricao_caso"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_colaboracao_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_colaboracao_status"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "tipo",
+        "-created_date"
+      ],
+      "name": "idx_colaboracao_tipo"
+    }
+  ]
+}

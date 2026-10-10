@@ -1,0 +1,141 @@
+{
+  "name": "CertidaoRegularidade",
+  "type": "object",
+  "properties": {
+    "orgao_emissor": {
+      "type": "string",
+      "description": "\u00d3rg\u00e3o emissor da certid\u00e3o"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo/Nome da certid\u00e3o"
+    },
+    "tipo_certidao": {
+      "type": "string",
+      "enum": [
+        "cnd_fgts",
+        "cnd_municipal",
+        "cnd_estadual",
+        "cnd_federal",
+        "cnd_trabalhista",
+        "cnd_falencia",
+        "consulta_tcu",
+        "cnd_ambiental",
+        "cnd_judicial",
+        "outra"
+      ],
+      "description": "Tipo da certid\u00e3o"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "federal",
+        "estadual",
+        "municipal",
+        "trabalhista",
+        "judicial",
+        "ambiental"
+      ],
+      "description": "Categoria da certid\u00e3o"
+    },
+    "numero_certidao": {
+      "type": "string",
+      "description": "N\u00famero da certid\u00e3o"
+    },
+    "data_emissao": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de emiss\u00e3o"
+    },
+    "data_validade": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de validade"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "vigente",
+        "vencida",
+        "pendente",
+        "irregular",
+        "em_consulta"
+      ],
+      "default": "vigente",
+      "description": "Status da certid\u00e3o"
+    },
+    "resultado": {
+      "type": "string",
+      "enum": [
+        "negativa",
+        "positiva",
+        "positiva_com_efeito_negativa",
+        "nada_consta"
+      ],
+      "description": "Resultado da certid\u00e3o"
+    },
+    "arquivo_url": {
+      "type": "string",
+      "description": "URL do arquivo da certid\u00e3o"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    },
+    "alerta_vencimento_dias": {
+      "type": "number",
+      "default": 30,
+      "description": "Dias antes do vencimento para alertar"
+    },
+    "consulta_automatica": {
+      "type": "boolean",
+      "default": false,
+      "description": "Habilitar consulta autom\u00e1tica"
+    },
+    "frequencia_consulta": {
+      "type": "string",
+      "enum": [
+        "diaria",
+        "semanal",
+        "quinzenal",
+        "mensal"
+      ],
+      "description": "Frequ\u00eancia da consulta autom\u00e1tica"
+    },
+    "ultima_consulta": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da \u00faltima consulta"
+    },
+    "proxima_consulta": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da pr\u00f3xima consulta agendada"
+    },
+    "url_consulta": {
+      "type": "string",
+      "description": "URL para consulta da certid\u00e3o"
+    },
+    "requer_certificado_digital": {
+      "type": "boolean",
+      "default": false,
+      "description": "Requer certificado digital para consulta"
+    },
+    "tipo_certificado": {
+      "type": "string",
+      "enum": [
+        "a1",
+        "a3",
+        "nenhum"
+      ],
+      "default": "nenhum",
+      "description": "Tipo de certificado necess\u00e1rio"
+    }
+  },
+  "required": [
+    "orgao_emissor",
+    "titulo",
+    "tipo_certidao",
+    "data_validade"
+  ]
+}

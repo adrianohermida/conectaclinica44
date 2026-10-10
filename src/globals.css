@@ -1,0 +1,316 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================================
+   CONECTACLINICA DESIGN SYSTEM - REBRANDING READY
+   Tokens CSS para personalização total
+   =================================== */
+
+/* ULTRA CRITICAL CSS - APENAS acima da dobra */
+@layer base {
+  :root {
+    /* ━━━ TOKENS PRIMÁRIOS (Core Brand) ━━━ */
+    --brand-primary: #7E57FF;
+    --brand-primary-50: #f5f3ff;
+    --brand-primary-100: #ede9fe;
+    --brand-primary-200: #ddd6fe;
+    --brand-primary-600: #7E57FF;
+    --brand-primary-700: #6d28d9;
+    --brand-primary-800: #5b21b6;
+
+    /* ━━━ TOKENS SEMÂNTICOS (Status) ━━━ */
+    --brand-success: #34a853;
+    --brand-success-50: #e6f7ed;
+    --brand-success-100: #ccefe0;
+    
+    --brand-warning: #fbbc04;
+    --brand-warning-50: #fef9e5;
+    --brand-warning-100: #fef3c7;
+    
+    --brand-error: #ea4335;
+    --brand-error-50: #fef2f2;
+    --brand-error-100: #fee2e2;
+    
+    --brand-info: #0B7A9E;
+    --brand-info-50: #e0f2fe;
+    --brand-info-100: #bae6fd;
+    --brand-info-200: #7dd3fc;
+    --brand-info-800: #075985;
+
+    /* ━━━ TOKENS NEUTROS (Text & BG) ━━━ */
+    --brand-text-primary: #202124;
+    --brand-text-secondary: #5f6368;
+    --brand-text-tertiary: #80868b;
+    --brand-text-disabled: #bdc1c6;
+    --brand-text-on-primary: #ffffff;
+
+    --brand-bg-primary: #ffffff;
+    --brand-bg-secondary: #F4F7FA;
+    --brand-bg-tertiary: #f8f9fa;
+
+    --brand-border-primary: #e8eaed;
+    --brand-border-secondary: #dadce0;
+    --brand-border-focus: var(--brand-primary);
+
+    /* ━━━ COMPATIBILIDADE INTERNA (DEPRECATED - Use brand-*) ━━━ */
+    --pc-primary: var(--brand-primary);
+    --pc-primary-50: var(--brand-primary-50);
+    --pc-primary-100: var(--brand-primary-100);
+    --pc-primary-200: var(--brand-primary-200);
+    --pc-primary-600: var(--brand-primary-600);
+    --pc-primary-700: var(--brand-primary-700);
+    --pc-primary-800: var(--brand-primary-800);
+
+    --pc-success: var(--brand-success);
+    --pc-success-50: var(--brand-success-50);
+    --pc-success-100: var(--brand-success-100);
+    
+    --pc-warning: var(--brand-warning);
+    --pc-warning-50: var(--brand-warning-50);
+    --pc-warning-100: var(--brand-warning-100);
+    
+    --pc-error: var(--brand-error);
+    --pc-error-50: var(--brand-error-50);
+    --pc-error-100: var(--brand-error-100);
+    
+    --pc-info: var(--brand-info);
+    --pc-info-50: var(--brand-info-50);
+    --pc-info-100: var(--brand-info-100);
+    --pc-info-200: var(--brand-info-200);
+    --pc-info-800: var(--brand-info-800);
+
+    --pc-text-primary: var(--brand-text-primary);
+    --pc-text-secondary: var(--brand-text-secondary);
+    --pc-text-tertiary: var(--brand-text-tertiary);
+    --pc-text-disabled: var(--brand-text-disabled);
+    --pc-text-on-primary: var(--brand-text-on-primary);
+
+    --pc-bg-primary: var(--brand-bg-primary);
+    --pc-bg-secondary: var(--brand-bg-secondary);
+    --pc-bg-tertiary: var(--brand-bg-tertiary);
+
+    --pc-border-primary: var(--brand-border-primary);
+    --pc-border-secondary: var(--brand-border-secondary);
+    --pc-border-focus: var(--brand-border-focus);
+
+    /* === GRAYS (Material Design) === */
+    --pc-gray-50: #f8f9fa;
+    --pc-gray-100: #f1f3f4;
+    --pc-gray-300: #dadce0;
+    --pc-gray-400: #bdc1c6;
+    --pc-gray-500: #9aa0a6;
+    --pc-gray-600: #80868b;
+    --pc-gray-700: #5f6368;
+    --pc-gray-800: #3c4043;
+    --pc-gray-900: #202124;
+
+    /* === SHADOWS === */
+    --pc-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --pc-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --pc-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --pc-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+    /* === SPACING === */
+    --pc-space-1: 0.25rem;
+    --pc-space-2: 0.5rem;
+    --pc-space-3: 0.75rem;
+    --pc-space-4: 1rem;
+    --pc-space-5: 1.25rem;
+    --pc-space-6: 1.5rem;
+    --pc-space-8: 2rem;
+    --pc-space-10: 2.5rem;
+    --pc-space-12: 3rem;
+
+    /* === TYPOGRAPHY === */
+    --pc-text-xs: 0.75rem;
+    --pc-text-sm: 0.875rem;
+    --pc-text-base: 1rem;
+    --pc-text-lg: 1.125rem;
+    --pc-text-xl: 1.25rem;
+    --pc-text-2xl: 1.5rem;
+    --pc-text-3xl: 1.875rem;
+    --pc-text-4xl: 2.25rem;
+
+    /* === RADIUS === */
+    --pc-radius-sm: 0.5rem;
+    --pc-radius-md: 0.75rem;
+    --pc-radius-lg: 1rem;
+    --pc-radius-xl: 1.5rem;
+    --pc-radius-full: 9999px;
+
+    /* ━━━ TAILWIND COMPATIBILITY ━━━ */
+    --background: var(--brand-bg-secondary);
+    --foreground: var(--brand-text-primary);
+    --card: var(--brand-bg-primary);
+    --border: var(--brand-border-primary);
+    --primary: var(--brand-primary);
+    --secondary: var(--brand-primary-600);
+    --success: var(--brand-success);
+    --warning: var(--brand-warning);
+    --error: var(--brand-error);
+    --info: var(--brand-info);
+    --card-foreground: var(--brand-text-primary);
+    --input: var(--brand-bg-primary);
+    --ring: var(--brand-border-focus);
+    --muted: var(--pc-gray-100);
+    --muted-foreground: var(--brand-text-secondary);
+    --accent: var(--brand-primary-50);
+    --accent-foreground: var(--brand-primary-700);
+    --destructive: var(--brand-error);
+    --destructive-foreground: var(--brand-text-on-primary);
+  }
+
+  *{border-color:var(--brand-border-primary);box-sizing:border-box}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--brand-bg-secondary);
+    color:var(--brand-text-primary);
+    margin:0;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeSpeed;
+    overflow-x:hidden;
+  }
+  img,video{height:auto;max-width:100%;display:block}
+
+  h1,h2,h3,h4,h5,h6{
+    font-weight:600;
+    margin:0;
+  }
+  @font-face{
+    font-family:'DM Sans';
+    font-display:swap;
+    font-weight:400 700;
+    src:local('DM Sans'),local('Arial');
+  }
+}
+
+@layer utilities {
+  /* === COMPONENTES BASE === */
+  .pc-card {
+    background-color: var(--brand-bg-primary);
+    border: 1px solid var(--brand-border-primary);
+    border-radius: 1rem;
+    box-shadow: var(--pc-shadow-sm);
+  }
+
+  .pc-card-elevated {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .pc-grid-cols-2 { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  
+  .pc-grid-cols-3 { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+  
+  .pc-grid-cols-4 { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+  }
+  
+  @media (min-width: 768px) {
+    .md\:pc-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .md\:pc-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .md\:pc-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .pc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--pc-radius-full);
+    font-size: var(--pc-text-xs);
+    font-weight: 500;
+  }
+
+  .pc-badge-success {
+    background-color: var(--brand-success-50);
+    color: var(--brand-success);
+  }
+
+  .pc-badge-warning {
+    background-color: var(--brand-warning-50);
+    color: var(--brand-warning);
+  }
+
+  .pc-badge-error {
+    background-color: var(--brand-error-50);
+    color: var(--brand-error);
+  }
+
+  .pc-badge-neutral {
+    background-color: var(--pc-gray-100);
+    color: var(--pc-gray-700);
+  }
+
+  /* === TYPOGRAPHY CLASSES === */
+  .pc-heading-1 { font-size: var(--pc-text-4xl); font-weight: 700; color: var(--pc-text-primary); }
+  .pc-heading-2 { font-size: var(--pc-text-3xl); font-weight: 700; color: var(--pc-text-primary); }
+  .pc-heading-3 { font-size: var(--pc-text-2xl); font-weight: 600; color: var(--pc-text-primary); }
+  .pc-heading-4 { font-size: var(--pc-text-xl); font-weight: 600; color: var(--pc-text-primary); }
+  .pc-body { font-size: var(--pc-text-base); color: var(--pc-text-primary); }
+  .pc-body-sm { font-size: var(--pc-text-sm); color: var(--pc-text-secondary); }
+  .pc-caption { font-size: var(--pc-text-xs); color: var(--pc-text-tertiary); }
+
+  /* === TRANSITIONS === */
+  .pc-transition { transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1); }
+  .pc-transition-fast { transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1); }
+  .pc-transition-slow { transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+  /* === SCROLLBAR === */
+  .pc-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .pc-scrollbar::-webkit-scrollbar-track { background: var(--pc-gray-100); }
+  .pc-scrollbar::-webkit-scrollbar-thumb { background: var(--pc-gray-300); border-radius: 3px; }
+  .pc-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--pc-gray-400); }
+
+  /* === UTILITIES === */
+  .skip-to-content {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: var(--brand-primary);
+    color: var(--brand-text-on-primary);
+    text-decoration: none;
+  }
+
+  .skip-to-content:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1em;
+  }
+}
+
+/* ━━━ REBRANDING INSTRUCTIONS ━━━
+Para rebrandar completamente o app:
+
+1. Edite APENAS os tokens --brand-* no :root
+2. Todos os componentes se atualizam automaticamente
+3. Tokens disponíveis:
+
+   --brand-primary: Cor principal (roxo padrão)
+   --brand-success: Sucesso (verde)
+   --brand-warning: Aviso (amarelo)
+   --brand-error: Erro (vermelho)
+   --brand-info: Info (azul)
+   
+   --brand-text-primary: Texto principal
+   --brand-text-secondary: Texto secundário
+   
+   --brand-bg-primary: Fundo primário (branco)
+   --brand-bg-secondary: Fundo secundário (cinza claro)
+
+EXEMPLO - Rebrandar para azul escuro + laranja:
+:root {
+  --brand-primary: #1e3a8a;
+  --brand-primary-50: #eff6ff;
+  --brand-success: #f97316;
+  --brand-info: #0ea5e9;
+}
+*/

@@ -1,0 +1,68 @@
+{
+  "name": "IntegracaoMetrica",
+  "type": "object",
+  "properties": {
+    "nome_integracao": {
+      "type": "string",
+      "enum": [
+        "stripe",
+        "sendgrid",
+        "infosimples",
+        "authentique",
+        "twilio"
+      ],
+      "description": "Nome da integra\u00e7\u00e3o"
+    },
+    "data": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da m\u00e9trica"
+    },
+    "total_chamadas": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de chamadas no dia"
+    },
+    "total_falhas": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de falhas"
+    },
+    "latencia_p95_ms": {
+      "type": "number",
+      "description": "Lat\u00eancia P95 em ms"
+    },
+    "custo_estimado_brl": {
+      "type": "number",
+      "default": 0,
+      "description": "Custo estimado do dia"
+    },
+    "top_clinicas_consumo": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Top cl\u00ednicas por consumo"
+    }
+  },
+  "required": [
+    "nome_integracao",
+    "data"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "nome_integracao",
+        "-data"
+      ],
+      "name": "idx_integracao_timeline"
+    },
+    {
+      "fields": [
+        "data",
+        "-total_chamadas"
+      ],
+      "name": "idx_integracao_chamadas"
+    }
+  ]
+}

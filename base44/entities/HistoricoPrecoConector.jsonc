@@ -1,0 +1,53 @@
+{
+  "name": "HistoricoPrecoConector",
+  "type": "object",
+  "properties": {
+    "conector_id": {
+      "type": "string",
+      "description": "ID do conector"
+    },
+    "conector_nome": {
+      "type": "string",
+      "description": "Nome do conector"
+    },
+    "preco_anterior": {
+      "type": "number",
+      "description": "Pre\u00e7o unit\u00e1rio anterior (R$)"
+    },
+    "preco_novo": {
+      "type": "number",
+      "description": "Novo pre\u00e7o unit\u00e1rio (R$)"
+    },
+    "variacao_percentual": {
+      "type": "number",
+      "description": "Varia\u00e7\u00e3o percentual (%)"
+    },
+    "motivo_alteracao": {
+      "type": "string",
+      "description": "Motivo da altera\u00e7\u00e3o de pre\u00e7o"
+    },
+    "usuario_responsavel": {
+      "type": "string",
+      "description": "Usu\u00e1rio que realizou a altera\u00e7\u00e3o"
+    },
+    "data_vigencia": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de vig\u00eancia do novo pre\u00e7o"
+    },
+    "fonte": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "fornecedor",
+        "automatico"
+      ],
+      "description": "Fonte da altera\u00e7\u00e3o"
+    }
+  },
+  "required": [
+    "conector_id",
+    "preco_anterior",
+    "preco_novo"
+  ]
+}

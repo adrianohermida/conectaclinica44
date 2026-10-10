@@ -1,0 +1,193 @@
+{
+  "name": "NotificacaoSistema",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "aprovacao_prontuario",
+        "ticket_novo",
+        "ticket_respondido",
+        "agendamento_confirmado",
+        "agendamento_cancelado",
+        "termo_pendente",
+        "prontuario_pronto",
+        "exame_anexado",
+        "receita_digital",
+        "colaboracao_mencionado",
+        "cobranca_vencendo",
+        "pagamento_falhou",
+        "credito_baixo",
+        "trial_expirando",
+        "sistema_alerta"
+      ],
+      "description": "Tipo de notifica\u00e7\u00e3o"
+    },
+    "destinatario_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio destinat\u00e1rio"
+    },
+    "destinatario_email": {
+      "type": "string",
+      "description": "Email destinat\u00e1rio (cache)"
+    },
+    "remetente_id": {
+      "type": "string",
+      "description": "ID do remetente (user ou sistema)"
+    },
+    "remetente_nome": {
+      "type": "string",
+      "description": "Nome do remetente"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo curto da notifica\u00e7\u00e3o"
+    },
+    "corpo": {
+      "type": "string",
+      "description": "Corpo da mensagem"
+    },
+    "acao_url": {
+      "type": "string",
+      "description": "URL de a\u00e7\u00e3o (deep link) - ex: /Prontuarios?id=X"
+    },
+    "acao_label": {
+      "type": "string",
+      "default": "Ver detalhes",
+      "description": "Label do bot\u00e3o de a\u00e7\u00e3o"
+    },
+    "canal": {
+      "type": "string",
+      "enum": [
+        "in_app",
+        "email",
+        "push",
+        "whatsapp"
+      ],
+      "default": "in_app",
+      "description": "Canal de entrega"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "media",
+        "alta",
+        "urgente"
+      ],
+      "default": "media",
+      "description": "Prioridade da notifica\u00e7\u00e3o"
+    },
+    "entregue": {
+      "type": "boolean",
+      "default": false,
+      "description": "Notifica\u00e7\u00e3o entregue ao destinat\u00e1rio"
+    },
+    "entregue_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp de entrega"
+    },
+    "lida": {
+      "type": "boolean",
+      "default": false,
+      "description": "Notifica\u00e7\u00e3o lida"
+    },
+    "lida_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp de leitura"
+    },
+    "clicada": {
+      "type": "boolean",
+      "default": false,
+      "description": "Usu\u00e1rio clicou na a\u00e7\u00e3o"
+    },
+    "clicada_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp do clique"
+    },
+    "arquivada": {
+      "type": "boolean",
+      "default": false,
+      "description": "Notifica\u00e7\u00e3o arquivada"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Metadados contextuais (prontuario_id, ticket_id, paciente_nome, etc)"
+    },
+    "icone": {
+      "type": "string",
+      "description": "Nome do \u00edcone Lucide React"
+    },
+    "cor": {
+      "type": "string",
+      "description": "Cor hex (ex: #7E57FF)"
+    },
+    "agrupamento_id": {
+      "type": "string",
+      "description": "ID de agrupamento (ex: todos tickets hoje = mesmo grupo)"
+    },
+    "expira_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data de expira\u00e7\u00e3o (notifica\u00e7\u00f5es tempor\u00e1rias)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "tipo",
+    "destinatario_id",
+    "titulo",
+    "corpo"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "destinatario_id",
+        "-created_date"
+      ],
+      "name": "idx_notif_destinatario_timeline",
+      "comment": "CRITICAL: Multi-tenant inbox - query com clinica_id + destinatario_id"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "destinatario_id",
+        "lida",
+        "-created_date"
+      ],
+      "name": "idx_notif_nao_lidas",
+      "comment": "PERFORMANCE: Filtro notifica\u00e7\u00f5es n\u00e3o lidas"
+    },
+    {
+      "fields": [
+        "tipo",
+        "-created_date"
+      ],
+      "name": "idx_notif_tipo"
+    },
+    {
+      "fields": [
+        "prioridade",
+        "lida",
+        "-created_date"
+      ],
+      "name": "idx_notif_urgentes"
+    },
+    {
+      "fields": [
+        "agrupamento_id",
+        "-created_date"
+      ],
+      "name": "idx_notif_grupo",
+      "sparse": true
+    }
+  ]
+}

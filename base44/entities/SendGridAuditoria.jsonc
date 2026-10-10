@@ -1,0 +1,172 @@
+{
+  "name": "SendGridAuditoria",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "tipo_email": {
+      "type": "string",
+      "enum": [
+        "confirmacao_criacao",
+        "resposta_ia",
+        "atualizado",
+        "cobranca",
+        "notificacao",
+        "newsletter",
+        "convite",
+        "outro"
+      ],
+      "description": "Tipo de email enviado"
+    },
+    "destinatario": {
+      "type": "string",
+      "description": "Email do destinat\u00e1rio"
+    },
+    "remetente": {
+      "type": "string",
+      "description": "Email do remetente (from)"
+    },
+    "assunto": {
+      "type": "string",
+      "description": "Subject do email"
+    },
+    "message_id": {
+      "type": "string",
+      "description": "Message-ID (RFC 2822)"
+    },
+    "sg_message_id": {
+      "type": "string",
+      "description": "SendGrid Message ID (x-message-id header)"
+    },
+    "custo_creditos": {
+      "type": "number",
+      "default": 1,
+      "description": "Cr\u00e9ditos consumidos (normalmente 1 email = 1 cr\u00e9dito)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "sent",
+        "delivered",
+        "bounced",
+        "dropped",
+        "deferred",
+        "opened",
+        "clicked",
+        "spam",
+        "unsubscribed"
+      ],
+      "default": "sent",
+      "description": "Status do email (atualizado via webhook)"
+    },
+    "latencia_ms": {
+      "type": "number",
+      "description": "Tempo de envio via API (ms)"
+    },
+    "bounce_reason": {
+      "type": "string",
+      "description": "Motivo do bounce (se aplic\u00e1vel)"
+    },
+    "opened_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data de abertura (webhook)"
+    },
+    "clicked_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do primeiro clique (webhook)"
+    },
+    "template_id": {
+      "type": "string",
+      "description": "ID do template SendGrid usado"
+    },
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket relacionado (se aplic\u00e1vel)"
+    },
+    "sender_verificado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se sender estava verificado no momento do envio"
+    },
+    "usou_fallback": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se usou sender gen\u00e9rico por fallback"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "IP de origem da requisi\u00e7\u00e3o"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "User agent da requisi\u00e7\u00e3o"
+    },
+    "erro_detalhes": {
+      "type": "string",
+      "description": "Detalhes de erro (se falhou)"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "tipo_email",
+    "destinatario"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_sendgrid_audit_timeline"
+    },
+    {
+      "fields": [
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_sendgrid_audit_status"
+    },
+    {
+      "fields": [
+        "message_id"
+      ],
+      "name": "idx_sendgrid_audit_msgid",
+      "unique": true,
+      "sparse": true
+    },
+    {
+      "fields": [
+        "sg_message_id"
+      ],
+      "name": "idx_sendgrid_audit_sg_msgid",
+      "sparse": true
+    },
+    {
+      "fields": [
+        "ticket_id",
+        "-created_date"
+      ],
+      "name": "idx_sendgrid_audit_ticket",
+      "sparse": true
+    },
+    {
+      "fields": [
+        "tipo_email",
+        "-created_date"
+      ],
+      "name": "idx_sendgrid_audit_tipo"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_sendgrid_audit_clinica_status"
+    }
+  ]
+}

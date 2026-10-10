@@ -1,0 +1,61 @@
+{
+  "name": "ConfiguracaoBackup",
+  "type": "object",
+  "properties": {
+    "habilitado": {
+      "type": "boolean",
+      "default": true,
+      "description": "Backup autom\u00e1tico habilitado"
+    },
+    "frequencia": {
+      "type": "string",
+      "enum": [
+        "diario",
+        "semanal",
+        "mensal"
+      ],
+      "default": "diario",
+      "description": "Frequ\u00eancia do backup"
+    },
+    "horario": {
+      "type": "string",
+      "default": "03:00",
+      "description": "Hor\u00e1rio de execu\u00e7\u00e3o (HH:mm)"
+    },
+    "retencao_dias": {
+      "type": "number",
+      "default": 30,
+      "description": "Dias de reten\u00e7\u00e3o de backups"
+    },
+    "ultimo_backup": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do \u00faltimo backup"
+    },
+    "proximo_backup": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do pr\u00f3ximo backup"
+    },
+    "status_ultimo": {
+      "type": "string",
+      "enum": [
+        "sucesso",
+        "erro",
+        "nunca_executado"
+      ],
+      "default": "nunca_executado",
+      "description": "Status do \u00faltimo backup"
+    },
+    "total_backups_realizados": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de backups realizados"
+    },
+    "tamanho_ultimo_mb": {
+      "type": "number",
+      "description": "Tamanho do \u00faltimo backup (MB)"
+    }
+  },
+  "required": []
+}

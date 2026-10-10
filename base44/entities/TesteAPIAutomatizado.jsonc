@@ -1,0 +1,118 @@
+{
+  "name": "TesteAPIAutomatizado",
+  "type": "object",
+  "properties": {
+    "conector_id": {
+      "type": "string",
+      "description": "ID do conector"
+    },
+    "conector_nome": {
+      "type": "string",
+      "description": "Nome do conector"
+    },
+    "nome_teste": {
+      "type": "string",
+      "description": "Nome do teste"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do teste"
+    },
+    "frequencia": {
+      "type": "string",
+      "enum": [
+        "horaria",
+        "diaria",
+        "semanal",
+        "mensal"
+      ],
+      "default": "diaria",
+      "description": "Frequ\u00eancia de execu\u00e7\u00e3o"
+    },
+    "horario_execucao": {
+      "type": "string",
+      "description": "Hor\u00e1rio de execu\u00e7\u00e3o (HH:mm)"
+    },
+    "dia_semana": {
+      "type": "number",
+      "description": "Dia da semana (0-6, para testes semanais)"
+    },
+    "dia_mes": {
+      "type": "number",
+      "description": "Dia do m\u00eas (1-28, para testes mensais)"
+    },
+    "parametros_teste": {
+      "type": "object",
+      "description": "Par\u00e2metros para o teste"
+    },
+    "validacoes_esperadas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "campo": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string"
+          },
+          "obrigatorio": {
+            "type": "boolean"
+          }
+        }
+      },
+      "description": "Valida\u00e7\u00f5es de schema esperadas"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se o teste est\u00e1 ativo"
+    },
+    "notificar_falha": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notificar em caso de falha"
+    },
+    "emails_notificacao": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "E-mails para notifica\u00e7\u00e3o de falhas"
+    },
+    "ultima_execucao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima execu\u00e7\u00e3o do teste"
+    },
+    "proxima_execucao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Pr\u00f3xima execu\u00e7\u00e3o agendada"
+    },
+    "total_execucoes": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de execu\u00e7\u00f5es"
+    },
+    "total_sucessos": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de sucessos"
+    },
+    "total_falhas": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de falhas"
+    },
+    "taxa_sucesso": {
+      "type": "number",
+      "description": "Taxa de sucesso (%)"
+    }
+  },
+  "required": [
+    "conector_id",
+    "nome_teste",
+    "frequencia"
+  ]
+}

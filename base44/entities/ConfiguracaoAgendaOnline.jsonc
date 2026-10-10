@@ -1,0 +1,83 @@
+{
+  "name": "ConfiguracaoAgendaOnline",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "cor_primaria": {
+      "type": "string",
+      "default": "#7E57FF",
+      "description": "Cor prim\u00e1ria do widget"
+    },
+    "duracao_padrao_minutos": {
+      "type": "number",
+      "default": 30,
+      "description": "Dura\u00e7\u00e3o padr\u00e3o das consultas"
+    },
+    "horario_inicio": {
+      "type": "string",
+      "default": "09:00",
+      "description": "Hor\u00e1rio de in\u00edcio do atendimento"
+    },
+    "horario_fim": {
+      "type": "string",
+      "default": "18:00",
+      "description": "Hor\u00e1rio de fim do atendimento"
+    },
+    "intervalo_minutos": {
+      "type": "number",
+      "default": 30,
+      "description": "Intervalo entre consultas"
+    },
+    "dias_semana": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "seg",
+        "ter",
+        "qua",
+        "qui",
+        "sex"
+      ],
+      "description": "Dias da semana dispon\u00edveis"
+    },
+    "confirmacao_automatica": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enviar confirma\u00e7\u00e3o autom\u00e1tica por email/WhatsApp"
+    },
+    "campos_obrigatorios": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "nome",
+        "telefone",
+        "email"
+      ],
+      "description": "Campos obrigat\u00f3rios no formul\u00e1rio"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Widget ativo"
+    }
+  },
+  "required": [
+    "clinica_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id"
+      ],
+      "name": "idx_agenda_online_clinica",
+      "unique": true
+    }
+  ]
+}

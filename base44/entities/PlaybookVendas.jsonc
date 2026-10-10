@@ -1,0 +1,122 @@
+{
+  "name": "PlaybookVendas",
+  "type": "object",
+  "properties": {
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "cold_calling",
+        "inbound",
+        "outbound",
+        "customer_success",
+        "retencao",
+        "resolucao_conflitos"
+      ],
+      "description": "Tipo de playbook"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo do playbook"
+    },
+    "contexto": {
+      "type": "string",
+      "description": "Quando usar este playbook (ex: 'Lead pergunta sobre pre\u00e7o', 'Cliente quer cancelar')"
+    },
+    "script": {
+      "type": "string",
+      "description": "Script completo com falas sugeridas (markdown)"
+    },
+    "objecoes_comuns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objecao": {
+            "type": "string"
+          },
+          "resposta": {
+            "type": "string"
+          },
+          "taxa_sucesso": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Obje\u00e7\u00f5es comuns e respostas validadas"
+    },
+    "metricas": {
+      "type": "object",
+      "properties": {
+        "taxa_conversao": {
+          "type": "number"
+        },
+        "tempo_medio_conversa": {
+          "type": "number"
+        },
+        "nps": {
+          "type": "number"
+        },
+        "vezes_usado": {
+          "type": "number"
+        }
+      }
+    },
+    "origem": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "ia_gerado",
+        "analise_dados"
+      ],
+      "default": "manual"
+    },
+    "gerado_por_ia": {
+      "type": "object",
+      "description": "Metadata de gera\u00e7\u00e3o por IA"
+    },
+    "aprovado": {
+      "type": "boolean",
+      "default": false
+    },
+    "aprovado_por": {
+      "type": "string"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "tipo",
+    "titulo",
+    "script"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "tipo",
+        "-created_date"
+      ],
+      "name": "idx_playbook_tipo"
+    },
+    {
+      "fields": [
+        "aprovado",
+        "ativo"
+      ],
+      "name": "idx_playbook_aprovado"
+    },
+    {
+      "fields": [
+        "-metricas.taxa_conversao"
+      ],
+      "name": "idx_playbook_performance"
+    }
+  ]
+}

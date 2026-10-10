@@ -1,0 +1,91 @@
+{
+  "name": "PermissaoCompliance",
+  "type": "object",
+  "properties": {
+    "pasta_id": {
+      "type": "string",
+      "description": "ID da pasta (exclusivo com documento_id)"
+    },
+    "documento_id": {
+      "type": "string",
+      "description": "ID do documento (exclusivo com pasta_id)"
+    },
+    "usuario_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio com permiss\u00e3o"
+    },
+    "usuario_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio"
+    },
+    "usuario_nome": {
+      "type": "string",
+      "description": "Nome do usu\u00e1rio"
+    },
+    "visualizar": {
+      "type": "boolean",
+      "default": true,
+      "description": "Pode visualizar/baixar"
+    },
+    "editar": {
+      "type": "boolean",
+      "default": false,
+      "description": "Pode editar metadados/conte\u00fado"
+    },
+    "excluir": {
+      "type": "boolean",
+      "default": false,
+      "description": "Pode excluir permanentemente"
+    },
+    "concedido_por": {
+      "type": "string",
+      "description": "Email de quem concedeu"
+    },
+    "herdar_subpastas": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se pasta, herdar para subpastas/docs filhos"
+    },
+    "validade": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data de expira\u00e7\u00e3o (opcional)"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Permiss\u00e3o ativa"
+    }
+  },
+  "required": [
+    "usuario_email",
+    "concedido_por"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "pasta_id",
+        "usuario_email"
+      ],
+      "name": "idx_perm_pasta_user",
+      "unique": true,
+      "sparse": true
+    },
+    {
+      "fields": [
+        "documento_id",
+        "usuario_email"
+      ],
+      "name": "idx_perm_doc_user",
+      "unique": true,
+      "sparse": true
+    },
+    {
+      "fields": [
+        "usuario_email",
+        "ativo"
+      ],
+      "name": "idx_perm_user_ativo"
+    }
+  ]
+}

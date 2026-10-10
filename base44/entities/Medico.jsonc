@@ -1,0 +1,100 @@
+{
+  "name": "Medico",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "usuario_id": {
+      "type": "string",
+      "description": "CR\u00cdTICO: ID do User (foreign key User.id) - OBRIGAT\u00d3RIO para RBAC"
+    },
+    "nome_completo": {
+      "type": "string",
+      "description": "Nome completo do m\u00e9dico"
+    },
+    "cpf": {
+      "type": "string",
+      "description": "CPF do m\u00e9dico"
+    },
+    "crm": {
+      "type": "string",
+      "description": "CRM formatado (ex: 12345/AM) - campo MIGRADO para performance"
+    },
+    "crms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "rqe": {
+            "type": "string"
+          },
+          "especialidade": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Lista de CRMs (m\u00faltiplos estados)"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email profissional (deve coincidir com User.email)"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone"
+    },
+    "whatsapp": {
+      "type": "string",
+      "description": "WhatsApp"
+    },
+    "especialidades": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de especialidades"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "M\u00e9dico ativo"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "usuario_id",
+    "nome_completo",
+    "email",
+    "crms"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "usuario_id"
+      ],
+      "name": "idx_medico_user",
+      "unique": true
+    },
+    {
+      "fields": [
+        "usuario_id"
+      ],
+      "name": "idx_medico_user_fk"
+    },
+    {
+      "fields": [
+        "email"
+      ],
+      "name": "idx_medico_email"
+    }
+  ]
+}

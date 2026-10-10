@@ -1,0 +1,98 @@
+{
+  "name": "FeedbackUsuario",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (null = feedback p\u00fablico)"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "pergunta_frequente",
+        "sugestao_feature",
+        "bug",
+        "elogio",
+        "reclamacao"
+      ],
+      "description": "Tipo de feedback"
+    },
+    "pergunta": {
+      "type": "string",
+      "description": "Pergunta do usu\u00e1rio"
+    },
+    "contexto": {
+      "type": "string",
+      "description": "Contexto (p\u00e1gina, m\u00f3dulo)"
+    },
+    "sentimento": {
+      "type": "string",
+      "enum": [
+        "positivo",
+        "neutro",
+        "negativo",
+        "urgente"
+      ],
+      "description": "Sentimento detectado por IA"
+    },
+    "resposta_ia": {
+      "type": "string",
+      "description": "Resposta gerada por IA"
+    },
+    "resposta_humana": {
+      "type": "string",
+      "description": "Resposta aprovada por humano"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "novo",
+        "analisando_ia",
+        "pendente_aprovacao",
+        "aprovado",
+        "rejeitado",
+        "publicado_faq"
+      ],
+      "default": "novo"
+    },
+    "convertido_faq": {
+      "type": "boolean",
+      "default": false
+    },
+    "artigo_faq_id": {
+      "type": "string",
+      "description": "ID do ArtigoFAQ criado"
+    },
+    "usuario_nome": {
+      "type": "string"
+    },
+    "usuario_email": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "tipo",
+    "pergunta"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "-created_date"
+      ],
+      "name": "idx_feedback_timeline"
+    },
+    {
+      "fields": [
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_feedback_status"
+    },
+    {
+      "fields": [
+        "convertido_faq"
+      ],
+      "name": "idx_feedback_convertido"
+    }
+  ]
+}

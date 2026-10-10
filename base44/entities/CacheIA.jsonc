@@ -1,0 +1,62 @@
+{
+  "name": "CacheIA",
+  "type": "object",
+  "properties": {
+    "hash_input": {
+      "type": "string",
+      "description": "Hash MD5 do input para deduplica\u00e7\u00e3o"
+    },
+    "tipo_analise": {
+      "type": "string",
+      "enum": [
+        "diagnostico",
+        "prescricao",
+        "interacoes",
+        "resumo",
+        "previsao_demanda",
+        "outro"
+      ],
+      "description": "Tipo de an\u00e1lise"
+    },
+    "input_resumido": {
+      "type": "string",
+      "description": "Resumo do input (primeiros 200 chars)"
+    },
+    "output": {
+      "type": "object",
+      "description": "Resultado da an\u00e1lise"
+    },
+    "modelo_usado": {
+      "type": "string",
+      "description": "Modelo de IA usado"
+    },
+    "custo_usd": {
+      "type": "number",
+      "description": "Custo da chamada em USD"
+    },
+    "tempo_resposta_ms": {
+      "type": "number",
+      "description": "Tempo de resposta em milissegundos"
+    },
+    "hits": {
+      "type": "number",
+      "default": 1,
+      "description": "N\u00famero de vezes que foi reusado"
+    },
+    "ultima_utilizacao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima vez que foi usado"
+    },
+    "valido_ate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Validade do cache"
+    }
+  },
+  "required": [
+    "hash_input",
+    "tipo_analise",
+    "output"
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "name": "Ticket",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "contato_id": {
+      "type": "string",
+      "description": "ID do contato relacionado"
+    },
+    "numero_ticket": {
+      "type": "string",
+      "description": "N\u00famero sequencial (ex: #2025-0001)"
+    },
+    "assunto": {
+      "type": "string",
+      "description": "Assunto do ticket"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "aberto",
+        "em_andamento",
+        "aguardando_cliente",
+        "aguardando",
+        "respondido_ia",
+        "resolvido",
+        "fechado"
+      ],
+      "default": "aberto",
+      "description": "Status do ticket (aguardando = fila IA)"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "media",
+        "alta",
+        "urgente"
+      ],
+      "default": "media",
+      "description": "Prioridade"
+    },
+    "canal": {
+      "type": "string",
+      "enum": [
+        "email",
+        "whatsapp",
+        "widget",
+        "interno"
+      ],
+      "description": "Canal de origem"
+    },
+    "solicitante_nome": {
+      "type": "string",
+      "description": "Nome do solicitante"
+    },
+    "solicitante_email": {
+      "type": "string",
+      "description": "Email do solicitante"
+    },
+    "solicitante_telefone": {
+      "type": "string",
+      "description": "Telefone do solicitante"
+    },
+    "atribuido_a": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio respons\u00e1vel"
+    },
+    "atribuido_nome": {
+      "type": "string",
+      "description": "Nome do respons\u00e1vel"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "suporte_tecnico",
+        "agendamento",
+        "financeiro",
+        "documentos",
+        "duvida",
+        "reclamacao",
+        "sugestao",
+        "outro"
+      ],
+      "description": "Categoria (pode ser IA ou manual)"
+    },
+    "email_id_origem": {
+      "type": "string",
+      "description": "ID do EmailRecebido que originou (se aplic\u00e1vel)"
+    },
+    "tempo_primeira_resposta": {
+      "type": "number",
+      "description": "Minutos at\u00e9 primeira resposta"
+    },
+    "tempo_resolucao": {
+      "type": "number",
+      "description": "Minutos at\u00e9 resolu\u00e7\u00e3o"
+    },
+    "ultima_interacao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima atualiza\u00e7\u00e3o (para cron de auto-resposta)"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags para busca"
+    },
+    "data_fechamento": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data de fechamento"
+    },
+    "csat_score": {
+      "type": "number",
+      "description": "Avalia\u00e7\u00e3o do cliente (1-5)"
+    },
+    "feedback_cliente": {
+      "type": "string",
+      "description": "Feedback textual do cliente"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "assunto",
+    "canal"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_ticket_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_ticket_status_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "atribuido_a",
+        "-created_date"
+      ],
+      "name": "idx_ticket_responsavel_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "contato_id",
+        "-created_date"
+      ],
+      "name": "idx_ticket_contato"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "canal",
+        "-created_date"
+      ],
+      "name": "idx_ticket_canal"
+    },
+    {
+      "fields": [
+        "status",
+        "ultima_interacao"
+      ],
+      "name": "idx_ticket_cron_autoresposta"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Newsletter",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Email inscrito"
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome (opcional)"
+    },
+    "origem": {
+      "type": "string",
+      "enum": [
+        "landing",
+        "blog",
+        "footer",
+        "checkout"
+      ],
+      "description": "De onde veio"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true
+    },
+    "data_inscricao": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "email"
+  ]
+}

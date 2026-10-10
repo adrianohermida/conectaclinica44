@@ -1,0 +1,104 @@
+{
+  "name": "LeadSite",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome do lead"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone/WhatsApp"
+    },
+    "empresa": {
+      "type": "string",
+      "description": "Nome da cl\u00ednica/consult\u00f3rio"
+    },
+    "cargo": {
+      "type": "string",
+      "description": "Cargo/fun\u00e7\u00e3o"
+    },
+    "origem": {
+      "type": "string",
+      "enum": [
+        "widget",
+        "landing_page",
+        "formulario_contato",
+        "newsletter",
+        "blog"
+      ],
+      "default": "widget",
+      "description": "Origem do lead"
+    },
+    "qualificacao": {
+      "type": "string",
+      "enum": [
+        "hot",
+        "warm",
+        "cold",
+        "nao_qualificado"
+      ],
+      "default": "nao_qualificado",
+      "description": "N\u00edvel de qualifica\u00e7\u00e3o"
+    },
+    "score": {
+      "type": "number",
+      "default": 0,
+      "description": "Score de 0-100 baseado em comportamento"
+    },
+    "interesses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "M\u00f3dulos de interesse"
+    },
+    "dores_identificadas": {
+      "type": "string",
+      "description": "Dores relatadas pelo lead"
+    },
+    "tamanho_operacao": {
+      "type": "string",
+      "description": "Pequena, m\u00e9dia ou grande"
+    },
+    "conversado_com_ia": {
+      "type": "boolean",
+      "default": false,
+      "description": "J\u00e1 interagiu com SDR IA"
+    },
+    "conversa_id": {
+      "type": "string",
+      "description": "ID da conversa com agente"
+    },
+    "transferido_vendas": {
+      "type": "boolean",
+      "default": false,
+      "description": "Transferido para humano"
+    },
+    "data_transferencia": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi transferido"
+    },
+    "convertido_cliente": {
+      "type": "boolean",
+      "default": false,
+      "description": "Converteu em cliente pagante"
+    },
+    "utm_source": {
+      "type": "string",
+      "description": "Origem tr\u00e1fego"
+    },
+    "utm_campaign": {
+      "type": "string",
+      "description": "Campanha"
+    }
+  },
+  "required": [
+    "email"
+  ]
+}

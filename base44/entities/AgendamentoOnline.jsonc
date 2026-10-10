@@ -1,0 +1,70 @@
+{
+  "name": "AgendamentoOnline",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "contato_id": {
+      "type": "string",
+      "description": "ID do contato criado"
+    },
+    "agendamento_id": {
+      "type": "string",
+      "description": "ID do agendamento criado"
+    },
+    "origem": {
+      "type": "string",
+      "enum": [
+        "widget_embed",
+        "url_direta",
+        "secretaria_ia"
+      ],
+      "default": "widget_embed",
+      "description": "Origem do agendamento"
+    },
+    "url_origem": {
+      "type": "string",
+      "description": "URL do site onde foi feito"
+    },
+    "utm_params": {
+      "type": "object",
+      "description": "Par\u00e2metros UTM de tracking"
+    },
+    "convertido": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se converteu em agendamento confirmado"
+    },
+    "data_conversao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando converteu"
+    },
+    "tempo_conversao_segundos": {
+      "type": "number",
+      "description": "Tempo desde visualiza\u00e7\u00e3o at\u00e9 agendamento"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "agendamento_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_agenda_online_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "convertido"
+      ],
+      "name": "idx_agenda_online_conversao"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "AlertaPerformance",
+  "type": "object",
+  "properties": {
+    "endpoint": {
+      "type": "string",
+      "description": "Endpoint que violou SLA"
+    },
+    "metrica": {
+      "type": "string",
+      "description": "M\u00e9trica violada (P95, taxa_erro, etc)"
+    },
+    "valor_atual": {
+      "type": "number",
+      "description": "Valor medido"
+    },
+    "valor_meta": {
+      "type": "number",
+      "description": "Meta/threshold"
+    },
+    "severidade": {
+      "type": "string",
+      "enum": [
+        "critica",
+        "alta",
+        "media"
+      ],
+      "default": "media",
+      "description": "Severidade do alerta"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativo",
+        "resolvido",
+        "ignorado"
+      ],
+      "default": "ativo",
+      "description": "Status do alerta"
+    },
+    "data_deteccao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi detectado"
+    },
+    "data_resolucao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi resolvido"
+    },
+    "acoes_tomadas": {
+      "type": "string",
+      "description": "A\u00e7\u00f5es corretivas"
+    }
+  },
+  "required": [
+    "endpoint",
+    "metrica",
+    "valor_atual",
+    "valor_meta"
+  ]
+}

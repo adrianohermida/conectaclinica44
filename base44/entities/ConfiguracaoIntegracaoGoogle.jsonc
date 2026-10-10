@@ -1,0 +1,78 @@
+{
+  "name": "ConfiguracaoIntegracaoGoogle",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant isolado)"
+    },
+    "service_id": {
+      "type": "string",
+      "enum": [
+        "drive",
+        "calendar",
+        "meet",
+        "tasks",
+        "docs",
+        "sheets",
+        "business"
+      ],
+      "description": "Servi\u00e7o Google conectado"
+    },
+    "access_token_encrypted": {
+      "type": "string",
+      "description": "Access token criptografado"
+    },
+    "refresh_token_encrypted": {
+      "type": "string",
+      "description": "Refresh token criptografado"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando o access token expira"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Escopos autorizados"
+    },
+    "last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima sincroniza\u00e7\u00e3o realizada"
+    },
+    "erro_ultima_sync": {
+      "type": "string",
+      "description": "Erro da \u00faltima tentativa de sync"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Integra\u00e7\u00e3o ativa"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "service_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "service_id"
+      ],
+      "name": "idx_google_clinica_service",
+      "unique": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "ativo"
+      ],
+      "name": "idx_google_ativo"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "LimiteEnvioEmail",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "data": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do envio"
+    },
+    "contador": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantidade de emails enviados no dia"
+    },
+    "limite_diario": {
+      "type": "number",
+      "description": "Limite di\u00e1rio permitido pelo plano"
+    },
+    "emails_bloqueados": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantidade bloqueada por exceder limite"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "data"
+  ]
+}

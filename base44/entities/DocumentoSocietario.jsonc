@@ -1,0 +1,83 @@
+{
+  "name": "DocumentoSocietario",
+  "type": "object",
+  "properties": {
+    "tipo_documento": {
+      "type": "string",
+      "enum": [
+        "contrato_social",
+        "alteracao_contratual",
+        "ata_assembleia",
+        "procuracao",
+        "estatuto_social",
+        "acordo_quotistas",
+        "distrato",
+        "certidao_junta",
+        "outros"
+      ],
+      "description": "Tipo do documento"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo/Identifica\u00e7\u00e3o do documento"
+    },
+    "numero_registro": {
+      "type": "string",
+      "description": "N\u00famero de registro na Junta Comercial"
+    },
+    "data_documento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do documento"
+    },
+    "data_registro": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de registro"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do documento"
+    },
+    "arquivo_url": {
+      "type": "string",
+      "description": "URL do arquivo"
+    },
+    "nome_arquivo": {
+      "type": "string",
+      "description": "Nome do arquivo original"
+    },
+    "tamanho_bytes": {
+      "type": "number",
+      "description": "Tamanho do arquivo"
+    },
+    "junta_comercial": {
+      "type": "string",
+      "description": "Junta Comercial respons\u00e1vel"
+    },
+    "estado": {
+      "type": "string",
+      "description": "Estado da Junta Comercial"
+    },
+    "valido": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se o documento est\u00e1 v\u00e1lido"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags para categoriza\u00e7\u00e3o"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "tipo_documento",
+    "titulo"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "name": "NotificacaoCompliance",
+  "type": "object",
+  "properties": {
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "cfm_normas",
+        "lgpd_termo",
+        "codigo_etica",
+        "cdc_direitos",
+        "termo_uso"
+      ],
+      "description": "Tipo de notifica\u00e7\u00e3o legal"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo da notifica\u00e7\u00e3o"
+    },
+    "conteudo": {
+      "type": "string",
+      "description": "Conte\u00fado completo (markdown)"
+    },
+    "obrigatoria": {
+      "type": "boolean",
+      "default": true,
+      "description": "Requer confirma\u00e7\u00e3o de leitura"
+    },
+    "usuario_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio destinat\u00e1rio"
+    },
+    "usuario_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio"
+    },
+    "lida": {
+      "type": "boolean",
+      "default": false,
+      "description": "Usu\u00e1rio marcou como lida"
+    },
+    "data_leitura": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp da confirma\u00e7\u00e3o"
+    },
+    "ip_leitura": {
+      "type": "string",
+      "description": "IP da confirma\u00e7\u00e3o"
+    },
+    "auditado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Registrado no log de auditoria"
+    },
+    "data_auditoria": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "tipo",
+    "titulo",
+    "conteudo",
+    "usuario_id"
+  ]
+}

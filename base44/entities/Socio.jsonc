@@ -1,0 +1,94 @@
+{
+  "name": "Socio",
+  "type": "object",
+  "properties": {
+    "nome_completo": {
+      "type": "string",
+      "description": "Nome completo do s\u00f3cio"
+    },
+    "cpf": {
+      "type": "string",
+      "description": "CPF"
+    },
+    "rg": {
+      "type": "string",
+      "description": "RG"
+    },
+    "data_nascimento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de nascimento"
+    },
+    "nacionalidade": {
+      "type": "string",
+      "description": "Nacionalidade"
+    },
+    "estado_civil": {
+      "type": "string",
+      "enum": [
+        "solteiro",
+        "casado",
+        "divorciado",
+        "viuvo",
+        "uniao_estavel"
+      ],
+      "description": "Estado civil"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "E-mail"
+    },
+    "endereco_completo": {
+      "type": "string",
+      "description": "Endere\u00e7o completo"
+    },
+    "tipo_socio": {
+      "type": "string",
+      "enum": [
+        "administrador",
+        "quotista",
+        "acionista"
+      ],
+      "description": "Tipo de participa\u00e7\u00e3o"
+    },
+    "percentual_participacao": {
+      "type": "number",
+      "description": "Percentual de participa\u00e7\u00e3o (%)"
+    },
+    "qualificacao": {
+      "type": "string",
+      "description": "Qualifica\u00e7\u00e3o no quadro societ\u00e1rio"
+    },
+    "data_entrada": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de entrada na sociedade"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "S\u00f3cio ativo"
+    },
+    "documentos_anexados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "URLs de documentos"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "nome_completo",
+    "cpf",
+    "tipo_socio"
+  ]
+}

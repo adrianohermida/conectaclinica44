@@ -1,0 +1,94 @@
+{
+  "name": "AprendizadoIA",
+  "type": "object",
+  "properties": {
+    "tipo_aprendizado": {
+      "type": "string",
+      "enum": [
+        "pesquisa_mercado",
+        "analise_concorrente",
+        "gap_analysis",
+        "predicao_insatisfacao",
+        "tendencia_nicho"
+      ],
+      "description": "Tipo de aprendizado"
+    },
+    "fonte": {
+      "type": "string",
+      "description": "Fonte da informa\u00e7\u00e3o (Google, competitor site, feedback)"
+    },
+    "insights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Insights extra\u00eddos"
+    },
+    "faqs_sugeridos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pergunta": {
+            "type": "string"
+          },
+          "resposta": {
+            "type": "string"
+          },
+          "prioridade": {
+            "type": "number"
+          },
+          "gap_detectado": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "FAQs sugeridos pela IA"
+    },
+    "score_confianca": {
+      "type": "number",
+      "description": "Confian\u00e7a do insight (0-100)"
+    },
+    "aprovado": {
+      "type": "boolean",
+      "default": false
+    },
+    "aplicado": {
+      "type": "boolean",
+      "default": false
+    },
+    "impacto_estimado": {
+      "type": "object",
+      "properties": {
+        "taxa_resolucao_esperada": {
+          "type": "number"
+        },
+        "reducao_tickets": {
+          "type": "number"
+        },
+        "score_satisfacao": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "required": [
+    "tipo_aprendizado",
+    "insights"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "-created_date"
+      ],
+      "name": "idx_aprendizado_timeline"
+    },
+    {
+      "fields": [
+        "aprovado",
+        "-score_confianca"
+      ],
+      "name": "idx_aprendizado_confianca"
+    }
+  ]
+}

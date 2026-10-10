@@ -1,0 +1,89 @@
+{
+  "name": "ConversaoAgendamentoIA",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "conversation_id": {
+      "type": "string",
+      "description": "ID da conversa do agente"
+    },
+    "contato_id": {
+      "type": "string",
+      "description": "ID do contato (paciente/lead)"
+    },
+    "agendamento_id": {
+      "type": "string",
+      "description": "ID do agendamento criado (se converteu)"
+    },
+    "total_mensagens": {
+      "type": "number",
+      "description": "Total de mensagens at\u00e9 convers\u00e3o"
+    },
+    "tempo_conversao_segundos": {
+      "type": "number",
+      "description": "Tempo desde 1\u00aa mensagem at\u00e9 agendamento"
+    },
+    "converteu": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se converteu em agendamento"
+    },
+    "motivo_nao_conversao": {
+      "type": "string",
+      "description": "Motivo se n\u00e3o converteu (falta disponibilidade, desist\u00eancia, etc)"
+    },
+    "tipo_agendamento": {
+      "type": "string",
+      "enum": [
+        "novo",
+        "reagendamento",
+        "cancelamento"
+      ],
+      "description": "Tipo da intera\u00e7\u00e3o"
+    },
+    "origem_conversa": {
+      "type": "string",
+      "enum": [
+        "whatsapp",
+        "widget",
+        "chat_interno"
+      ],
+      "description": "Canal de origem"
+    },
+    "data_conversao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp da convers\u00e3o"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "conversation_id"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_conversao_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "converteu"
+      ],
+      "name": "idx_conversao_taxa"
+    },
+    {
+      "fields": [
+        "conversation_id"
+      ],
+      "name": "idx_conversao_conversa",
+      "unique": true
+    }
+  ]
+}

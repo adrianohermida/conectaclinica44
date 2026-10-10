@@ -1,0 +1,132 @@
+{
+  "name": "MenuSidebar",
+  "type": "object",
+  "properties": {
+    "tipo_menu": {
+      "type": "string",
+      "enum": [
+        "superadmin",
+        "clinica"
+      ],
+      "description": "Tipo de menu (SuperAdmin ou Cl\u00ednica)"
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "ID do item pai (pasta/submenu)"
+    },
+    "ordem": {
+      "type": "number",
+      "default": 0,
+      "description": "Ordem de exibi\u00e7\u00e3o (drag & drop)"
+    },
+    "tipo_item": {
+      "type": "string",
+      "enum": [
+        "pasta",
+        "pagina",
+        "link_externo"
+      ],
+      "default": "pagina",
+      "description": "Tipo do item de menu"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo exibido no menu"
+    },
+    "icone_lucide": {
+      "type": "string",
+      "description": "Nome do \u00edcone Lucide React (ex: LayoutDashboard, Users, etc)"
+    },
+    "cor": {
+      "type": "string",
+      "default": "#7E57FF",
+      "description": "Cor do \u00edcone (hex)"
+    },
+    "rota_pagina": {
+      "type": "string",
+      "description": "Nome da p\u00e1gina (ex: DashboardCompleto, Pacientes)"
+    },
+    "url_externa": {
+      "type": "string",
+      "description": "URL externa (se tipo_item = link_externo)"
+    },
+    "planos_requeridos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs de PlanoModulo que incluem este m\u00f3dulo"
+    },
+    "modulo_slug": {
+      "type": "string",
+      "description": "Slug do m\u00f3dulo (ex: pacientes, agenda, prontuarios)"
+    },
+    "roles_permitidos": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "admin",
+          "user"
+        ]
+      },
+      "default": [
+        "admin",
+        "user"
+      ],
+      "description": "Roles que podem ver este item"
+    },
+    "visivel": {
+      "type": "boolean",
+      "default": true,
+      "description": "Item vis\u00edvel no menu"
+    },
+    "beta": {
+      "type": "boolean",
+      "default": false,
+      "description": "Badge Beta"
+    },
+    "badge_texto": {
+      "type": "string",
+      "description": "Texto do badge customizado"
+    },
+    "badge_cor": {
+      "type": "string",
+      "description": "Cor do badge (hex)"
+    },
+    "customizavel_clinica": {
+      "type": "boolean",
+      "default": false,
+      "description": "Cl\u00ednica pode customizar este item (ordem, visibilidade)"
+    }
+  },
+  "required": [
+    "tipo_menu",
+    "titulo",
+    "tipo_item"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "tipo_menu",
+        "ordem"
+      ],
+      "name": "idx_menu_ordem"
+    },
+    {
+      "fields": [
+        "tipo_menu",
+        "parent_id",
+        "ordem"
+      ],
+      "name": "idx_menu_hierarquia"
+    },
+    {
+      "fields": [
+        "modulo_slug"
+      ],
+      "name": "idx_menu_modulo",
+      "sparse": true
+    }
+  ]
+}

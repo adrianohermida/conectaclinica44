@@ -1,0 +1,93 @@
+{
+  "name": "Medicamento",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome do medicamento"
+    },
+    "principio_ativo": {
+      "type": "string",
+      "description": "Princ\u00edpio ativo"
+    },
+    "fabricante": {
+      "type": "string",
+      "description": "Fabricante/Laborat\u00f3rio"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "antibiotico",
+        "analgesico",
+        "anti_inflamatorio",
+        "vitamina",
+        "suplemento",
+        "hormonio",
+        "uso_topico",
+        "injetavel",
+        "controlado",
+        "outro"
+      ],
+      "description": "Categoria do medicamento"
+    },
+    "quantidade_estoque": {
+      "type": "number",
+      "description": "Quantidade em estoque"
+    },
+    "estoque_minimo": {
+      "type": "number",
+      "description": "Estoque m\u00ednimo"
+    },
+    "preco_custo": {
+      "type": "number",
+      "description": "Pre\u00e7o de custo"
+    },
+    "preco_venda": {
+      "type": "number",
+      "description": "Pre\u00e7o de venda"
+    },
+    "validade": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de validade"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Produto ativo"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "nome",
+    "quantidade_estoque"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_medicamento_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "ativo",
+        "-created_date"
+      ],
+      "name": "idx_medicamento_ativo"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "categoria"
+      ],
+      "name": "idx_medicamento_categoria"
+    }
+  ]
+}

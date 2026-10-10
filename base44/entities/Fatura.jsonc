@@ -1,0 +1,124 @@
+{
+  "name": "Fatura",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "paciente_id": {
+      "type": "string",
+      "description": "ID do paciente"
+    },
+    "paciente_nome": {
+      "type": "string",
+      "description": "Nome do paciente"
+    },
+    "numero_fatura": {
+      "type": "string",
+      "description": "N\u00famero sequencial (FAT-2025-0001)"
+    },
+    "data_emissao": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de emiss\u00e3o"
+    },
+    "data_vencimento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de vencimento"
+    },
+    "itens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "number"
+          },
+          "valor_unitario": {
+            "type": "number"
+          },
+          "subtotal": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Itens discriminados"
+    },
+    "subtotal": {
+      "type": "number",
+      "description": "Subtotal"
+    },
+    "desconto": {
+      "type": "number",
+      "default": 0,
+      "description": "Desconto"
+    },
+    "valor_total": {
+      "type": "number",
+      "description": "Valor total"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "pago",
+        "vencido",
+        "cancelado"
+      ],
+      "default": "pendente",
+      "description": "Status"
+    },
+    "forma_pagamento": {
+      "type": "string",
+      "enum": [
+        "dinheiro",
+        "debito",
+        "credito",
+        "pix",
+        "transferencia",
+        "convenio"
+      ],
+      "description": "Forma de pagamento"
+    },
+    "pix_qrcode_url": {
+      "type": "string",
+      "description": "URL QR Code PIX (upload manual)"
+    },
+    "comprovante_url": {
+      "type": "string",
+      "description": "URL comprovante pagamento"
+    },
+    "venda_id": {
+      "type": "string",
+      "description": "ID da venda origem"
+    },
+    "nota_fiscal_numero": {
+      "type": "string",
+      "description": "N\u00famero NF-e (manual ou autom\u00e1tico)"
+    },
+    "nota_fiscal_url": {
+      "type": "string",
+      "description": "URL PDF nota fiscal"
+    },
+    "recibo_url": {
+      "type": "string",
+      "description": "URL PDF recibo"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "paciente_id",
+    "numero_fatura",
+    "data_emissao",
+    "valor_total"
+  ]
+}

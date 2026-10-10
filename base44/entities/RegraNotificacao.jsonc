@@ -1,0 +1,90 @@
+{
+  "name": "RegraNotificacao",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome da regra"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "vencimento",
+        "consulta_agendada",
+        "resultado_irregular",
+        "renovacao"
+      ],
+      "description": "Tipo de notifica\u00e7\u00e3o"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "media",
+        "alta",
+        "critica"
+      ],
+      "default": "media",
+      "description": "Prioridade do alerta"
+    },
+    "dias_antecedencia": {
+      "type": "number",
+      "default": 30,
+      "description": "Dias de anteced\u00eancia para alertar"
+    },
+    "destinatarios_emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de e-mails destinat\u00e1rios"
+    },
+    "categorias_certidao": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categorias de certid\u00e3o aplic\u00e1veis"
+    },
+    "template_email": {
+      "type": "object",
+      "properties": {
+        "assunto": {
+          "type": "string"
+        },
+        "corpo": {
+          "type": "string"
+        },
+        "incluir_anexo": {
+          "type": "boolean"
+        }
+      },
+      "description": "Template personalizado de e-mail"
+    },
+    "placeholders_disponiveis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Placeholders: {titulo}, {orgao}, {data_validade}, {dias_restantes}, {numero_certidao}"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se a regra est\u00e1 ativa"
+    },
+    "enviar_email": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enviar notifica\u00e7\u00e3o por e-mail"
+    },
+    "mensagem_personalizada": {
+      "type": "string",
+      "description": "Mensagem adicional personalizada"
+    }
+  },
+  "required": [
+    "nome",
+    "tipo"
+  ]
+}

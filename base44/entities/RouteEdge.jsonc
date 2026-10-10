@@ -1,0 +1,87 @@
+{
+  "name": "RouteEdge",
+  "type": "object",
+  "properties": {
+    "from_path": {
+      "type": "string",
+      "description": "Rota de origem"
+    },
+    "to_path": {
+      "type": "string",
+      "description": "Rota de destino"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "link",
+        "redirect",
+        "cta",
+        "guard"
+      ],
+      "description": "Tipo de transi\u00e7\u00e3o"
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Condi\u00e7\u00f5es (auth, clinica_id, role, etc)"
+    },
+    "drop_off_rate": {
+      "type": "number",
+      "description": "Taxa de abandono nesta transi\u00e7\u00e3o (%)"
+    },
+    "error_rate": {
+      "type": "number",
+      "description": "Taxa de erro nesta transi\u00e7\u00e3o (%)"
+    },
+    "perf_cost_ms": {
+      "type": "number",
+      "description": "Custo de performance (ms)"
+    },
+    "count_30d": {
+      "type": "number",
+      "default": 0,
+      "description": "Navega\u00e7\u00f5es nos \u00faltimos 30 dias"
+    },
+    "is_broken": {
+      "type": "boolean",
+      "default": false,
+      "description": "Rota quebrada"
+    },
+    "is_loop": {
+      "type": "boolean",
+      "default": false,
+      "description": "Loop detectado"
+    }
+  },
+  "required": [
+    "from_path",
+    "to_path",
+    "action"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "from_path",
+        "to_path"
+      ],
+      "unique": true
+    },
+    {
+      "fields": [
+        "is_broken"
+      ]
+    },
+    {
+      "fields": [
+        "is_loop"
+      ]
+    },
+    {
+      "fields": [
+        "-count_30d"
+      ]
+    }
+  ]
+}

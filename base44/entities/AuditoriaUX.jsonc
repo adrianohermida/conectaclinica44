@@ -1,0 +1,240 @@
+{
+  "name": "AuditoriaUX",
+  "type": "object",
+  "properties": {
+    "pagina": {
+      "type": "string",
+      "description": "Nome da p\u00e1gina auditada"
+    },
+    "caminho": {
+      "type": "string",
+      "description": "Caminho do arquivo (pages/NomePagina.jsx)"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "critica",
+        "alta",
+        "media",
+        "baixa"
+      ],
+      "default": "media",
+      "description": "Prioridade de corre\u00e7\u00e3o"
+    },
+    "status_geral": {
+      "type": "string",
+      "enum": [
+        "nao_auditado",
+        "em_auditoria",
+        "reprovado",
+        "aprovado"
+      ],
+      "default": "nao_auditado",
+      "description": "Status da auditoria"
+    },
+    "mobile_320px": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Funciona em 320px (iPhone SE)"
+    },
+    "mobile_375px": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Funciona em 375px (iPhone 12/13)"
+    },
+    "mobile_428px": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Funciona em 428px (iPhone 14 Pro Max)"
+    },
+    "tablet_768px": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Funciona em 768px (iPad)"
+    },
+    "desktop_1024px": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Funciona em 1024px+"
+    },
+    "touch_targets_44px": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Bot\u00f5es/links \u2265 44x44px"
+    },
+    "formularios_mobile": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Forms mobile-friendly (inputs grandes, labels vis\u00edveis)"
+    },
+    "tabelas_responsivas": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Tabelas scroll horizontal ou stack em mobile"
+    },
+    "navegacao_mobile": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Menu mobile acess\u00edvel e funcional"
+    },
+    "sem_scroll_horizontal": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Sem scroll horizontal indesejado"
+    },
+    "textos_legiveis": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Fontes \u2265 14px em mobile"
+    },
+    "modals_panels_mobile": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Modals/panels 100% largura em mobile"
+    },
+    "imagens_responsivas": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Imagens/\u00edcones adaptam tamanho"
+    },
+    "espacamento_adequado": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Padding/margin adequados mobile"
+    },
+    "performance_mobile": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Carrega < 3s em 3G"
+    },
+    "performance_3g": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 FCP < 2.5s em 3G (First Contentful Paint)"
+    },
+    "performance_4g": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 LCP < 2.5s em 4G (Largest Contentful Paint)"
+    },
+    "performance_tti": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 TTI < 5s em 3G (Time to Interactive)"
+    },
+    "acessibilidade_basica": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Labels, aria-labels, contraste m\u00ednimo"
+    },
+    "acessibilidade_screen_reader": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Navega\u00e7\u00e3o completa via screen reader (NVDA/JAWS/VoiceOver)"
+    },
+    "acessibilidade_keyboard": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Navega\u00e7\u00e3o completa via teclado (Tab, Enter, Esc)"
+    },
+    "acessibilidade_focus_visible": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Indicadores de foco vis\u00edveis (outline/ring)"
+    },
+    "acessibilidade_aria_live": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Regi\u00f5es ARIA live para notifica\u00e7\u00f5es din\u00e2micas"
+    },
+    "branding_cores_primarias": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Cores prim\u00e1rias PrevenClin (#0B7A9E, #58B4D4) aplicadas"
+    },
+    "branding_cores_secundarias": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Cores secund\u00e1rias (#34a853 success, #fbbc04 warning, #ea4335 error)"
+    },
+    "branding_cores_terciarias": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Cores terci\u00e1rias (#1a73e8 info, grays #f8f9fa-#202124)"
+    },
+    "branding_tokens_css": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Tokens CSS (--pc-*) usados consistentemente"
+    },
+    "branding_tipografia": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Google Sans/Roboto aplicadas"
+    },
+    "branding_radius": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Border radius DNA (12px, 16px, 20px, 24px)"
+    },
+    "branding_shadows": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Shadows suaves (--pc-shadow-*)"
+    },
+    "branding_icones": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 \u00cdcones tamanhos consistentes (w-4/5/6)"
+    },
+    "branding_badges": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Badges cores sem\u00e2nticas PrevenClin"
+    },
+    "branding_espacamento": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Espa\u00e7amento baseado em tokens (--pc-space-*)"
+    },
+    "branding_transicoes": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Transi\u00e7\u00f5es suaves (--pc-transition-*)"
+    },
+    "branding_componentes_pc": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u2713 Componentes pc-* (pc-btn, pc-card, pc-badge)"
+    },
+    "problemas_identificados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de problemas encontrados"
+    },
+    "tempo_estimado_correcao": {
+      "type": "number",
+      "description": "Horas estimadas para corrigir"
+    },
+    "data_auditoria": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da \u00faltima auditoria"
+    },
+    "auditor": {
+      "type": "string",
+      "description": "Quem auditou"
+    },
+    "notas": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es gerais"
+    }
+  },
+  "required": [
+    "pagina",
+    "caminho",
+    "prioridade"
+  ]
+}

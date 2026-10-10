@@ -1,0 +1,95 @@
+{
+  "name": "ConsumoOpenAI",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "mes_referencia": {
+      "type": "string",
+      "description": "M\u00eas refer\u00eancia (YYYY-MM)"
+    },
+    "total_tokens": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de tokens consumidos no m\u00eas"
+    },
+    "total_requisicoes": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de chamadas LLM no m\u00eas"
+    },
+    "custo_total_usd": {
+      "type": "number",
+      "default": 0,
+      "description": "Custo total em USD"
+    },
+    "custo_total_brl": {
+      "type": "number",
+      "default": 0,
+      "description": "Custo total em BRL (c\u00e2mbio m\u00e9dio)"
+    },
+    "limite_mensal_brl": {
+      "type": "number",
+      "default": 1000,
+      "description": "Limite de custo mensal (R$1.000 padr\u00e3o)"
+    },
+    "pausado_automaticamente": {
+      "type": "boolean",
+      "default": false,
+      "description": "FASE 6: Se atingiu limite e pausou"
+    },
+    "data_pausa": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi pausado"
+    },
+    "alerta_80_enviado": {
+      "type": "boolean",
+      "default": false,
+      "description": "FASE 6: Email 80% enviado"
+    },
+    "detalhamento": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string"
+          },
+          "tokens": {
+            "type": "number"
+          },
+          "custo_usd": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Detalhamento di\u00e1rio"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "mes_referencia"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "mes_referencia"
+      ],
+      "name": "idx_consumo_openai_mes",
+      "unique": true
+    },
+    {
+      "fields": [
+        "pausado_automaticamente"
+      ],
+      "name": "idx_consumo_pausado"
+    }
+  ]
+}

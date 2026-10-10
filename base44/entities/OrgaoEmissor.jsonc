@@ -1,0 +1,49 @@
+{
+  "name": "OrgaoEmissor",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome do \u00f3rg\u00e3o emissor"
+    },
+    "sigla": {
+      "type": "string",
+      "description": "Sigla do \u00f3rg\u00e3o"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "federal",
+        "estadual",
+        "municipal",
+        "outro"
+      ],
+      "description": "Tipo/Esfera do \u00f3rg\u00e3o"
+    },
+    "estado": {
+      "type": "string",
+      "description": "Estado (UF)"
+    },
+    "cidade": {
+      "type": "string",
+      "description": "Cidade"
+    },
+    "site": {
+      "type": "string",
+      "description": "Site oficial do \u00f3rg\u00e3o"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es gerais"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se o \u00f3rg\u00e3o est\u00e1 ativo"
+    }
+  },
+  "required": [
+    "nome",
+    "tipo"
+  ]
+}

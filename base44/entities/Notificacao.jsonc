@@ -1,0 +1,92 @@
+{
+  "name": "Notificacao",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "ID do usu\u00e1rio destinat\u00e1rio"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "novo_ticket",
+        "resposta_ticket",
+        "novo_email",
+        "resposta_email",
+        "status_email",
+        "atribuicao_ticket"
+      ],
+      "description": "Tipo de notifica\u00e7\u00e3o"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo da notifica\u00e7\u00e3o"
+    },
+    "mensagem": {
+      "type": "string",
+      "description": "Mensagem da notifica\u00e7\u00e3o"
+    },
+    "ticket_id": {
+      "type": "string",
+      "description": "ID do ticket relacionado"
+    },
+    "link": {
+      "type": "string",
+      "description": "URL para a\u00e7\u00e3o"
+    },
+    "lida": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se foi lida"
+    },
+    "data_leitura": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi lida"
+    },
+    "push_enviado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se push mobile foi enviado"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "media",
+        "alta",
+        "urgente"
+      ],
+      "default": "media",
+      "description": "Prioridade da notifica\u00e7\u00e3o"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "user_id",
+    "tipo",
+    "titulo",
+    "mensagem"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "user_id",
+        "-created_date"
+      ],
+      "name": "idx_notif_user"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "lida",
+        "-created_date"
+      ],
+      "name": "idx_notif_clinica_lida"
+    }
+  ]
+}

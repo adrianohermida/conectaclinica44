@@ -1,0 +1,123 @@
+{
+  "name": "ROPA",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "operacao": {
+      "type": "string",
+      "description": "Opera\u00e7\u00e3o de tratamento (ex: Coleta de CPF, Prontu\u00e1rio eletr\u00f4nico)"
+    },
+    "finalidade": {
+      "type": "string",
+      "description": "Finalidade do tratamento"
+    },
+    "base_legal": {
+      "type": "string",
+      "enum": [
+        "consentimento",
+        "obrigacao_legal",
+        "execucao_contrato",
+        "tutela_saude",
+        "interesse_legitimo",
+        "protecao_vida",
+        "exercicio_direitos"
+      ],
+      "description": "Base legal (Art. 7\u00ba LGPD)"
+    },
+    "artigo_lgpd": {
+      "type": "string",
+      "description": "Artigo espec\u00edfico (ex: Art. 7\u00ba, VI ou Art. 11, II)"
+    },
+    "dados_tratados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tipos de dados tratados"
+    },
+    "categorias_titulares": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categorias de titulares (pacientes, m\u00e9dicos, etc)"
+    },
+    "dados_sensiveis": {
+      "type": "boolean",
+      "default": false,
+      "description": "Trata dados sens\u00edveis (sa\u00fade)?"
+    },
+    "compartilhamento": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "destinatario": {
+            "type": "string"
+          },
+          "finalidade": {
+            "type": "string"
+          },
+          "garantias": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Compartilhamento com terceiros"
+    },
+    "retencao_prazo": {
+      "type": "string",
+      "description": "Prazo de reten\u00e7\u00e3o (ex: 20 anos - CFM 1821/2007)"
+    },
+    "medidas_seguranca": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Medidas t\u00e9cnicas e organizacionais"
+    },
+    "responsavel": {
+      "type": "string",
+      "description": "Respons\u00e1vel pelo tratamento"
+    },
+    "dpia_necessaria": {
+      "type": "boolean",
+      "default": false,
+      "description": "DPIA necess\u00e1ria?"
+    },
+    "dpia_id": {
+      "type": "string",
+      "description": "ID da DPIA vinculada"
+    },
+    "data_criacao": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de cria\u00e7\u00e3o do registro"
+    },
+    "ultima_revisao": {
+      "type": "string",
+      "format": "date",
+      "description": "\u00daltima revis\u00e3o"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativo",
+        "revisao",
+        "descontinuado"
+      ],
+      "default": "ativo",
+      "description": "Status da opera\u00e7\u00e3o"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "operacao",
+    "finalidade",
+    "base_legal",
+    "dados_tratados"
+  ]
+}

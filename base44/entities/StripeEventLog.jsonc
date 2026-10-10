@@ -1,0 +1,122 @@
+{
+  "name": "StripeEventLog",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "ID do evento Stripe (unique)"
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Tipo do evento (customer.subscription.created, invoice.paid, etc)"
+    },
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica afetada (extra\u00eddo de metadata)"
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "description": "ID do customer Stripe"
+    },
+    "stripe_subscription_id": {
+      "type": "string",
+      "description": "ID da subscription Stripe (se aplic\u00e1vel)"
+    },
+    "stripe_invoice_id": {
+      "type": "string",
+      "description": "ID da invoice Stripe (se aplic\u00e1vel)"
+    },
+    "valor_centavos": {
+      "type": "number",
+      "description": "Valor em centavos (para invoices)"
+    },
+    "status_processamento": {
+      "type": "string",
+      "enum": [
+        "processado",
+        "falhado",
+        "retry_pendente",
+        "ignorado"
+      ],
+      "default": "processado",
+      "description": "Status do processamento do evento"
+    },
+    "tentativas_processamento": {
+      "type": "number",
+      "default": 1,
+      "description": "N\u00famero de tentativas de processamento"
+    },
+    "erro_detalhes": {
+      "type": "string",
+      "description": "Detalhes do erro (se falhado)"
+    },
+    "tempo_processamento_ms": {
+      "type": "number",
+      "description": "Tempo de processamento em ms"
+    },
+    "payload_completo": {
+      "type": "object",
+      "description": "Payload completo do evento (para debug)"
+    },
+    "data_evento": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do evento no Stripe"
+    },
+    "data_processamento": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do processamento"
+    },
+    "impacto_receita": {
+      "type": "boolean",
+      "default": false,
+      "description": "Evento impacta receita (paid/failed/refunded)"
+    },
+    "acao_tomada": {
+      "type": "string",
+      "description": "A\u00e7\u00e3o tomada pelo sistema (criou assinatura, atualizou status, etc)"
+    }
+  },
+  "required": [
+    "event_id",
+    "event_type"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "event_id"
+      ],
+      "name": "idx_stripe_event_unique",
+      "unique": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_stripe_clinica_timeline"
+    },
+    {
+      "fields": [
+        "status_processamento",
+        "-created_date"
+      ],
+      "name": "idx_stripe_status"
+    },
+    {
+      "fields": [
+        "event_type",
+        "-created_date"
+      ],
+      "name": "idx_stripe_event_type"
+    },
+    {
+      "fields": [
+        "impacto_receita",
+        "-created_date"
+      ],
+      "name": "idx_stripe_receita"
+    }
+  ]
+}

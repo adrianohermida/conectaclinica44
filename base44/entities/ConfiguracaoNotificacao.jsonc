@@ -1,0 +1,58 @@
+{
+  "name": "ConfiguracaoNotificacao",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "email_agendamentos": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notificar novos agendamentos por email"
+    },
+    "email_lembretes": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enviar lembretes 24h antes de consultas"
+    },
+    "email_vencimentos": {
+      "type": "boolean",
+      "default": true,
+      "description": "Alertas de certid\u00f5es e obriga\u00e7\u00f5es vencendo"
+    },
+    "email_estoque_baixo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Alertas de produtos com estoque baixo"
+    },
+    "email_tickets": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notificar equipe sobre novos tickets"
+    },
+    "whatsapp_lembretes": {
+      "type": "boolean",
+      "default": false,
+      "description": "Lembretes via WhatsApp para pacientes"
+    },
+    "whatsapp_confirmacoes": {
+      "type": "boolean",
+      "default": false,
+      "description": "Confirma\u00e7\u00f5es autom\u00e1ticas via WhatsApp"
+    },
+    "notificacao_push": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notifica\u00e7\u00f5es push no sistema"
+    },
+    "notificacao_desktop": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notifica\u00e7\u00f5es desktop (navegador)"
+    }
+  },
+  "required": [
+    "clinica_id"
+  ]
+}

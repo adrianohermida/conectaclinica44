@@ -1,0 +1,114 @@
+{
+  "name": "AgendamentoConsulta",
+  "type": "object",
+  "properties": {
+    "certidao_id": {
+      "type": "string",
+      "description": "ID da certid\u00e3o vinculada"
+    },
+    "certidao_titulo": {
+      "type": "string",
+      "description": "T\u00edtulo da certid\u00e3o"
+    },
+    "orgao_emissor": {
+      "type": "string",
+      "description": "\u00d3rg\u00e3o emissor"
+    },
+    "tipo_consulta": {
+      "type": "string",
+      "enum": [
+        "fgts",
+        "receita_federal",
+        "trt11",
+        "tcu",
+        "prefeitura",
+        "sefaz",
+        "tst_falencia"
+      ],
+      "description": "Tipo de consulta a executar"
+    },
+    "parametros_consulta": {
+      "type": "object",
+      "description": "Par\u00e2metros necess\u00e1rios para a consulta"
+    },
+    "frequencia": {
+      "type": "string",
+      "enum": [
+        "diaria",
+        "semanal",
+        "quinzenal",
+        "mensal"
+      ],
+      "default": "mensal",
+      "description": "Frequ\u00eancia da consulta"
+    },
+    "dia_semana": {
+      "type": "number",
+      "description": "Dia da semana (0-6, para consultas semanais)"
+    },
+    "dia_mes": {
+      "type": "number",
+      "description": "Dia do m\u00eas (1-28, para consultas mensais)"
+    },
+    "horario": {
+      "type": "string",
+      "description": "Hor\u00e1rio de execu\u00e7\u00e3o (HH:mm)"
+    },
+    "url_consulta": {
+      "type": "string",
+      "description": "URL do site de consulta manual"
+    },
+    "certificado_digital_id": {
+      "type": "string",
+      "description": "ID do certificado digital necess\u00e1rio"
+    },
+    "notificar_resultado": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enviar notifica\u00e7\u00e3o ap\u00f3s execu\u00e7\u00e3o"
+    },
+    "emails_notificacao": {
+      "type": "string",
+      "description": "E-mails para notifica\u00e7\u00e3o (separados por v\u00edrgula)"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Se o agendamento est\u00e1 ativo"
+    },
+    "ultima_execucao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da \u00faltima execu\u00e7\u00e3o"
+    },
+    "proxima_execucao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da pr\u00f3xima execu\u00e7\u00e3o"
+    },
+    "status_ultima_execucao": {
+      "type": "string",
+      "enum": [
+        "sucesso",
+        "erro",
+        "nao_executado"
+      ],
+      "default": "nao_executado",
+      "description": "Status da \u00faltima execu\u00e7\u00e3o"
+    },
+    "erro_ultima_execucao": {
+      "type": "string",
+      "description": "Mensagem de erro da \u00faltima execu\u00e7\u00e3o"
+    },
+    "total_execucoes": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de execu\u00e7\u00f5es realizadas"
+    }
+  },
+  "required": [
+    "certidao_titulo",
+    "tipo_consulta",
+    "frequencia"
+  ]
+}

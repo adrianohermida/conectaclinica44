@@ -1,0 +1,62 @@
+{
+  "name": "CreditoIA",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica tenant"
+    },
+    "saldo_creditos": {
+      "type": "number",
+      "default": 0,
+      "description": "Saldo atual de cr\u00e9ditos de IA"
+    },
+    "creditos_mensais_plano": {
+      "type": "number",
+      "default": 0,
+      "description": "Cr\u00e9ditos inclusos no plano por m\u00eas"
+    },
+    "creditos_comprados_avulso": {
+      "type": "number",
+      "default": 0,
+      "description": "Cr\u00e9ditos comprados al\u00e9m do plano"
+    },
+    "total_consumido_mes": {
+      "type": "number",
+      "default": 0,
+      "description": "Total consumido no m\u00eas atual"
+    },
+    "total_consumido_historico": {
+      "type": "number",
+      "default": 0,
+      "description": "Total consumido desde in\u00edcio"
+    },
+    "data_ultima_recarga": {
+      "type": "string",
+      "format": "date",
+      "description": "\u00daltima recarga de cr\u00e9ditos"
+    },
+    "data_ultimo_reset": {
+      "type": "string",
+      "format": "date",
+      "description": "\u00daltimo reset mensal (dia da assinatura)"
+    },
+    "alertas": {
+      "type": "object",
+      "properties": {
+        "alerta_80_porcento": {
+          "type": "boolean",
+          "default": false
+        },
+        "alerta_100_porcento": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "description": "Alertas de consumo enviados"
+    }
+  },
+  "required": [
+    "clinica_id"
+  ]
+}

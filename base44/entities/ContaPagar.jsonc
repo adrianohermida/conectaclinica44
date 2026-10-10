@@ -1,0 +1,83 @@
+{
+  "name": "ContaPagar",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o da conta"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "fornecedor",
+        "aluguel",
+        "salarios",
+        "impostos",
+        "servicos",
+        "energia",
+        "agua",
+        "internet",
+        "manutencao",
+        "marketing",
+        "outros"
+      ],
+      "description": "Categoria da despesa"
+    },
+    "fornecedor": {
+      "type": "string",
+      "description": "Nome do fornecedor"
+    },
+    "valor": {
+      "type": "number",
+      "description": "Valor a pagar"
+    },
+    "data_vencimento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de vencimento"
+    },
+    "data_pagamento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do pagamento"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "pago",
+        "vencido",
+        "cancelado"
+      ],
+      "default": "pendente",
+      "description": "Status da conta"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "descricao",
+    "valor",
+    "data_vencimento"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-data_vencimento"
+      ],
+      "name": "idx_contapagar_vencimento"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-data_vencimento"
+      ],
+      "name": "idx_contapagar_status"
+    }
+  ]
+}

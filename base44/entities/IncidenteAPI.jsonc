@@ -1,0 +1,105 @@
+{
+  "name": "IncidenteAPI",
+  "type": "object",
+  "properties": {
+    "conector_id": {
+      "type": "string",
+      "description": "ID do conector afetado"
+    },
+    "conector_nome": {
+      "type": "string",
+      "description": "Nome do conector"
+    },
+    "severidade": {
+      "type": "string",
+      "enum": [
+        "critica",
+        "alta",
+        "media",
+        "baixa"
+      ],
+      "description": "Severidade do incidente"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "aberto",
+        "investigando",
+        "resolvido",
+        "monitorando"
+      ],
+      "default": "aberto",
+      "description": "Status do incidente"
+    },
+    "tipo_erro": {
+      "type": "string",
+      "enum": [
+        "timeout",
+        "autenticacao",
+        "rate_limit",
+        "indisponibilidade",
+        "erro_dados",
+        "outro"
+      ],
+      "description": "Tipo de erro"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo do incidente"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o detalhada"
+    },
+    "erro_mensagem": {
+      "type": "string",
+      "description": "Mensagem de erro t\u00e9cnica"
+    },
+    "consultas_afetadas": {
+      "type": "number",
+      "description": "N\u00famero de consultas afetadas"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando o incidente come\u00e7ou"
+    },
+    "data_resolucao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi resolvido"
+    },
+    "tempo_inatividade_min": {
+      "type": "number",
+      "description": "Tempo de inatividade em minutos"
+    },
+    "acao_corretiva": {
+      "type": "string",
+      "description": "A\u00e7\u00e3o tomada para resolver"
+    },
+    "responsavel": {
+      "type": "string",
+      "description": "Respons\u00e1vel pela resolu\u00e7\u00e3o"
+    },
+    "impacto_financeiro": {
+      "type": "number",
+      "description": "Impacto financeiro estimado (R$)"
+    },
+    "notificacoes_enviadas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "E-mails notificados"
+    },
+    "postmortem": {
+      "type": "string",
+      "description": "An\u00e1lise post-mortem do incidente"
+    }
+  },
+  "required": [
+    "conector_id",
+    "severidade",
+    "titulo"
+  ]
+}

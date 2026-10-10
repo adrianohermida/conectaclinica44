@@ -1,0 +1,316 @@
+{
+  "name": "Contato",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multitenant)"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "ID do User vinculado"
+    },
+    "tipo_contato": {
+      "type": "string",
+      "enum": [
+        "paciente",
+        "lead",
+        "fornecedor",
+        "parceiro"
+      ],
+      "default": "paciente",
+      "description": "Tipo de contato"
+    },
+    "nome_completo": {
+      "type": "string",
+      "description": "Nome completo"
+    },
+    "cpf": {
+      "type": "string",
+      "description": "CPF"
+    },
+    "cnpj": {
+      "type": "string",
+      "description": "CNPJ (fornecedores)"
+    },
+    "data_nascimento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de nascimento"
+    },
+    "nacionalidade": {
+      "type": "string",
+      "default": "Brasileira",
+      "description": "Nacionalidade"
+    },
+    "estado_civil": {
+      "type": "string",
+      "enum": [
+        "solteiro",
+        "casado",
+        "divorciado",
+        "viuvo",
+        "uniao_estavel"
+      ],
+      "description": "Estado civil"
+    },
+    "profissao": {
+      "type": "string",
+      "description": "Profiss\u00e3o"
+    },
+    "sexo": {
+      "type": "string",
+      "enum": [
+        "masculino",
+        "feminino",
+        "outro",
+        "nao_informado"
+      ],
+      "description": "Sexo"
+    },
+    "telefones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "celular",
+              "fixo",
+              "recado",
+              "comercial"
+            ]
+          },
+          "numero": {
+            "type": "string"
+          },
+          "principal": {
+            "type": "boolean"
+          }
+        }
+      },
+      "description": "Lista de telefones"
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "pessoal",
+              "comercial",
+              "outro"
+            ]
+          },
+          "principal": {
+            "type": "boolean"
+          }
+        }
+      },
+      "description": "Lista de emails"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone principal (deprecated - usar telefones[])"
+    },
+    "whatsapp": {
+      "type": "string",
+      "description": "WhatsApp"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email principal (deprecated - usar emails[])"
+    },
+    "redes_sociais": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        },
+        "linkedin": {
+          "type": "string"
+        },
+        "tiktok": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        }
+      },
+      "description": "URLs das redes sociais"
+    },
+    "endereco": {
+      "type": "object",
+      "properties": {
+        "cep": {
+          "type": "string"
+        },
+        "logradouro": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "string"
+        },
+        "complemento": {
+          "type": "string"
+        },
+        "bairro": {
+          "type": "string"
+        },
+        "cidade": {
+          "type": "string"
+        },
+        "uf": {
+          "type": "string"
+        },
+        "codigo_ibge": {
+          "type": "string"
+        }
+      },
+      "description": "Endere\u00e7o completo estruturado"
+    },
+    "endereco_completo": {
+      "type": "string",
+      "description": "Endere\u00e7o texto (deprecated)"
+    },
+    "cidade": {
+      "type": "string",
+      "description": "Cidade (deprecated)"
+    },
+    "estado": {
+      "type": "string",
+      "description": "Estado (deprecated)"
+    },
+    "cep": {
+      "type": "string",
+      "description": "CEP (deprecated)"
+    },
+    "convenio": {
+      "type": "string",
+      "description": "Conv\u00eanio m\u00e9dico"
+    },
+    "numero_carteirinha": {
+      "type": "string",
+      "description": "Carteirinha conv\u00eanio"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativo",
+        "inativo",
+        "prospecto",
+        "convertido",
+        "baixado"
+      ],
+      "default": "ativo",
+      "description": "Status (baixado = arquivado)"
+    },
+    "origem_lead": {
+      "type": "string",
+      "enum": [
+        "site",
+        "indicacao",
+        "redes_sociais",
+        "anuncio",
+        "evento",
+        "widget",
+        "outro"
+      ],
+      "description": "Origem do lead"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    },
+    "historico_medico": {
+      "type": "string",
+      "description": "Hist\u00f3rico m\u00e9dico resumido"
+    },
+    "alergias": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alergias"
+    },
+    "medicamentos_uso": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Medicamentos em uso"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "URL do avatar"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags personalizadas"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "nome_completo",
+    "tipo_contato"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_contato_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "tipo_contato",
+        "-created_date"
+      ],
+      "name": "idx_contato_tipo_timeline"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_contato_status"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "cpf"
+      ],
+      "name": "idx_contato_cpf",
+      "unique": true,
+      "sparse": true,
+      "partialFilterExpression": {
+        "cpf": {
+          "$exists": true,
+          "$ne": ""
+        }
+      }
+    },
+    {
+      "fields": [
+        "user_id"
+      ],
+      "name": "idx_contato_user",
+      "sparse": true
+    }
+  ]
+}

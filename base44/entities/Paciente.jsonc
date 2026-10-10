@@ -1,0 +1,151 @@
+{
+  "name": "Paciente",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "nome_completo": {
+      "type": "string",
+      "description": "Nome completo do paciente"
+    },
+    "cpf": {
+      "type": "string",
+      "description": "CPF"
+    },
+    "data_nascimento": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de nascimento"
+    },
+    "sexo": {
+      "type": "string",
+      "enum": [
+        "masculino",
+        "feminino",
+        "outro",
+        "nao_informado"
+      ],
+      "description": "Sexo biol\u00f3gico"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone principal"
+    },
+    "whatsapp": {
+      "type": "string",
+      "description": "WhatsApp"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email"
+    },
+    "endereco_completo": {
+      "type": "string",
+      "description": "Endere\u00e7o completo"
+    },
+    "cidade": {
+      "type": "string",
+      "description": "Cidade"
+    },
+    "estado": {
+      "type": "string",
+      "description": "Estado"
+    },
+    "cep": {
+      "type": "string",
+      "description": "CEP"
+    },
+    "convenio": {
+      "type": "string",
+      "description": "Conv\u00eanio m\u00e9dico"
+    },
+    "numero_carteirinha": {
+      "type": "string",
+      "description": "N\u00famero da carteirinha do conv\u00eanio"
+    },
+    "tipo_paciente": {
+      "type": "string",
+      "enum": [
+        "particular",
+        "convenio",
+        "sus"
+      ],
+      "default": "particular",
+      "description": "Tipo de paciente"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativo",
+        "inativo",
+        "alta"
+      ],
+      "default": "ativo",
+      "description": "Status do paciente"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es gerais"
+    },
+    "historico_medico": {
+      "type": "string",
+      "description": "Hist\u00f3rico m\u00e9dico resumido"
+    },
+    "alergias": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de alergias conhecidas"
+    },
+    "medicamentos_uso": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Medicamentos em uso cont\u00ednuo"
+    },
+    "responsavel_nome": {
+      "type": "string",
+      "description": "Nome do respons\u00e1vel (menor de idade)"
+    },
+    "responsavel_cpf": {
+      "type": "string",
+      "description": "CPF do respons\u00e1vel"
+    },
+    "responsavel_telefone": {
+      "type": "string",
+      "description": "Telefone do respons\u00e1vel"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "nome_completo"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_paciente_timeline_optimized"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_paciente_status"
+    },
+    {
+      "fields": [
+        "cpf"
+      ],
+      "name": "idx_paciente_cpf",
+      "sparse": true
+    }
+  ]
+}

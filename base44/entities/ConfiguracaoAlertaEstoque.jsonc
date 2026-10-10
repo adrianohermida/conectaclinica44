@@ -1,0 +1,58 @@
+{
+  "name": "ConfiguracaoAlertaEstoque",
+  "type": "object",
+  "properties": {
+    "usuario_email": {
+      "type": "string",
+      "format": "email",
+      "description": "E-mail do usu\u00e1rio"
+    },
+    "limite_estoque_baixo_percentual": {
+      "type": "number",
+      "default": 20,
+      "description": "Percentual do estoque m\u00ednimo para alertar"
+    },
+    "dias_alerta_validade": {
+      "type": "number",
+      "default": 60,
+      "description": "Dias antes do vencimento para alertar"
+    },
+    "dias_previsao_ruptura": {
+      "type": "number",
+      "default": 30,
+      "description": "Dias de anteced\u00eancia para prever ruptura"
+    },
+    "notificar_email": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enviar alertas por e-mail"
+    },
+    "notificar_sistema": {
+      "type": "boolean",
+      "default": true,
+      "description": "Mostrar alertas no sistema"
+    },
+    "emails_notificacao": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "E-mails adicionais para notifica\u00e7\u00e3o"
+    },
+    "categorias_monitoradas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categorias de medicamentos a monitorar"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Sistema de alertas ativo"
+    }
+  },
+  "required": [
+    "usuario_email"
+  ]
+}

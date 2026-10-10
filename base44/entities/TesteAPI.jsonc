@@ -1,0 +1,89 @@
+{
+  "name": "TesteAPI",
+  "type": "object",
+  "properties": {
+    "conector_id": {
+      "type": "string",
+      "description": "ID do conector testado"
+    },
+    "conector_nome": {
+      "type": "string",
+      "description": "Nome do conector"
+    },
+    "tipo_teste": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "automatico",
+        "validacao"
+      ],
+      "description": "Tipo de teste"
+    },
+    "parametros_enviados": {
+      "type": "object",
+      "description": "Par\u00e2metros do teste"
+    },
+    "resposta_recebida": {
+      "type": "object",
+      "description": "Resposta completa da API"
+    },
+    "status_http": {
+      "type": "number",
+      "description": "Status HTTP da resposta"
+    },
+    "sucesso": {
+      "type": "boolean",
+      "description": "Se o teste foi bem sucedido"
+    },
+    "tempo_resposta_ms": {
+      "type": "number",
+      "description": "Tempo de resposta em ms"
+    },
+    "erro_mensagem": {
+      "type": "string",
+      "description": "Mensagem de erro se houver"
+    },
+    "erro_stack": {
+      "type": "string",
+      "description": "Stack trace do erro"
+    },
+    "validacoes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "campo": {
+            "type": "string"
+          },
+          "esperado": {
+            "type": "string"
+          },
+          "obtido": {
+            "type": "string"
+          },
+          "passou": {
+            "type": "boolean"
+          }
+        }
+      },
+      "description": "Valida\u00e7\u00f5es de schema"
+    },
+    "usuario_testador": {
+      "type": "string",
+      "description": "E-mail do usu\u00e1rio que executou o teste"
+    },
+    "ambiente": {
+      "type": "string",
+      "enum": [
+        "development",
+        "production"
+      ],
+      "description": "Ambiente do teste"
+    }
+  },
+  "required": [
+    "conector_id",
+    "tipo_teste",
+    "sucesso"
+  ]
+}

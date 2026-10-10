@@ -1,0 +1,46 @@
+{
+  "name": "StatusSistema",
+  "type": "object",
+  "properties": {
+    "servico": {
+      "type": "string",
+      "enum": [
+        "api",
+        "dashboard",
+        "agenda",
+        "prontuarios",
+        "telemedicina",
+        "ia",
+        "integracao_stripe",
+        "backup"
+      ],
+      "description": "Servi\u00e7o monitorado"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "operacional",
+        "degradado",
+        "parcial",
+        "offline"
+      ],
+      "default": "operacional"
+    },
+    "ultimo_check": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "latencia_ms": {
+      "type": "number",
+      "description": "Lat\u00eancia em ms"
+    },
+    "mensagem": {
+      "type": "string",
+      "description": "Mensagem de status"
+    }
+  },
+  "required": [
+    "servico",
+    "status"
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "name": "TemplateNotificacao",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (null = template global padr\u00e3o)"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "aprovacao_prontuario",
+        "ticket_novo",
+        "ticket_respondido",
+        "agendamento_confirmado",
+        "agendamento_cancelado",
+        "termo_pendente",
+        "prontuario_pronto",
+        "exame_anexado",
+        "receita_digital",
+        "colaboracao_mencionado",
+        "cobranca_vencendo",
+        "pagamento_falhou",
+        "credito_baixo",
+        "trial_expirando",
+        "sistema_alerta"
+      ],
+      "description": "Tipo de notifica\u00e7\u00e3o vinculado"
+    },
+    "titulo_template": {
+      "type": "string",
+      "description": "Template do t\u00edtulo com vari\u00e1veis {{paciente_nome}}, {{medico_nome}}, {{data}}, {{numero_ticket}}, etc"
+    },
+    "corpo_template": {
+      "type": "string",
+      "description": "Template do corpo com vari\u00e1veis din\u00e2micas"
+    },
+    "variaveis_disponiveis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de vari\u00e1veis permitidas (ex: ['paciente_nome', 'medico_nome', 'data', 'hora'])"
+    },
+    "acao_label": {
+      "type": "string",
+      "default": "Ver detalhes",
+      "description": "Label do bot\u00e3o de a\u00e7\u00e3o"
+    },
+    "prioridade_padrao": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "media",
+        "alta",
+        "urgente"
+      ],
+      "default": "media",
+      "description": "Prioridade padr\u00e3o das notifica\u00e7\u00f5es deste tipo"
+    },
+    "canal_padrao": {
+      "type": "string",
+      "enum": [
+        "in_app",
+        "email",
+        "push",
+        "whatsapp"
+      ],
+      "default": "in_app",
+      "description": "Canal padr\u00e3o de entrega"
+    },
+    "icone": {
+      "type": "string",
+      "description": "Nome do \u00edcone Lucide React"
+    },
+    "cor": {
+      "type": "string",
+      "description": "Cor hex padr\u00e3o"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Template ativo"
+    },
+    "exemplo_render": {
+      "type": "string",
+      "description": "Exemplo de renderiza\u00e7\u00e3o com dados fict\u00edcios"
+    }
+  },
+  "required": [
+    "tipo",
+    "titulo_template",
+    "corpo_template"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "tipo"
+      ],
+      "name": "idx_template_notif_clinica_tipo",
+      "unique": true,
+      "comment": "Um template por tipo por cl\u00ednica (null = global)"
+    },
+    {
+      "fields": [
+        "tipo",
+        "ativo"
+      ],
+      "name": "idx_template_notif_tipo_ativo"
+    }
+  ]
+}

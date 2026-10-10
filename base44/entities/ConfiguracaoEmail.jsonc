@@ -1,0 +1,156 @@
+{
+  "name": "ConfiguracaoEmail",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica (multi-tenant)"
+    },
+    "provedor": {
+      "type": "string",
+      "enum": [
+        "conectaclinica",
+        "gmail",
+        "outlook",
+        "smtp_custom",
+        "dominio_proprio"
+      ],
+      "default": "conectaclinica",
+      "description": "Provedor de email"
+    },
+    "provedor_padrao": {
+      "type": "boolean",
+      "default": false,
+      "description": "Provedor padr\u00e3o para envios"
+    },
+    "alias_recebimento": {
+      "type": "string",
+      "description": "Email alias para receber tickets (ex: clinica@conectaclinica.com.br)"
+    },
+    "email_remetente": {
+      "type": "string",
+      "description": "Email FROM"
+    },
+    "nome_remetente": {
+      "type": "string",
+      "description": "Nome exibi\u00e7\u00e3o"
+    },
+    "smtp_host": {
+      "type": "string",
+      "description": "SMTP server (se custom)"
+    },
+    "smtp_port": {
+      "type": "number",
+      "description": "Porta SMTP (587, 465, 25)"
+    },
+    "smtp_usuario": {
+      "type": "string",
+      "description": "Usu\u00e1rio SMTP"
+    },
+    "smtp_senha_encrypted": {
+      "type": "string",
+      "description": "Senha SMTP criptografada"
+    },
+    "dkim_domain": {
+      "type": "string",
+      "description": "Dom\u00ednio DKIM configurado"
+    },
+    "dkim_domain_id": {
+      "type": "string",
+      "description": "ID dom\u00ednio SendGrid"
+    },
+    "dkim_status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "verificado",
+        "falhou"
+      ],
+      "default": "pendente"
+    },
+    "enviar_confirmacao_automatica": {
+      "type": "boolean",
+      "default": true
+    },
+    "usar_nome_agente_resposta": {
+      "type": "boolean",
+      "default": true
+    },
+    "incluir_historico_email": {
+      "type": "boolean",
+      "default": true
+    },
+    "detectar_auto_reply": {
+      "type": "boolean",
+      "default": true
+    },
+    "assinatura_padrao": {
+      "type": "string",
+      "description": "Assinatura HTML"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": false,
+      "description": "Provedor ativo"
+    },
+    "testado_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima vez que foi testado"
+    },
+    "teste_sucesso": {
+      "type": "boolean",
+      "description": "\u00daltimo teste passou"
+    },
+    "webhook_configurado": {
+      "type": "boolean",
+      "default": false
+    },
+    "inbound_parse_configurado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Inbound Parse SendGrid configurado (emails externos viram tickets)"
+    },
+    "unsubscribe_groups_criados": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "clinica_id",
+    "provedor"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id",
+        "provedor_padrao"
+      ],
+      "name": "idx_config_email_padrao"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_config_email_timeline"
+    },
+    {
+      "fields": [
+        "alias_recebimento"
+      ],
+      "name": "idx_config_email_alias",
+      "unique": true,
+      "sparse": true
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "dkim_domain_id"
+      ],
+      "name": "idx_config_email_domain_clinica",
+      "unique": true,
+      "sparse": true
+    }
+  ]
+}

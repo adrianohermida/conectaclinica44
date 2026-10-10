@@ -1,0 +1,220 @@
+{
+  "name": "ChecklistProjeto",
+  "type": "object",
+  "properties": {
+    "ordem_execucao": {
+      "type": "number",
+      "description": "Ordem manual de execu\u00e7\u00e3o (1, 2, 3...) - override de prioriza\u00e7\u00e3o autom\u00e1tica"
+    },
+    "modulo": {
+      "type": "string",
+      "description": "Nome do m\u00f3dulo"
+    },
+    "funcionalidade": {
+      "type": "string",
+      "description": "Funcionalidade espec\u00edfica"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "core",
+        "monetizacao",
+        "integracao",
+        "ux",
+        "seguranca",
+        "performance",
+        "compliance"
+      ],
+      "description": "Categoria"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "critica",
+        "alta",
+        "media",
+        "baixa"
+      ],
+      "default": "media",
+      "description": "Prioridade"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "em_progresso",
+        "completo",
+        "bloqueado",
+        "feature_futura"
+      ],
+      "default": "pendente",
+      "description": "Status (feature_futura = skip por agora, retomar depois)"
+    },
+    "percentual_completo": {
+      "type": "number",
+      "default": 0,
+      "description": "% de completude"
+    },
+    "fase": {
+      "type": "string",
+      "enum": [
+        "fase1",
+        "fase2",
+        "fase3",
+        "fase4"
+      ],
+      "default": "fase1",
+      "description": "Fase do projeto (6 semanas)"
+    },
+    "dependencias": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs de itens que este depende"
+    },
+    "bloqueadores": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Motivos de bloqueio"
+    },
+    "requisitos_externos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "APIs/Secrets necess\u00e1rios"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio"
+    },
+    "data_conclusao": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de conclus\u00e3o"
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date",
+      "description": "DEADLINE OBRIGAT\u00d3RIO - sem deadline = sem urg\u00eancia"
+    },
+    "tempo_estimado_horas": {
+      "type": "number",
+      "description": "Horas estimadas (para velocity tracking)"
+    },
+    "tempo_gasto_horas": {
+      "type": "number",
+      "default": 0,
+      "description": "Horas realmente gastas"
+    },
+    "evidencias": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evid\u00eancias de conclus\u00e3o (entities, pages, functions)"
+    },
+    "definition_of_done": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Checklist para considerar completo"
+    },
+    "bloqueado_desde": {
+      "type": "string",
+      "format": "date",
+      "description": "Data que ficou bloqueado (SLA tracking)"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Respons\u00e1vel direto"
+    },
+    "estimativa_horas": {
+      "type": "number",
+      "description": "Horas estimadas"
+    },
+    "responsavel": {
+      "type": "string",
+      "description": "Respons\u00e1vel"
+    },
+    "observacoes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags (feature_futura, v2, mvp, etc)"
+    },
+    "score_checklist": {
+      "type": "number",
+      "description": "Score 0-100 da auditoria brutal (validado contra codebase)"
+    },
+    "bloqueio_completo_ate_100": {
+      "type": "boolean",
+      "default": true,
+      "description": "Bloqueia marcar como completo at\u00e9 score 100% (ou tag feature_futura)"
+    },
+    "historico_analises": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "MEM\u00d3RIA: Hist\u00f3rico de todas an\u00e1lises (refatoramento, scan, sprint, \u00e1rvore)"
+    },
+    "ultima_analise_refatoramento": {
+      "type": "object",
+      "description": "\u00daltima an\u00e1lise de refatoramento completa (cache)"
+    },
+    "ultima_arvore_tecnica": {
+      "type": "object",
+      "description": "\u00daltima \u00e1rvore t\u00e9cnica gerada (cache)"
+    },
+    "ultimo_scan_codebase": {
+      "type": "object",
+      "description": "\u00daltimo scan de c\u00f3digo (cache)"
+    },
+    "ultimo_sprint_breakdown": {
+      "type": "object",
+      "description": "\u00daltimo breakdown de sprint (cache)"
+    },
+    "status_analise_completa": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "processing",
+        "completed",
+        "error"
+      ],
+      "default": "idle",
+      "description": "Status da an\u00e1lise completa ass\u00edncrona"
+    },
+    "analise_inicio": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp in\u00edcio an\u00e1lise async"
+    },
+    "analise_fim": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp fim an\u00e1lise async"
+    },
+    "analise_erro": {
+      "type": "string",
+      "description": "Mensagem de erro se falhar"
+    }
+  },
+  "required": [
+    "modulo",
+    "funcionalidade",
+    "categoria",
+    "prioridade"
+  ]
+}

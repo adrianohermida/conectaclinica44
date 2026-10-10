@@ -1,0 +1,134 @@
+{
+  "name": "TicketSuporte",
+  "type": "object",
+  "properties": {
+    "numero_ticket": {
+      "type": "string",
+      "description": "N\u00famero \u00fanico do ticket"
+    },
+    "nome_solicitante": {
+      "type": "string",
+      "description": "Nome de quem abriu"
+    },
+    "email_solicitante": {
+      "type": "string",
+      "description": "Email do solicitante"
+    },
+    "telefone_solicitante": {
+      "type": "string",
+      "description": "Telefone"
+    },
+    "tipo_solicitante": {
+      "type": "string",
+      "enum": [
+        "paciente",
+        "visitante",
+        "usuario_interno"
+      ],
+      "default": "visitante",
+      "description": "Origem do ticket"
+    },
+    "assunto": {
+      "type": "string",
+      "description": "Assunto do ticket"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "duvida",
+        "agendamento",
+        "financeiro",
+        "resultado_exame",
+        "receita",
+        "reclamacao",
+        "sugestao",
+        "tecnico",
+        "outro"
+      ],
+      "description": "Categoria"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "media",
+        "alta",
+        "urgente"
+      ],
+      "default": "media",
+      "description": "Prioridade"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o detalhada"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "novo",
+        "aberto",
+        "em_atendimento",
+        "aguardando_cliente",
+        "resolvido",
+        "fechado"
+      ],
+      "default": "novo",
+      "description": "Status"
+    },
+    "responsavel_id": {
+      "type": "string",
+      "description": "ID do atendente"
+    },
+    "responsavel_nome": {
+      "type": "string",
+      "description": "Nome do atendente"
+    },
+    "respostas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "autor": {
+            "type": "string"
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          },
+          "interno": {
+            "type": "boolean"
+          }
+        }
+      },
+      "description": "Hist\u00f3rico de respostas"
+    },
+    "anexos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Arquivos anexados"
+    },
+    "data_resolucao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando foi resolvido"
+    },
+    "avaliacao": {
+      "type": "number",
+      "description": "Avalia\u00e7\u00e3o do atendimento (1-5)"
+    },
+    "feedback": {
+      "type": "string",
+      "description": "Feedback do cliente"
+    }
+  },
+  "required": [
+    "nome_solicitante",
+    "email_solicitante",
+    "assunto",
+    "categoria"
+  ]
+}

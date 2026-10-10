@@ -1,0 +1,135 @@
+{
+  "name": "ConfiguracaoClinica",
+  "type": "object",
+  "properties": {
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica"
+    },
+    "dpo_nome": {
+      "type": "string",
+      "description": "Nome completo do DPO (Data Protection Officer)"
+    },
+    "dpo_email": {
+      "type": "string",
+      "description": "Email profissional do DPO"
+    },
+    "dpo_telefone": {
+      "type": "string",
+      "description": "Telefone de contato do DPO"
+    },
+    "dpo_cpf": {
+      "type": "string",
+      "description": "CPF do DPO"
+    },
+    "dpo_cargo": {
+      "type": "string",
+      "description": "Cargo do DPO na organiza\u00e7\u00e3o"
+    },
+    "data_nomeacao_dpo": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da nomea\u00e7\u00e3o oficial do DPO"
+    },
+    "politica_privacidade_url": {
+      "type": "string",
+      "description": "URL da pol\u00edtica de privacidade"
+    },
+    "termo_uso_url": {
+      "type": "string",
+      "description": "URL dos termos de uso"
+    },
+    "base_legal_tratamento": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "consentimento",
+          "obrigacao_legal",
+          "execucao_contrato",
+          "exercicio_regular_direitos",
+          "protecao_vida",
+          "tutela_saude",
+          "interesse_legitimo"
+        ]
+      },
+      "description": "Bases legais para tratamento de dados"
+    },
+    "responsavel_tecnico_nome": {
+      "type": "string",
+      "description": "Nome do respons\u00e1vel t\u00e9cnico"
+    },
+    "responsavel_tecnico_email": {
+      "type": "string",
+      "description": "Email do respons\u00e1vel t\u00e9cnico"
+    },
+    "tempo_retencao_dados_anos": {
+      "type": "number",
+      "default": 5,
+      "description": "Tempo de reten\u00e7\u00e3o de dados em anos"
+    },
+    "compartilhamento_dados_terceiros": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se h\u00e1 compartilhamento com terceiros"
+    },
+    "terceiros_autorizados": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "finalidade": {
+            "type": "string"
+          },
+          "data_autorizacao": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "description": "Lista de terceiros autorizados"
+    },
+    "medidas_seguranca": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Medidas de seguran\u00e7a implementadas"
+    },
+    "ultima_auditoria_lgpd": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da \u00faltima auditoria LGPD"
+    },
+    "proxima_auditoria_lgpd": {
+      "type": "string",
+      "format": "date",
+      "description": "Data prevista pr\u00f3xima auditoria"
+    },
+    "incidentes_seguranca": {
+      "type": "number",
+      "default": 0,
+      "description": "N\u00famero de incidentes reportados"
+    }
+  },
+  "required": [
+    "clinica_id",
+    "dpo_nome",
+    "dpo_email"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "clinica_id"
+      ],
+      "unique": true,
+      "name": "idx_config_clinica"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "name": "IncidenteProducao",
+  "type": "object",
+  "properties": {
+    "codigo_incidente": {
+      "type": "string",
+      "description": "C\u00f3digo \u00fanico (ex: INC-20251214-001)"
+    },
+    "modulo": {
+      "type": "string",
+      "enum": [
+        "email",
+        "agenda",
+        "prontuarios",
+        "atendimento",
+        "financeiro",
+        "auth",
+        "integracao",
+        "outro"
+      ],
+      "description": "M\u00f3dulo onde ocorreu"
+    },
+    "severidade": {
+      "type": "string",
+      "enum": [
+        "critico",
+        "alto",
+        "medio",
+        "baixo"
+      ],
+      "default": "medio",
+      "description": "Severidade do incidente"
+    },
+    "tipo_erro": {
+      "type": "string",
+      "description": "Tipo de erro (ex: alias_nao_gerado, toggle_falhou, teste_email_falhou)"
+    },
+    "mensagem_erro": {
+      "type": "string",
+      "description": "Mensagem de erro completa"
+    },
+    "stack_trace": {
+      "type": "string",
+      "description": "Stack trace do erro"
+    },
+    "contexto": {
+      "type": "object",
+      "description": "Contexto adicional (user_id, clinica_id, action, etc)"
+    },
+    "clinica_id": {
+      "type": "string",
+      "description": "ID da cl\u00ednica afetada"
+    },
+    "usuario_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio que encontrou o erro"
+    },
+    "url_origem": {
+      "type": "string",
+      "description": "URL onde o erro ocorreu"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "User agent do navegador"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "aberto",
+        "investigando",
+        "resolvido",
+        "ignorado"
+      ],
+      "default": "aberto",
+      "description": "Status do incidente"
+    },
+    "atribuido_a": {
+      "type": "string",
+      "description": "Email do dev respons\u00e1vel"
+    },
+    "resolucao": {
+      "type": "string",
+      "description": "Como foi resolvido"
+    },
+    "tempo_resolucao_minutos": {
+      "type": "number",
+      "description": "Tempo at\u00e9 resolu\u00e7\u00e3o"
+    },
+    "notificado_dev": {
+      "type": "boolean",
+      "default": false,
+      "description": "Dev foi notificado?"
+    },
+    "notificado_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quando dev foi notificado"
+    }
+  },
+  "required": [
+    "codigo_incidente",
+    "modulo",
+    "tipo_erro",
+    "mensagem_erro"
+  ],
+  "indexes": [
+    {
+      "fields": [
+        "status",
+        "-created_date"
+      ],
+      "name": "idx_incidente_status"
+    },
+    {
+      "fields": [
+        "modulo",
+        "-created_date"
+      ],
+      "name": "idx_incidente_modulo"
+    },
+    {
+      "fields": [
+        "severidade",
+        "-created_date"
+      ],
+      "name": "idx_incidente_severidade"
+    },
+    {
+      "fields": [
+        "clinica_id",
+        "-created_date"
+      ],
+      "name": "idx_incidente_clinica"
+    },
+    {
+      "fields": [
+        "codigo_incidente"
+      ],
+      "name": "idx_incidente_codigo",
+      "unique": true
+    }
+  ]
+}
